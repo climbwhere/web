@@ -1,4 +1,7 @@
-/* Add CSS styles here! */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
 body {
-  font-family: sans-serif;
+  font-family: "Inter", sans-serif;
+  overflow: hidden;
+  background: #f5f5f5;
 }
