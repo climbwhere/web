@@ -10,8 +10,8 @@
   let numberOfClimbers = 1;
   let gymFilter = "all";
   let gymList = [];
-  let store = writable({});
-  let data = null;
+  let store = writable([]);
+  let displayData = null;
 
   const fetchSlots = () => {
     fetch("https://triomic.github.io/climbing-gym-scraper/sessions.json")
@@ -19,7 +19,8 @@
       .then((slots) =>
         slots.data
           .filter((slot) => `${slot.spaces}` !== "0") // only show slots that have spaces
-          .map((slot) => ({ // add some extra props to help us render things more efficiently
+          .map((slot) => ({
+            // add some extra props to help us render things more efficiently
             ...slot,
             timing: `${getTimeString(new Date(slot.start))} to ${getTimeString(
               new Date(slot.end)
@@ -28,27 +29,19 @@
             hide: false,
           }))
       )
-      .then((slots) => groupBy(sortBy(slots, "start"), "gym"))
-      .then((gyms) => {
-        let d = {};
-        Object.keys(gyms).forEach((gym) => {
-          d[gym] = groupBy(gyms[gym], "date");
-        });
-        gymList = Object.keys(gyms);
-        store.set(d);
-      });
+      .then((slots) => sortBy(slots, "start"))
+      .then((slots) => store.update((_) => slots));
   };
 
   store.subscribe((newData) => {
-    console.info("update");
-    console.info(newData);
-    data = newData;
+    displayData = newData;
+    gymList = Object.keys(groupBy(newData, "gym"));
   });
   onMount(fetchSlots);
 </script>
 
 <div class="container">
-  {#if data === null}
+  {#if displayData === null}
     <p>Loading...</p>
   {:else}
     <div class="title">Climb where?</div>
@@ -64,36 +57,63 @@
       <input type="number" placeholder="..." bind:value={numberOfClimbers} /> Climbers
     </div>
     <div class="content">
-      {#each Object.keys(data) as gym}
-        <div
-          class:hidden={gymFilter !== "all" && gym !== gymFilter}
-          class="gym"
-        >
-          <h2>{gym}</h2>
-          {#each Object.keys(data[gym]) as date}
-            <p class="underline">{date}</p>
-            {#each data[gym][date] as slot}
-              <p class:hidden={slot.spaces < numberOfClimbers}>
-                {slot.timing}, available spaces: {slot.spaces}
-              </p>
-            {/each}
-          {/each}
-        </div>
-      {/each}
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Gym</th>
+          <th class="spaces">Available Spaces</th>
+        </tr>
+        {#each displayData as slot}
+          <tr
+            class:hidden={slot.spaces < numberOfClimbers ||
+              (gymFilter !== "all" && gymFilter !== slot.gym)}
+          >
+            <td>{slot.date}</td>
+            <td>{slot.timing}</td>
+            <td>{slot.gym}</td>
+            <td class="spaces">
+              <span class="data-spaces">{slot.spaces}</span></td>
+          </tr>
+        {/each}
+      </table>
     </div>
   {/if}
 </div>
 
 <style>
   .container {
-    height: 100%;
+    margin: auto;
+    height: 100vh;
+    width: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
 
-  .title {
+  table {
+    width: 100%;
+  }
+  th {
+    text-align: left;
+    font-size: 0.8em;
+  }
+
+  td, th {
+    padding: 10px 5px;
+  }
+
+  td.spaces {
+    font-size: 30px;
+    text-align: right;
+  }
+
+  .data-spaces {
+    border-radius: 5px;
+    background: #f5f5f5;
+    padding: 5px;
+
   }
 
   .content {
@@ -102,12 +122,12 @@
     padding: 15px;
     border-radius: 5px;
     font-size: 21px;
-    flex: 1;
-    width: 500px;
-    max-height: 80vh;
+    flex: 5;
+    width: 100%;
     overflow-y: scroll;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+    margin-bottom: 20px;
   }
 
   .filter-widget {
@@ -118,7 +138,7 @@
     border-radius: 5px;
     font-size: 21px;
     flex: 1;
-    width: 500px;
+    width: 100%;
     margin-bottom: 20px;
   }
 
