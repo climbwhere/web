@@ -13,12 +13,7 @@
   let store = writable([]);
 
   const slotsPromise = fetch(
-    "https://triomic.github.io/climbing-gym-scraper/sessions.json",
-    {
-      headers: {
-        "cache-control": "no-cache",
-      },
-    }
+    "https://triomic.github.io/climbing-gym-scraper/sessions.json"
   )
     .then((r) => r.json())
     .then((slots) =>
