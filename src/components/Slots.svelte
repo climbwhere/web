@@ -13,21 +13,24 @@
   let store = writable([]);
 
   const slotsPromise = fetch(
-    "https://triomic.github.io/climbing-gym-scraper/sessions.json"
+    "https://triomic.github.io/climbing-gym-scraper/sessions.json",
+    {
+      headers: {
+        "cache-control": "no-cache",
+      },
+    }
   )
     .then((r) => r.json())
     .then((slots) =>
-      slots.data
-        // .filter((slot) => `${slot.spaces}` !== "0") // only show slots that have spaces
-        .map((slot) => ({
-          // add some extra props to help us render things more efficiently
-          ...slot,
-          timing: `${getTimeString(new Date(slot.start))} to ${getTimeString(
-            new Date(slot.end)
-          )}`,
-          date: getDateString(new Date(slot.start)),
-          hide: false,
-        }))
+      slots.data.map((slot) => ({
+        // add some extra props to help us render things more efficiently
+        ...slot,
+        timing: `${getTimeString(new Date(slot.start))} to ${getTimeString(
+          new Date(slot.end)
+        )}`,
+        date: getDateString(new Date(slot.start)),
+        hide: false,
+      }))
     )
     .then((slots) => sortBy(slots, "start"))
     .then((slots) => {
@@ -42,10 +45,10 @@
 
 <div class="container">
   {#await slotsPromise}
-    <p>Loading...</p>
+    <p>🧗 Loading...</p>
   {:then slots}
     <div class="title">
-      <h1>🧗 Climb Where?</h1>
+      <h1>🧗 climbwhere.sg</h1>
       <p>SG climbing gym slots checker.</p>
     </div>
     <div class="filter-widget">
@@ -62,17 +65,17 @@
     <div class="content">
       <table>
         <tr>
-          <th>Gym</th>
-          <th>Date</th>
-          <th>Time</th>
-          <th class="spaces">Available Spaces</th>
+          <th><span class="badge">Gym</span></th>
+          <th><span class="badge">Date</span></th>
+          <th><span class="badge">Time</span></th>
+          <th class="spaces"><span class="badge">Availble Spaces</span></th>
         </tr>
         {#each slots as slot}
           <tr
             class:hidden={gymFilter !== "all" && gymFilter !== slot.gym}
             class:invalid={slot.spaces < numberOfClimbers}
           >
-            <td>{slot.gym}</td>
+            <td><span class="badge">{slot.gym}</span></td>
             <td>{slot.date}</td>
             <td>{slot.timing}</td>
             <td class="spaces">
@@ -82,6 +85,9 @@
         {/each}
       </table>
     </div>
+  {:catch error}
+    <p>{error}</p>
+    <p>Please try again.</p>
   {/await}
 </div>
 
@@ -89,7 +95,7 @@
   .container {
     margin: auto;
     height: 100vh;
-    width: 100%;  
+    width: 100%;
     max-width: 800px;
     display: flex;
     flex-direction: column;
@@ -98,14 +104,19 @@
   }
   table {
     width: 100%;
+    border-collapse: collapse;
   }
   th {
     text-align: left;
-    font-size: 0.8em;
+    font-size: 0.7em;
   }
 
   td {
     font-size: 0.9em;
+  }
+
+  tr:hover {
+    background: aliceblue;
   }
 
   td,
@@ -113,8 +124,14 @@
     padding: 10px 0;
   }
 
-  td.spaces, th.spaces {
+  td.spaces,
+  th.spaces {
     text-align: right;
+    padding-right: 10px;
+  }
+
+  td {
+    border-bottom: solid 0.5px #f5f5f5;
   }
 
   .data-spaces {
@@ -126,24 +143,18 @@
   .content {
     background: white;
     font-size: 21px;
+    flex: 1;
     width: 100%;
     overflow-y: scroll;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
     margin-bottom: 20px;
   }
 
   .filter-widget {
-    max-height: 200px;
+    max-height: 10px;
     flex: 1;
     width: 100%;
     margin-bottom: 20px;
   }
-
-  .content::-webkit-scrollbar {
-    display: none;
-  }
-
   .title {
     width: 100%;
     padding-top: 20px;
@@ -164,5 +175,11 @@
 
   .hidden {
     display: none;
+  }
+
+  .badge {
+    background: #f5f5f5;
+    padding: 4px 10px;
+    border-radius: 15px;
   }
 </style>
