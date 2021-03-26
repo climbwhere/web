@@ -1,50 +1,53 @@
 <script>
-  import { onMount } from "svelte";
-  import { get, writable } from "svelte/store";
+  import { writable } from "svelte/store";
   import fetch from "unfetch";
   import groupBy from "lodash/groupBy";
   import sortBy from "lodash/sortBy";
 
   import { getDateString, getTimeString } from "../utils/date";
 
+  export let location;
   let numberOfClimbers = 1;
   let gymFilter = "all";
   let gymList = [];
   let store = writable([]);
-  let displayData = null;
 
-  const fetchSlots = () => {
-    fetch("https://triomic.github.io/climbing-gym-scraper/sessions.json")
-      .then((r) => r.json())
-      .then((slots) =>
-        slots.data
-          .filter((slot) => `${slot.spaces}` !== "0") // only show slots that have spaces
-          .map((slot) => ({
-            // add some extra props to help us render things more efficiently
-            ...slot,
-            timing: `${getTimeString(new Date(slot.start))} to ${getTimeString(
-              new Date(slot.end)
-            )}`,
-            date: getDateString(new Date(slot.start)),
-            hide: false,
-          }))
-      )
-      .then((slots) => sortBy(slots, "start"))
-      .then((slots) => store.update((_) => slots));
-  };
+  const slotsPromise = fetch(
+    "https://triomic.github.io/climbing-gym-scraper/sessions.json"
+  )
+    .then((r) => r.json())
+    .then((slots) =>
+      slots.data
+        // .filter((slot) => `${slot.spaces}` !== "0") // only show slots that have spaces
+        .map((slot) => ({
+          // add some extra props to help us render things more efficiently
+          ...slot,
+          timing: `${getTimeString(new Date(slot.start))} to ${getTimeString(
+            new Date(slot.end)
+          )}`,
+          date: getDateString(new Date(slot.start)),
+          hide: false,
+        }))
+    )
+    .then((slots) => sortBy(slots, "start"))
+    .then((slots) => {
+      store.update((_) => slots);
+      return slots;
+    });
 
   store.subscribe((newData) => {
-    displayData = newData;
     gymList = Object.keys(groupBy(newData, "gym"));
   });
-  onMount(fetchSlots);
 </script>
 
 <div class="container">
-  {#if displayData === null}
+  {#await slotsPromise}
     <p>Loading...</p>
-  {:else}
-    <div class="title">Climb where?</div>
+  {:then slots}
+    <div class="title">
+      <h1>🧗 Climb Where?</h1>
+      <p>SG climbing gym slots checker.</p>
+    </div>
     <div class="filter-widget">
       <select bind:value={gymFilter}>
         <option value="all">All gyms</option>
@@ -59,39 +62,40 @@
     <div class="content">
       <table>
         <tr>
+          <th>Gym</th>
           <th>Date</th>
           <th>Time</th>
-          <th>Gym</th>
           <th class="spaces">Available Spaces</th>
         </tr>
-        {#each displayData as slot}
+        {#each slots as slot}
           <tr
-            class:hidden={slot.spaces < numberOfClimbers ||
-              (gymFilter !== "all" && gymFilter !== slot.gym)}
+            class:hidden={gymFilter !== "all" && gymFilter !== slot.gym}
+            class:invalid={slot.spaces < numberOfClimbers}
           >
+            <td>{slot.gym}</td>
             <td>{slot.date}</td>
             <td>{slot.timing}</td>
-            <td>{slot.gym}</td>
             <td class="spaces">
-              <span class="data-spaces">{slot.spaces}</span></td>
+              <span class="data-spaces">{slot.spaces}</span></td
+            >
           </tr>
         {/each}
       </table>
     </div>
-  {/if}
+  {/await}
 </div>
 
 <style>
   .container {
     margin: auto;
     height: 100vh;
-    width: 800px;
+    width: 100%;  
+    max-width: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
-
   table {
     width: 100%;
   }
@@ -100,12 +104,16 @@
     font-size: 0.8em;
   }
 
-  td, th {
-    padding: 10px 5px;
+  td {
+    font-size: 0.9em;
   }
 
-  td.spaces {
-    font-size: 30px;
+  td,
+  th {
+    padding: 10px 0;
+  }
+
+  td.spaces, th.spaces {
     text-align: right;
   }
 
@@ -113,16 +121,11 @@
     border-radius: 5px;
     background: #f5f5f5;
     padding: 5px;
-
   }
 
   .content {
     background: white;
-    border: 4px solid black;
-    padding: 15px;
-    border-radius: 5px;
     font-size: 21px;
-    flex: 5;
     width: 100%;
     overflow-y: scroll;
     -ms-overflow-style: none; /* IE and Edge */
@@ -131,12 +134,7 @@
   }
 
   .filter-widget {
-    background: #3a86ff;
-    color: white;
-    border: 4px solid black;
-    padding: 15px;
-    border-radius: 5px;
-    font-size: 21px;
+    max-height: 200px;
     flex: 1;
     width: 100%;
     margin-bottom: 20px;
@@ -146,8 +144,22 @@
     display: none;
   }
 
-  .underline {
-    text-decoration: underline;
+  .title {
+    width: 100%;
+    padding-top: 20px;
+  }
+  h1 {
+    font-size: 1.3em;
+  }
+
+  h1,
+  p {
+    margin-top: 5px;
+    margin-bottom: 0;
+  }
+  .invalid {
+    color: red;
+    text-decoration: line-through;
   }
 
   .hidden {
