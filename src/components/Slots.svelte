@@ -155,6 +155,7 @@
     flex: 1;
     width: 100%;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     margin-bottom: 20px;
     padding: 0 5px;
   }
