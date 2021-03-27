@@ -3,11 +3,8 @@
 body {
   font-family: "Inter", sans-serif;
   font-size: 18px;
-  overflow: scroll;
-}
-
-body::-webkit-scrollbar{
-  display: none;
+  overflow-Y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 * {

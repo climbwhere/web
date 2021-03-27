@@ -104,7 +104,6 @@
 <style>
   .container {
     margin: auto;
-    height: 100vh;
     width: 100%;
     max-width: 800px;
     display: flex;
@@ -154,8 +153,6 @@
     background: white;
     flex: 1;
     width: 100%;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
     margin-bottom: 20px;
     padding: 0 5px;
   }
