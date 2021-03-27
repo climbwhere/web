@@ -138,6 +138,7 @@
   th.spaces {
     text-align: right;
     padding-right: 10px;
+    min-width: 120px;
   }
   td {
     border-bottom: solid 0.5px #f5f5f5;
@@ -155,18 +156,17 @@
     width: 100%;
     overflow-y: scroll;
     margin-bottom: 20px;
+    padding: 0 5px;
+  }
+
+  .title {
+    width: 100%;
+    padding: 20px 5px;
   }
 
   .filter-widget {
-    height: 100%;
-    max-height: 20px;
-    flex: 1;
     width: 100%;
-    margin: 20px 0;
-  }
-  .title {
-    width: 100%;
-    padding-top: 20px;
+    padding: 0 5px 20px 5px;
   }
   h1 {
     font-size: 1.3em;

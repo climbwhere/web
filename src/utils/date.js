@@ -15,7 +15,7 @@ const months = [
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export const getDateString = (date) =>
-  `${date.getDate()} ${months[date.getMonth()]} ${days[date.getDay()]}`;
+  `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]} `;
 
 export const getTimeString = (date) => {
   return date.toLocaleString("en-SG", {
