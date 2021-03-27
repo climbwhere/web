@@ -4,10 +4,11 @@
   import groupBy from "lodash/groupBy";
   import sortBy from "lodash/sortBy";
 
-  import { getDateString, getTimeString } from "../utils/date";
+  import { getDateString, getTimeString, formatDate } from "../utils/date";
 
   export let location;
-  let numberOfClimbers = 1;
+  let dateFilter = writable(null);
+  let numberOfClimbers = writable(1);
   let gymFilter = "all";
   let gymList = [];
   let store = writable([]);
@@ -33,6 +34,11 @@
       return slots;
     });
 
+  const resetDateFilter = (e) => {
+    e.preventDefault();
+    $dateFilter = null;
+  };
+
   store.subscribe((newData) => {
     gymList = Object.keys(groupBy(newData, "gym"));
   });
@@ -47,6 +53,7 @@
       <p>SG climbing gym slots checker.</p>
     </div>
     <div class="filter-widget">
+      Climbing at
       <select bind:value={gymFilter}>
         <option value="all">All gyms</option>
         {#each gymList as gym}
@@ -55,7 +62,13 @@
           </option>
         {/each}
       </select>
-      <input type="number" placeholder="..." bind:value={numberOfClimbers} /> Climbers
+      , with
+      <input type="number" placeholder="..." bind:value={$numberOfClimbers} />
+      Climbers, on
+      <input type="date" bind:value={$dateFilter} />
+      <a class:hidden={$dateFilter === null} href="" on:click={resetDateFilter}
+        >show all dates</a
+      >
     </div>
     <div class="content">
       <table>
@@ -67,12 +80,14 @@
         </tr>
         {#each slots as slot}
           <tr
-            class:hidden={gymFilter !== "all" && gymFilter !== slot.gym}
-            class:invalid={slot.spaces < numberOfClimbers}
+            class:hidden={(gymFilter !== "all" && gymFilter !== slot.gym) ||
+              ($dateFilter !== null &&
+                formatDate(new Date(slot.start)) !== $dateFilter)}
+            class:invalid={slot.spaces < $numberOfClimbers}
           >
             <td><span class="badge">{slot.gym}</span></td>
             <td>{slot.date}</td>
-            <td>{slot.timing}</td>
+            <td class="timings">{slot.timing}</td>
             <td class="spaces">
               <span class="data-spaces">{slot.spaces}</span></td
             >
@@ -124,7 +139,6 @@
     text-align: right;
     padding-right: 10px;
   }
-
   td {
     border-bottom: solid 0.5px #f5f5f5;
   }
@@ -137,7 +151,6 @@
 
   .content {
     background: white;
-    font-size: 21px;
     flex: 1;
     width: 100%;
     overflow-y: scroll;
@@ -145,10 +158,11 @@
   }
 
   .filter-widget {
-    max-height: 10px;
+    height: 100%;
+    max-height: 20px;
     flex: 1;
     width: 100%;
-    margin-bottom: 20px;
+    margin: 20px 0;
   }
   .title {
     width: 100%;
@@ -176,5 +190,16 @@
     background: #f5f5f5;
     padding: 4px 10px;
     border-radius: 15px;
+  }
+
+  input[type="number"] {
+    width: 50px;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 500px) {
+    td {
+      font-size: 0.7em;
+    }
   }
 </style>
