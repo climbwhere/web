@@ -125,7 +125,7 @@
     font-size: 0.9em;
   }
 
-  tr:hover {
+  tr:hover, tr:active {
     background: aliceblue;
   }
 
@@ -195,6 +195,10 @@
   input[type="number"] {
     width: 50px;
     text-align: center;
+  }
+
+  input {
+    outline: none;
   }
 
   @media screen and (max-width: 500px) {
