@@ -14,7 +14,7 @@
   let store = writable([]);
 
   const slotsPromise = fetch(
-    "https://triomic.github.io/climbing-gym-scraper/sessions.json"
+    "https://triomic.github.io/climbing-gym-scraper/sessions.json",
   )
     .then((r) => r.json())
     .then((slots) =>
@@ -65,6 +65,8 @@
       , with
       <input type="number" placeholder="..." bind:value={$numberOfClimbers} />
       Climbers, on
+      <!-- date inputs are not supported on Safari, 
+        should look into creating a custom date picker component -->
       <input type="date" bind:value={$dateFilter} />
       <a class:hidden={$dateFilter === null} href="" on:click={resetDateFilter}
         >show all dates</a
@@ -124,7 +126,8 @@
     font-size: 0.9em;
   }
 
-  tr:hover, tr:active {
+  tr:hover,
+  tr:active {
     background: aliceblue;
   }
 
