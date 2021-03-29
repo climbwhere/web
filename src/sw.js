@@ -4,8 +4,10 @@ const urlsToCache = [
   "/index.html",
   "/index.css",
   "/index.js",
-  "/components/*",
-  "/utils/*",
+  "/components/Slots.svelte.css",
+  "/components/Slots.svelte.css.proxy.js",
+  "/components/Slots.svelte.js",
+  "/utils/date.js",
 ];
 
 self.addEventListener("install", function (event) {
