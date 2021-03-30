@@ -14,7 +14,7 @@
   let store = writable([]);
 
   const slotsPromise = fetch(
-    "https://triomic.github.io/climbing-gym-scraper/sessions.json",
+    "https://triomic.github.io/climbing-gym-scraper/sessions.json"
   )
     .then((r) => r.json())
     .then((slots) =>
@@ -87,7 +87,18 @@
                 formatDate(new Date(slot.start)) !== $dateFilter)}
             class:invalid={slot.spaces < $numberOfClimbers}
           >
-            <td><span class="badge">{slot.gym}</span></td>
+            <td
+              ><span
+                class:fitbloc={slot.gym === "Fit Bloc"}
+                class:boulderplus={slot.gym === "boulder+"}
+                class:bffclimb={slot.gym === "BFF Climb"}
+                class:oyeyo={slot.gym === "Oyeyo"}
+                class:zvertigo={slot.gym === "Z-Vertigo"}
+                class:boulderworld={slot.gym === "Boulder World"}
+                class:lighthouse={slot.gym === "Lighthouse"}
+                class="badge">{slot.gym}</span
+              ></td
+            >
             <td>{slot.date}</td>
             <td class="timings">{slot.timing}</td>
             <td class="spaces">
@@ -191,6 +202,7 @@
     background: #f5f5f5;
     padding: 4px 10px;
     border-radius: 15px;
+    font-weight: bold;
   }
 
   input[type="number"] {
@@ -207,4 +219,41 @@
       font-size: 0.7em;
     }
   }
+
+  .fitbloc {
+    background-color: #7b112a;
+    color: white;
+  }
+
+  .boulderplus {
+    background-color: #652580;
+    color: white;
+  }
+
+  .bffclimb {
+    background-color: #EA078D;
+    color: black; 
+  }
+
+  .boulderworld {
+    background-color: #0C606B;
+    color: white; 
+  }
+
+  .lighthouse {
+    background-color: #9E0102;
+    color: white;
+  }
+
+  .zvertigo {
+    background-color: yellow;
+    color: black;
+  }
+
+  .oyeyo {
+    background-color: #EF1E29;
+    color: white;
+  }
+
+
 </style>
