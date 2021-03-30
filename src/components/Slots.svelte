@@ -85,6 +85,7 @@
             class:hidden={(gymFilter !== "all" && gymFilter !== slot.gym) ||
               ($dateFilter !== null &&
                 formatDate(new Date(slot.start)) !== $dateFilter)}
+            class:warn={slot.spaces < 10}
             class:invalid={slot.spaces < $numberOfClimbers}
           >
             <td
@@ -101,9 +102,7 @@
             >
             <td>{slot.date}</td>
             <td class="timings">{slot.timing}</td>
-            <td class="spaces">
-              <span class="data-spaces">{slot.spaces}</span></td
-            >
+            <td class="spaces"> <span class="badge">{slot.spaces}</span></td>
           </tr>
         {/each}
       </table>
@@ -142,6 +141,10 @@
     background: aliceblue;
   }
 
+  tr {
+    border-radius: 25%;
+  }
+
   td,
   th {
     padding: 10px 0;
@@ -155,12 +158,6 @@
   }
   td {
     border-bottom: solid 0.5px #f5f5f5;
-  }
-
-  .data-spaces {
-    border-radius: 5px;
-    background: #f5f5f5;
-    padding: 5px;
   }
 
   .content {
@@ -188,10 +185,6 @@
   p {
     margin-top: 5px;
     margin-bottom: 0;
-  }
-  .invalid {
-    color: red;
-    text-decoration: line-through;
   }
 
   .hidden {
@@ -231,17 +224,17 @@
   }
 
   .bffclimb {
-    background-color: #EA078D;
-    color: black; 
+    background-color: #ea078d;
+    color: black;
   }
 
   .boulderworld {
-    background-color: #0C606B;
-    color: white; 
+    background-color: #0c606b;
+    color: white;
   }
 
   .lighthouse {
-    background-color: #9E0102;
+    background-color: #9e0102;
     color: white;
   }
 
@@ -251,9 +244,17 @@
   }
 
   .oyeyo {
-    background-color: #EF1E29;
+    background-color: #ef1e29;
     color: white;
   }
 
+  .warn {
+    background-color: #e67d2243;
+  }
 
+  .invalid {
+    background: rgba(255, 175, 166, 0.284);
+    color: crimson;
+    text-decoration: line-through;
+  }
 </style>
