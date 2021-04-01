@@ -3,13 +3,17 @@
   import fetch from "unfetch";
   import groupBy from "lodash/groupBy";
   import sortBy from "lodash/sortBy";
+  import flatten from "lodash/flatten";
+  import values from "lodash/values";
+  import keys from "lodash/keys";
 
   import { getDateString, getTimeString, formatDate } from "../utils/date";
+  import TableRow from "./TableRow.svelte";
 
   export let location;
   let dateFilter = writable(null);
   let numberOfClimbers = writable(1);
-  let gymFilter = "all";
+  let gymFilter = writable("all");
   let gymList = [];
   let store = writable([]);
 
@@ -21,14 +25,14 @@
       slots.data.map((slot) => ({
         // add some extra props to help us render things more efficiently
         ...slot,
-        timing: `${getTimeString(new Date(slot.start))} to ${getTimeString(
+        timing: `${getTimeString(new Date(slot.start))} - ${getTimeString(
           new Date(slot.end)
         )}`,
         date: getDateString(new Date(slot.start)),
         hide: false,
       }))
     )
-    .then((slots) => sortBy(slots, "start"))
+    .then((slots) => groupBy(sortBy(slots, "start"), "date"))
     .then((slots) => {
       store.update((_) => slots);
       return slots;
@@ -40,7 +44,7 @@
   };
 
   store.subscribe((newData) => {
-    gymList = Object.keys(groupBy(newData, "gym"));
+    gymList = keys(groupBy(flatten(values(newData)), "gym"));
   });
 </script>
 
@@ -49,12 +53,12 @@
     <p>🧗 Loading...</p>
   {:then slots}
     <div class="title">
-      <h1>🧗 climbwhere.sg</h1>
-      <p>SG climbing gym slots checker.</p>
+      <h1>🧗 Climbwhere.sg</h1>
+      <p>Timely SG climbing gyms slot information.</p>
     </div>
     <div class="filter-widget">
       Climbing at
-      <select bind:value={gymFilter}>
+      <select bind:value={$gymFilter}>
         <option value="all">All gyms</option>
         {#each gymList as gym}
           <option value={gym}>
@@ -73,39 +77,26 @@
       >
     </div>
     <div class="content">
-      <table>
-        <tr>
-          <th><span class="badge">Gym</span></th>
-          <th><span class="badge">Date</span></th>
-          <th><span class="badge">Time</span></th>
-          <th class="spaces"><span class="badge">Availble Spaces</span></th>
-        </tr>
-        {#each slots as slot}
-          <tr
-            class:hidden={(gymFilter !== "all" && gymFilter !== slot.gym) ||
-              ($dateFilter !== null &&
-                formatDate(new Date(slot.start)) !== $dateFilter)}
-            class:warn={slot.spaces < 10}
-            class:invalid={slot.spaces < $numberOfClimbers}
-          >
-            <td
-              ><span
-                class:fitbloc={slot.gym === "Fit Bloc"}
-                class:boulderplus={slot.gym === "boulder+"}
-                class:bffclimb={slot.gym === "BFF Climb"}
-                class:oyeyo={slot.gym === "Oyeyo"}
-                class:zvertigo={slot.gym === "Z-Vertigo"}
-                class:boulderworld={slot.gym === "Boulder World"}
-                class:lighthouse={slot.gym === "Lighthouse"}
-                class="badge">{slot.gym}</span
-              ></td
-            >
-            <td>{slot.date}</td>
-            <td class="timings">{slot.timing}</td>
-            <td class="spaces"> <span class="badge">{slot.spaces}</span></td>
-          </tr>
-        {/each}
-      </table>
+      {#each Object.keys(slots) as date}
+        <div class="day">
+          <h3>{date}</h3>
+          <table>
+            <tr>
+              <th><span class="badge">Gym</span></th>
+              <th><span class="badge">Time</span></th>
+              <th class="spaces"><span class="badge">Availble Spaces</span></th>
+            </tr>
+            {#each slots[date] as slot}
+              <TableRow
+                {...slot}
+                gymFilter={$gymFilter}
+                dateFilter={$dateFilter}
+                numberOfClimbers={$numberOfClimbers}
+              />
+            {/each}
+          </table>
+        </div>
+      {/each}
     </div>
   {:catch error}
     <p>{error}</p>
@@ -123,45 +114,37 @@
     align-items: center;
     justify-content: center;
   }
+
+  .day {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    transition-duration: 1s;
+  }
+  .day:hover {
+    border: solid 2px #f4a261;
+    transform: scaleZ(1.2);
+  }
   table {
     width: 100%;
     border-collapse: collapse;
+    border: solid 1px black; 
   }
   th {
     text-align: left;
     font-size: 0.7em;
   }
 
-  td {
-    font-size: 0.9em;
-  }
-
-  tr:hover,
-  tr:active {
-    background: aliceblue;
-  }
-
-  tr {
-    border-radius: 25%;
-  }
-
-  td,
   th {
-    padding: 10px 0;
+    padding: 10px 5px;
   }
 
-  td.spaces,
   th.spaces {
     text-align: right;
     padding-right: 10px;
     min-width: 120px;
   }
-  td {
-    border-bottom: solid 0.5px #f5f5f5;
-  }
 
   .content {
-    background: white;
     flex: 1;
     width: 100%;
     margin-bottom: 20px;
@@ -175,7 +158,9 @@
 
   .filter-widget {
     width: 100%;
-    padding: 0 5px 20px 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background: white;
   }
   h1 {
     font-size: 1.3em;
@@ -205,56 +190,5 @@
 
   input {
     outline: none;
-  }
-
-  @media screen and (max-width: 500px) {
-    td {
-      font-size: 0.7em;
-    }
-  }
-
-  .fitbloc {
-    background-color: #7b112a;
-    color: white;
-  }
-
-  .boulderplus {
-    background-color: #652580;
-    color: white;
-  }
-
-  .bffclimb {
-    background-color: #ea078d;
-    color: black;
-  }
-
-  .boulderworld {
-    background-color: #0c606b;
-    color: white;
-  }
-
-  .lighthouse {
-    background-color: #9e0102;
-    color: white;
-  }
-
-  .zvertigo {
-    background-color: yellow;
-    color: black;
-  }
-
-  .oyeyo {
-    background-color: #ef1e29;
-    color: white;
-  }
-
-  .warn {
-    background-color: #e67d2243;
-  }
-
-  .invalid {
-    background: rgba(255, 175, 166, 0.284);
-    color: crimson;
-    text-decoration: line-through;
   }
 </style>

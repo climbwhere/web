@@ -5,7 +5,7 @@ module.exports = {
     "public": {url: "/", static: true, resolve: false}
   },
   plugins: [
-    '@snowpack/plugin-svelte'
+    '@snowpack/plugin-svelte',
   ],
   routes: [
     /* Enable an SPA Fallback in development: */

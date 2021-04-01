@@ -1,4 +1,5 @@
 const CACHE_NAME = "climbwhere-sg-cache-test";
+// TODO: update urls to cache on release 
 const urlsToCache = [
   "/",
   "/index.html",
@@ -11,9 +12,9 @@ const urlsToCache = [
 ];
 
 self.addEventListener("install", function (event) {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
-  );
+  // event.waitUntil(
+  //   caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
+  // );
 });
 
 self.addEventListener("activate", function (event) {
@@ -28,7 +29,6 @@ self.addEventListener("fetch", function (event) {
     caches.match(event.request).then(function (response) {
 		// Cache hit - return response
 		if (response) {
-			console.info(`cache hit for ${event.request.url}`);
 			return response;
 		}
 
@@ -44,8 +44,6 @@ self.addEventListener("fetch", function (event) {
         // as well as the cache consuming the response, we need
         // to clone it so we have two streams.
         let responseToCache = response.clone();
-
-		console.info(` put cache for ${event.request.url}`);
 
         caches.open(CACHE_NAME).then(function (cache) {
           cache.put(event.request, responseToCache);
