@@ -79,7 +79,7 @@
     <div class="content">
       {#each Object.keys(slots) as date}
         <div class="day">
-          <h3>{date}</h3>
+          <h3 class="date-header">{date}</h3>
           <table>
             <tr>
               <th><span class="badge">Gym</span></th>
@@ -115,19 +115,20 @@
     justify-content: center;
   }
 
+  .date-header {
+    border-bottom: 2px solid #f5f5f5;
+    padding: 5px;
+    margin-bottom: 5px;
+  }
+
   .day {
     margin-bottom: 20px;
     border-radius: 10px;
     transition-duration: 1s;
   }
-  .day:hover {
-    border: solid 2px #f4a261;
-    transform: scaleZ(1.2);
-  }
   table {
     width: 100%;
     border-collapse: collapse;
-    border: solid 1px black; 
   }
   th {
     text-align: left;
@@ -159,7 +160,7 @@
   .filter-widget {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     background: white;
   }
   h1 {
