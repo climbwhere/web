@@ -1,4 +1,5 @@
 <script>
+  import moment from "moment";
   import { writable } from "svelte/store";
   import fetch from "unfetch";
   import groupBy from "lodash/groupBy";
@@ -16,13 +17,15 @@
   let gymFilter = writable("all");
   let gymList = [];
   let store = writable([]);
+  let lastUpdated = "Loading...";
 
   const slotsPromise = fetch(
     "https://triomic.github.io/climbing-gym-scraper/sessions.json"
   )
     .then((r) => r.json())
-    .then((slots) =>
-      slots.data.map((slot) => ({
+    .then((slots) => {
+      lastUpdated = moment(slots.last_updated).format("D MMMM, h:mma");
+      return slots.data.map((slot) => ({
         // add some extra props to help us render things more efficiently
         ...slot,
         timing: `${getTimeString(new Date(slot.start))} - ${getTimeString(
@@ -30,8 +33,8 @@
         )}`,
         date: getDateString(new Date(slot.start)),
         hide: false,
-      }))
-    )
+      }));
+    })
     .then((slots) => groupBy(sortBy(slots, "start"), "date"))
     .then((slots) => {
       store.update((_) => slots);
@@ -55,6 +58,7 @@
     <div class="title">
       <h1>🧗 Climbwhere.sg</h1>
       <p>Timely SG climbing gyms slot information.</p>
+      <small>Last updated: {lastUpdated}.</small>
     </div>
     <div class="filter-widget">
       Climbing at
