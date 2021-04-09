@@ -24,7 +24,7 @@
   )
     .then((r) => r.json())
     .then((slots) => {
-      lastUpdated = moment(slots.last_updated).format("D MMMM, h:mma");
+      lastUpdated = moment(slots.last_updated).fromNow();
       return slots.data.map((slot) => ({
         // add some extra props to help us render things more efficiently
         ...slot,
@@ -58,7 +58,7 @@
     <div class="title">
       <h1>🧗 Climbwhere.sg</h1>
       <p>Timely SG climbing gyms slot information.</p>
-      <small>Last updated: {lastUpdated}.</small>
+      <small>Last updated {lastUpdated}.</small>
     </div>
     <div class="filter-widget">
       Climbing at
