@@ -69,7 +69,7 @@
     }}
   />
   {#await slotsPromise}
-    <p>🧗 Loading...</p>
+    <p class="load-indicator">🧗 Loading...</p>
   {:then slots}
     <div class="description">
       Timely Singapore climbing gym slot information.
@@ -173,11 +173,8 @@
     display: none;
   }
 
-  footer {
-    background: #f5f5f5;
-    border-radius: 15px;
-    padding: 10px;
-    width: 100%;
-    font-size: 16px;
+  .load-indicator {
+    margin-top: 30px;
+    flex: 1;
   }
 </style>
