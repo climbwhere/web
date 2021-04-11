@@ -13,6 +13,7 @@
   import TableRow from "./TableRow.svelte";
 
   export let location;
+  let showFilterMenu = writable(false);
   let showAvailableOnly = writable(false);
   let dateFilter = writable("all");
   let numberOfClimbers = writable(1);
@@ -56,41 +57,23 @@
 </script>
 
 <div class="container">
-  <NavBar />
+  <NavBar
+    filterProps={{
+      showFilterMenu,
+      numberOfClimbers,
+      gymFilter,
+      dateFilter,
+      showAvailableOnly,
+      gymList,
+      dateList,
+    }}
+  />
   {#await slotsPromise}
     <p>🧗 Loading...</p>
   {:then slots}
-    <div class="filter-widget">
-      <input
-        type="number"
-        min="1"
-        placeholder="..."
-        bind:value={$numberOfClimbers}
-      />
-      climbers climbing at
-      <select bind:value={$gymFilter}>
-        <option value="all">All gyms</option>
-        {#each gymList as gym}
-          <option value={gym}>
-            {gym}
-          </option>
-        {/each}
-      </select>
-      on
-      <select bind:value={$dateFilter}>
-        <option value="all">All dates</option>
-        {#each dateList as date}
-          <option value={date}>{date}</option>
-        {/each}
-      </select>
-      <p>
-        <input type="checkbox" bind:value={$showAvailableOnly} /> Show available
-        slots only
-      </p>
-      <p>
-        <small>Last updated {lastUpdated}.</small>
-      </p>
-    </div>
+    <p>
+      <small>Last updated {lastUpdated}.</small>
+    </p>
     <div class="content">
       {#each Object.keys(slots) as date}
         <div
@@ -172,12 +155,6 @@
     padding: 0 5px;
   }
 
-  .filter-widget {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 0px;
-    background: white;
-  }
   p {
     margin-top: 5px;
     margin-bottom: 0;
@@ -185,26 +162,5 @@
 
   .hidden {
     display: none;
-  }
-
-  .badge {
-    background: #f5f5f5;
-    padding: 4px 10px;
-    border-radius: 15px;
-    font-weight: bold;
-  }
-
-  input[type="number"] {
-    width: 50px;
-    text-align: center;
-  }
-
-  input {
-    outline: none;
-    padding: 3px;
-  }
-
-  select {
-    padding: 3px;
   }
 </style>
