@@ -107,9 +107,6 @@
     <p>{error}</p>
     <p>Please try again.</p>
   {/await}
-  <footer>
-    <a href>contact.climbwheresg@gmail.com</a>
-  </footer>
 </div>
 
 <style>

@@ -6,6 +6,10 @@
     showAvailableOnly,
     gymList,
     dateList;
+
+  const onCloseButtonClick = () => {
+    showFilterMenu.update((i) => !i);
+  };
 </script>
 
 <div class:hidden={!$showFilterMenu} class="filter-widget">
@@ -44,12 +48,13 @@
     <input type="checkbox" bind:checked={$showAvailableOnly} /> Show available slots
     only
   </p>
-
   <div class="feedback">
-    Created by nerd climbers. Got feedback/ideas for us? <a href=""
-      >contact.climbwhere@gmail.com</a
-    >
+    Created by nerd climbers <a href="https://twitter.com/seanlkx">@seanlkx</a>
+    and
+    <a href="https://twitter.com/ravernkoh">@ravernkoh</a>. Code open-sourced on
+    <a href="https://github.com/seanlim/climbwhere-sg">Github</a>.
   </div>
+  <div class="close-button" on:click={onCloseButtonClick}>Close</div>
 </div>
 
 <style>
@@ -62,13 +67,14 @@
     border-radius: 10px;
     border: solid 2px #f5f5f5;
     position: absolute;
-    top: 40px;
+    top: 50px;
     right: 0;
   }
 
   h3 {
     margin: 0;
     margin-bottom: 10px;
+    font-size: 17px;
   }
 
   .filter {
@@ -99,10 +105,23 @@
   }
 
   .feedback {
-    background: #f5f5f5;
-    border-radius: 6px;
-    padding: 10px;
     width: 100%;
     font-size: 11px;
+  }
+
+  .close-button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 10px;
+    background: #f5f5f5;
+    text-align: center;
+    -webkit-user-select: none;
+  }
+
+  .close-button:active {
+    opacity: 0.4;
   }
 </style>

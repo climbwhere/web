@@ -20,6 +20,8 @@
 <style>
   nav {
     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     padding: 10px 5px;
     border-bottom: #f5f5f5 solid 2px;
@@ -54,10 +56,11 @@
   }
 
   .filter-button {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     background: white;
     border-radius: 5px;
     border: 2px solid #f5f5f5;
+    text-align: center;
   }
 </style>
