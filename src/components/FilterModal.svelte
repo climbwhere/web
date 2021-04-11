@@ -9,6 +9,7 @@
 </script>
 
 <div class:hidden={!$showFilterMenu} class="filter-widget">
+  <h3>Filters</h3>
   <div class="filter">
     <span class="label"> Climbers: </span>
     <input
@@ -52,10 +53,16 @@
     padding: 15px;
     margin-bottom: 0px;
     background: white;
+    border-radius: 10px;
     border: solid 2px #f5f5f5;
     position: absolute;
     top: 40px;
     right: 0;
+  }
+
+  h3 {
+    margin: 0;
+    margin-bottom: 10px;
   }
 
   .filter {

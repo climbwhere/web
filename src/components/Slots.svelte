@@ -71,9 +71,12 @@
   {#await slotsPromise}
     <p>🧗 Loading...</p>
   {:then slots}
-    <p>
-      <small>Last updated {lastUpdated}.</small>
-    </p>
+    <div class="description">
+      Timely Singapore climbing gym slot information.
+      <p>
+        <small>Last updated {lastUpdated}.</small>
+      </p>
+    </div>
     <div class="content">
       {#each Object.keys(slots) as date}
         <div
@@ -153,6 +156,12 @@
     width: 100%;
     margin-bottom: 20px;
     padding: 0 5px;
+  }
+
+  .description {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
   }
 
   p {
