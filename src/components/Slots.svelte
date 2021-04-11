@@ -8,14 +8,16 @@
   import values from "lodash/values";
   import keys from "lodash/keys";
 
-  import { getDateString, getTimeString, formatDate } from "../utils/date";
+  import { getDateString, getTimeString } from "../utils/date";
+  import NavBar from "./NavBar.svelte";
   import TableRow from "./TableRow.svelte";
 
   export let location;
-  let dateFilter = writable(null);
+  let dateFilter = writable("all");
   let numberOfClimbers = writable(1);
   let gymFilter = writable("all");
   let gymList = [];
+  let dateList = [];
   let store = writable([]);
   let lastUpdated = "Loading...";
 
@@ -48,20 +50,23 @@
 
   store.subscribe((newData) => {
     gymList = keys(groupBy(flatten(values(newData)), "gym"));
+    dateList = keys(newData);
   });
 </script>
 
 <div class="container">
+  <NavBar />
   {#await slotsPromise}
     <p>🧗 Loading...</p>
   {:then slots}
-    <div class="title">
-      <h1>🧗 Climbwhere.sg</h1>
-      <p>Timely SG climbing gyms slot information.</p>
-      <small>Last updated {lastUpdated}.</small>
-    </div>
     <div class="filter-widget">
-      Climbing at
+      <input
+        type="number"
+        min="1"
+        placeholder="..."
+        bind:value={$numberOfClimbers}
+      />
+      climbers climbing at
       <select bind:value={$gymFilter}>
         <option value="all">All gyms</option>
         {#each gymList as gym}
@@ -70,19 +75,23 @@
           </option>
         {/each}
       </select>
-      , with
-      <input type="number" placeholder="..." bind:value={$numberOfClimbers} />
-      Climbers, on
-      <!-- date inputs are not supported on Safari, 
-        should look into creating a custom date picker component -->
-      <input type="date" bind:value={$dateFilter} />
-      <a class:hidden={$dateFilter === null} href="" on:click={resetDateFilter}
-        >show all dates</a
-      >
+      on
+      <select bind:value={$dateFilter}>
+        <option value="all">All dates</option>
+        {#each dateList as date}
+          <option value={date}>{date}</option>
+        {/each}
+      </select>
+      <p>
+        <small>Last updated {lastUpdated}.</small>
+      </p>
     </div>
     <div class="content">
       {#each Object.keys(slots) as date}
-        <div class="day">
+        <div
+          class:hidden={$dateFilter !== "all" && $dateFilter !== date}
+          class="day"
+        >
           <h3 class="date-header">{date}</h3>
           <table>
             <tr>
@@ -120,6 +129,7 @@
   }
 
   .date-header {
+    font-size: 18px;
     border-bottom: 2px solid #f5f5f5;
     padding: 5px;
     margin-bottom: 5px;
@@ -156,22 +166,12 @@
     padding: 0 5px;
   }
 
-  .title {
-    width: 100%;
-    padding: 20px 5px;
-  }
-
   .filter-widget {
     width: 100%;
     padding: 10px;
     margin-bottom: 0px;
     background: white;
   }
-  h1 {
-    font-size: 1.3em;
-  }
-
-  h1,
   p {
     margin-top: 5px;
     margin-bottom: 0;
@@ -195,5 +195,10 @@
 
   input {
     outline: none;
+    padding: 3px;
+  }
+
+  select {
+    padding: 3px;
   }
 </style>

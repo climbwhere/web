@@ -15,7 +15,9 @@ const months = [
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export const getDateString = (date) =>
-  `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]} `;
+  `${days[date.getDay()]}, ${date.getDate()} ${
+    months[date.getMonth()]
+  } ${date.getFullYear()} `;
 
 export const getTimeString = (date) => {
   return date.toLocaleString("en-SG", {
@@ -28,14 +30,12 @@ export const getTimeString = (date) => {
 
 export const formatDate = (date) => {
   var d = new Date(date),
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear();
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
 
-  if (month.length < 2) 
-      month = '0' + month;
-  if (day.length < 2) 
-      day = '0' + day;
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
 
-  return [year, month, day].join('-');
+  return [year, month, day].join("-");
 };

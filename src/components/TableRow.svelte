@@ -1,12 +1,10 @@
 <script>
-  import { formatDate } from "../utils/date";
-  export let gym, start, end, spaces, timing, date, hide;
-  export let gymFilter, dateFilter, numberOfClimbers;
+  export let gym, spaces, timing;
+  export let gymFilter, numberOfClimbers;
 </script>
 
 <tr
-  class:hidden={(gymFilter !== "all" && gymFilter !== gym) ||
-    (dateFilter !== null && formatDate(new Date(start)) !== dateFilter)}
+  class:hidden={gymFilter !== "all" && gymFilter !== gym}
   class:warn={spaces < 10}
   class:invalid={spaces < numberOfClimbers}
 >
