@@ -10,11 +10,23 @@
   const onCloseButtonClick = () => {
     showFilterMenu.update((i) => !i);
   };
+
+  const onClearAllButtonClick = (e) => {
+    e.preventDefault();
+    gymFilter.update((_) => "all");
+    dateFilter.update((_) => "all");
+    numberOfClimbers.update((_) => 1);
+  };
 </script>
 
 <div class:hidden={!$showFilterMenu} class="filter-widget">
-  <h3>Filters</h3>
-  <div class="filter">
+  <div class="filter-row">
+    <h3 class="label">Filters</h3>
+    <a class="clear-all-button" on:click={onClearAllButtonClick} href=""
+      >reset</a
+    >
+  </div>
+  <div class="filter-row">
     <span class="label"> Climbers: </span>
     <input
       type="number"
@@ -24,7 +36,7 @@
     />
   </div>
 
-  <div class="filter">
+  <div class="filter-row">
     <span class="label">Gym:</span>
     <select bind:value={$gymFilter}>
       <option value="all">All gyms</option>
@@ -35,7 +47,7 @@
       {/each}
     </select>
   </div>
-  <div class="filter">
+  <div class="filter-row">
     <span class="label">Date:</span>
     <select bind:value={$dateFilter}>
       <option value="all">All dates</option>
@@ -73,11 +85,10 @@
 
   h3 {
     margin: 0;
-    margin-bottom: 10px;
     font-size: 17px;
   }
 
-  .filter {
+  .filter-row {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -86,7 +97,7 @@
     margin: 5px 0;
   }
 
-  .filter .label {
+  .filter-row .label {
     flex: 1;
   }
 
@@ -123,5 +134,10 @@
 
   .close-button:active {
     opacity: 0.4;
+  }
+
+  .clear-all-button {
+    float: right;
+    font-size: 15px;
   }
 </style>
