@@ -1,10 +1,11 @@
 <script>
   export let gym, spaces, timing;
-  export let gymFilter, numberOfClimbers;
+  export let gymFilter, numberOfClimbers, showAvailableOnly;
 </script>
 
 <tr
-  class:hidden={gymFilter !== "all" && gymFilter !== gym}
+  class:hidden={(gymFilter !== "all" && gymFilter !== gym) ||
+    (showAvailableOnly && spaces < numberOfClimbers)}
   class:warn={spaces < 10}
   class:invalid={spaces < numberOfClimbers}
 >
@@ -54,9 +55,6 @@
   }
 
   @media screen and (max-width: 500px) {
-    td {
-      font-size: 0.7em;
-    }
   }
 
   .fitbloc {

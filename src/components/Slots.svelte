@@ -13,6 +13,7 @@
   import TableRow from "./TableRow.svelte";
 
   export let location;
+  let showAvailableOnly = writable(false);
   let dateFilter = writable("all");
   let numberOfClimbers = writable(1);
   let gymFilter = writable("all");
@@ -83,6 +84,10 @@
         {/each}
       </select>
       <p>
+        <input type="checkbox" bind:value={$showAvailableOnly} /> Show available
+        slots only
+      </p>
+      <p>
         <small>Last updated {lastUpdated}.</small>
       </p>
     </div>
@@ -95,9 +100,9 @@
           <h3 class="date-header">{date}</h3>
           <table>
             <tr>
-              <th><span class="badge">Gym</span></th>
-              <th><span class="badge">Time</span></th>
-              <th class="spaces"><span class="badge">Availble Spaces</span></th>
+              <th>Gym</th>
+              <th>Time</th>
+              <th class="spaces">Availble Spaces</th>
             </tr>
             {#each slots[date] as slot}
               <TableRow
@@ -105,6 +110,7 @@
                 gymFilter={$gymFilter}
                 dateFilter={$dateFilter}
                 numberOfClimbers={$numberOfClimbers}
+                showAvailableOnly={$showAvailableOnly}
               />
             {/each}
           </table>

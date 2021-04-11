@@ -14,6 +14,9 @@
     padding: 10px 5px;
     font-weight: 600;
     border-bottom: #f5f5f5 solid 2px;
+    background: white;
+    position: sticky;
+    top: 0px;
   }
 
   .logo {
