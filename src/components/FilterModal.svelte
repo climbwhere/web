@@ -44,6 +44,12 @@
     <input type="checkbox" bind:checked={$showAvailableOnly} /> Show available slots
     only
   </p>
+
+  <div class="feedback">
+    Created by nerd climbers. Got feedback/ideas for us? <a href=""
+      >contact.climbwhere@gmail.com</a
+    >
+  </div>
 </div>
 
 <style>
@@ -90,5 +96,13 @@
 
   select {
     padding: 3px;
+  }
+
+  .feedback {
+    background: #f5f5f5;
+    border-radius: 6px;
+    padding: 10px;
+    width: 100%;
+    font-size: 11px;
   }
 </style>

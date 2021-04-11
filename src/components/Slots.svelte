@@ -107,6 +107,9 @@
     <p>{error}</p>
     <p>Please try again.</p>
   {/await}
+  <footer>
+    <a href>contact.climbwheresg@gmail.com</a>
+  </footer>
 </div>
 
 <style>
@@ -171,5 +174,13 @@
 
   .hidden {
     display: none;
+  }
+
+  footer {
+    background: #f5f5f5;
+    border-radius: 15px;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
   }
 </style>
