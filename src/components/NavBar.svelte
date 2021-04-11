@@ -13,7 +13,13 @@
       <img class="logo-image" alt="climb emoji" src="/climb.png" />Climbwhere.sg
     </div>
   </div>
-  <button on:click={onFilterButtonClick} class="filter-button"> &#9776;</button>
+  <button on:click={onFilterButtonClick} class="filter-button"
+    ><img
+      class="filter-button-icon"
+      alt="filter button"
+      src="/filter-results-button.png"
+    /></button
+  >
   <FilterModal {...filterProps} />
 </nav>
 
@@ -61,6 +67,14 @@
     background: white;
     border-radius: 5px;
     border: 2px solid #f5f5f5;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .filter-button-icon {
+    width: 20px;
+    height: 20px;
+    flex: 1;
   }
 </style>
