@@ -54,6 +54,8 @@
   }
 
   .filter-button {
+    width: 30px;
+    height: 30px;
     background: white;
     border-radius: 5px;
     border: 2px solid #f5f5f5;
