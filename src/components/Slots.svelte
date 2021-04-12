@@ -11,7 +11,7 @@
   import { getDateString, getTimeString } from "../utils/date";
   import NavBar from "./NavBar.svelte";
   import TableRow from "./TableRow.svelte";
-  import { query } from "../stores";
+  import { query } from "../query";
 
   export let location;
 
