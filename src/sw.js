@@ -1,4 +1,4 @@
-const CACHE_NAME = "climbwhere-sg-cache-test-1";
+const CACHE_NAME = "climbwhere-sg-cache-test-2";
 // TODO: update urls to cache on release
 const urlsToCache = [
   "/",
