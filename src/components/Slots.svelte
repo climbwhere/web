@@ -27,7 +27,8 @@
   let lastUpdated = "Loading...";
 
   const slotsPromise = fetch(
-    "https://triomic.github.io/climbing-gym-scraper/sessions.json"
+    "https://triomic.github.io/climbing-gym-scraper/sessions.json?rnd=" +
+      Math.random()
   )
     .then((r) => r.json())
     .then((slots) => {
@@ -141,6 +142,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background: white;
   }
 
   .date-header {

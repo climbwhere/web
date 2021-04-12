@@ -2,7 +2,12 @@
   import FilterModal from "./FilterModal.svelte";
   export let filterProps;
 
-  const onLogoClick = () => location.reload();
+  const onLogoClick = () => {
+    filterProps.gymFilter.update((_) => "all");
+    filterProps.dateFilter.update((_) => "all");
+    filterProps.numberOfClimbers.update((_) => 1);
+    location.reload();
+  };
   const onFilterButtonClick = () =>
     filterProps.showFilterMenu.update((i) => !i);
 </script>

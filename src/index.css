@@ -5,6 +5,8 @@ body {
   font-size: 18px;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 * {
