@@ -11,16 +11,19 @@
   import { getDateString, getTimeString } from "../utils/date";
   import NavBar from "./NavBar.svelte";
   import TableRow from "./TableRow.svelte";
+  import { query } from "../stores";
 
   export let location;
+
   let showFilterMenu = writable(false);
-  let showAvailableOnly = writable(false);
-  let dateFilter = writable("all");
-  let numberOfClimbers = writable(1);
-  let gymFilter = writable("all");
+  let showAvailableOnly = writable($query.showAvailableOnly);
+  let dateFilter = writable($query.dateFilter);
+  let numberOfClimbers = writable($query.numberOfClimbers || 1);
+  let gymFilter = writable($query.gymFilter);
+  let slotData = writable([]);
   let gymList = [];
   let dateList = [];
-  let store = writable([]);
+
   let lastUpdated = "Loading...";
 
   const slotsPromise = fetch(
@@ -41,18 +44,38 @@
     })
     .then((slots) => groupBy(sortBy(slots, "start"), "date"))
     .then((slots) => {
-      store.update((_) => slots);
+      slotData.update((_) => slots);
       return slots;
     });
 
-  const resetDateFilter = (e) => {
-    e.preventDefault();
-    $dateFilter = null;
-  };
-
-  store.subscribe((newData) => {
+  slotData.subscribe((newData) => {
     gymList = keys(groupBy(flatten(values(newData)), "gym"));
     dateList = keys(newData);
+  });
+
+  gymFilter.subscribe((newValue) => {
+    query.update((q) => ({
+      ...q,
+      gymFilter: newValue,
+    }));
+  });
+  numberOfClimbers.subscribe((newValue) => {
+    query.update((q) => ({
+      ...q,
+      numberOfClimbers: newValue,
+    }));
+  });
+  dateFilter.subscribe((newValue) => {
+    query.update((q) => ({
+      ...q,
+      dateFilter: newValue,
+    }));
+  });
+  showAvailableOnly.subscribe((newValue) => {
+    query.update((q) => ({
+      ...q,
+      showAvailableOnly: newValue,
+    }));
   });
 </script>
 

@@ -1,5 +1,5 @@
-const CACHE_NAME = "climbwhere-sg-cache-test";
-// TODO: update urls to cache on release 
+const CACHE_NAME = "climbwhere-sg-cache-test-1";
+// TODO: update urls to cache on release
 const urlsToCache = [
   "/",
   "/index.html",
@@ -12,9 +12,9 @@ const urlsToCache = [
 ];
 
 self.addEventListener("install", function (event) {
-  // event.waitUntil(
-  //   caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
-  // );
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
+  );
 });
 
 self.addEventListener("activate", function (event) {
@@ -22,18 +22,17 @@ self.addEventListener("activate", function (event) {
 });
 
 self.addEventListener("fetch", function (event) {
-  // skip requests for extensions 
-  if (!(event.request.url.indexOf('http') === 0)) return;
+  // skip requests for extensions
+  if (!(event.request.url.indexOf("http") === 0)) return;
 
   event.respondWith(
     caches.match(event.request).then(function (response) {
-		// Cache hit - return response
-		if (response) {
-			return response;
-		}
+      // Cache hit - return response
+      if (response) {
+        return response;
+      }
 
       return fetch(event.request).then(function (response) {
-
         // Check if we received a valid response
         if (!response || response.status !== 200 || response.type !== "basic") {
           return response;
