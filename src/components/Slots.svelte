@@ -12,11 +12,13 @@
   import NavBar from "./NavBar.svelte";
   import TableRow from "./TableRow.svelte";
   import { query } from "../query";
+  import MoreInfoModal from "./MoreInfoModal.svelte";
 
   export let location;
 
   let showFilterMenu = writable(false);
-  let showAvailableOnly = writable($query.showAvailableOnly);
+  let showMoreInfoModal = writable(false);
+  let showAvailableOnly = writable($query.showAvailableOnly === "true");
   let dateFilter = writable($query.dateFilter);
   let numberOfClimbers = writable($query.numberOfClimbers || 1);
   let gymFilter = writable($query.gymFilter);
@@ -48,6 +50,11 @@
       slotData.update((_) => slots);
       return slots;
     });
+
+  const onRefreshClicked = (e) => {
+    e.preventDefault();
+    window.location.reload();
+  };
 
   slotData.subscribe((newData) => {
     gymList = keys(groupBy(flatten(values(newData)), "gym"));
@@ -82,6 +89,7 @@
 
 <div class="container">
   <NavBar
+    {showMoreInfoModal}
     filterProps={{
       showFilterMenu,
       numberOfClimbers,
@@ -96,10 +104,7 @@
     <p class="load-indicator">🧗 Loading...</p>
   {:then slots}
     <div class="description">
-      Timely Singapore climbing gym slot information.
-      <p>
-        <small>Last updated {lastUpdated}.</small>
-      </p>
+      <small>Showing information for {gymList.length} gyms. Last updated {lastUpdated}. <a href="" on:click={onRefreshClicked}>Refresh</a></small>
     </div>
     <div class="content">
       {#each Object.keys(slots) as date}
@@ -126,6 +131,7 @@
           </table>
         </div>
       {/each}
+      <MoreInfoModal {showMoreInfoModal} />
     </div>
   {:catch error}
     <p>{error}</p>
@@ -185,8 +191,8 @@
 
   .description {
     width: 100%;
-    padding: 5px;
-    margin-top: 5px;
+    padding: 0 10px;
+    margin-top: 10px;
   }
 
   p {

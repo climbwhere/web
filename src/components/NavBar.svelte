@@ -1,13 +1,11 @@
 <script>
   import FilterModal from "./FilterModal.svelte";
-  export let filterProps;
+  export let filterProps, showMoreInfoModal;
 
   const onLogoClick = () => {
-    filterProps.gymFilter.update((_) => "all");
-    filterProps.dateFilter.update((_) => "all");
-    filterProps.numberOfClimbers.update((_) => 1);
-    location.reload();
+    showMoreInfoModal.update((i) => !i);
   };
+
   const onFilterButtonClick = () =>
     filterProps.showFilterMenu.update((i) => !i);
 </script>
@@ -54,9 +52,12 @@
     width: 170px;
     text-align: center;
     border-radius: 10px;
+    cursor: pointer;
+    transition-duration: 0.3s;
   }
 
-  .logo:active {
+  .logo:active,
+  .logo:hover {
     background: #f5f5f5;
   }
 

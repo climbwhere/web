@@ -60,12 +60,6 @@
     <input type="checkbox" bind:checked={$showAvailableOnly} /> Show available slots
     only
   </p>
-  <div class="feedback">
-    Created by nerd climbers <a href="https://twitter.com/seanlkx">@seanlkx</a>
-    and
-    <a href="https://twitter.com/ravernkoh">@ravernkoh</a>. Code open-sourced on
-    <a href="https://github.com/seanlim/climbwhere-sg">Github</a>.
-  </div>
   <div class="close-button" on:click={onCloseButtonClick}>Close</div>
 </div>
 
@@ -113,11 +107,6 @@
 
   select {
     padding: 3px;
-  }
-
-  .feedback {
-    width: 100%;
-    font-size: 11px;
   }
 
   .close-button {
