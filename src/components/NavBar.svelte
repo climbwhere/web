@@ -76,6 +76,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    outline: none;
+    cursor: pointer;
   }
 
   .filter-button-icon {

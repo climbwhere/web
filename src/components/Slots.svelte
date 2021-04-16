@@ -104,7 +104,16 @@
     <p class="load-indicator">🧗 Loading...</p>
   {:then slots}
     <div class="description">
-      <small>Showing information for {gymList.length} gyms. Last updated {lastUpdated}. <a href="" on:click={onRefreshClicked}>Refresh</a></small>
+      <small>
+        {$gymFilter !== "all"
+          ? `Showing information for ${$gymFilter}`
+          : `Showing information for all ${gymList.length} gyms`},
+        {$dateFilter !== "all" ? `on ${$dateFilter}` : "on all dates"}
+        for {$numberOfClimbers} climbers.
+        <br />
+        Last updated {lastUpdated}.
+        <a href="" on:click={onRefreshClicked}>Refresh</a></small
+      >
     </div>
     <div class="content">
       {#each Object.keys(slots) as date}

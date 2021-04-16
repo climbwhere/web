@@ -1,16 +1,13 @@
 import queryString from "query-string";
 import { writable } from "svelte/store";
 
+import { defaultFilterState } from "./constants";
+
 const createQueryStore = () => {
   const initialQuery =
     window.location.hash !== ""
       ? queryString.parse(window.location.hash)
-      : {
-          numberOfClimbers: 1,
-          dateFilter: "all",
-          gymFilter: "all",
-          showAvailableOnly: false,
-        };
+      : defaultFilterState;
 
   const { subscribe, set } = writable(initialQuery);
 
