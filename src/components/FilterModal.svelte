@@ -1,4 +1,6 @@
 <script>
+  import Button from "./Button.svelte";
+
   export let showFilterMenu,
     numberOfClimbers,
     gymFilter,
@@ -60,7 +62,7 @@
     <input type="checkbox" bind:checked={$showAvailableOnly} /> Show available slots
     only
   </p>
-  <div class="close-button" on:click={onCloseButtonClick}>Close</div>
+  <Button title="Close" on:click={onCloseButtonClick} />
 </div>
 
 <style>
@@ -108,23 +110,6 @@
   select {
     padding: 3px;
   }
-
-  .close-button {
-    margin-top: 10px;
-    width: 100%;
-    padding: 10px;
-    font-weight: bold;
-    font-size: 16px;
-    border-radius: 10px;
-    background: #f5f5f5;
-    text-align: center;
-    -webkit-user-select: none;
-  }
-
-  .close-button:active {
-    opacity: 0.4;
-  }
-
   .clear-all-button {
     float: right;
     font-size: 15px;

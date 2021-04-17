@@ -1,4 +1,6 @@
 <script>
+  import Button from './Button.svelte';
+
   export let showMoreInfoModal;
 
   const onCloseButtonClick = () => {
@@ -18,7 +20,7 @@
     <a href="https://twitter.com/ravernkoh">@ravernkoh</a>. Code open-sourced on
     <a href="https://github.com/seanlim/climbwhere-sg">Github</a>.
   </div>
-  <div class="button" on:click={onCloseButtonClick}>Close</div>
+  <Button title="Close" on:click={onCloseButtonClick} />
 </div>
 
 <style>
