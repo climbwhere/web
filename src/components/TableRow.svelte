@@ -54,9 +54,6 @@
     font-weight: bold;
   }
 
-  @media screen and (max-width: 500px) {
-  }
-
   .fitbloc {
     background-color: #7b112a;
     color: white;

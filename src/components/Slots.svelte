@@ -38,7 +38,7 @@
         // add some extra props to help us render things more efficiently
         ...slot,
         timing: `${moment(slot.start).format("hh:mmA")}`,
-        date: moment(slot.start).format("dddd, D MMMM YYYY"),
+        date: moment(slot.start).format("dddd, D/MM"),
         hide: false,
       }));
     })
