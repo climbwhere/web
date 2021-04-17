@@ -9,7 +9,7 @@
   class:warn={spaces < 10}
   class:invalid={spaces < numberOfClimbers}
 >
-  <td
+  <td class="gym"
     ><span
       class:fitbloc={gym === "Fit Bloc"}
       class:boulderplus={gym === "boulder+"}
@@ -44,6 +44,10 @@
   td.spaces {
     text-align: right;
     padding-right: 10px;
+    min-width: 80px;
+  }
+
+  td.gym {
     min-width: 120px;
   }
 
