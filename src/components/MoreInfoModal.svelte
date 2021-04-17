@@ -1,10 +1,13 @@
 <script>
-  import Button from './Button.svelte';
+  import Button from "./Button.svelte";
 
   export let showMoreInfoModal;
 
   const onCloseButtonClick = () => {
     showMoreInfoModal.update((i) => !i);
+  };
+  const onTelegramButtonClick = () => {
+    window.open("https://t.me/climbwhere_sg_bot");
   };
 </script>
 
@@ -20,6 +23,11 @@
     <a href="https://twitter.com/ravernkoh">@ravernkoh</a>. Code open-sourced on
     <a href="https://github.com/seanlim/climbwhere-sg">Github</a>.
   </div>
+  <Button
+    iconSrc="/telegram.png"
+    title="@climbwhere_sg Telegram bot"
+    on:click={onTelegramButtonClick}
+  />
   <Button title="Close" on:click={onCloseButtonClick} />
 </div>
 
@@ -41,21 +49,6 @@
   .feedback {
     width: 100%;
     font-size: 11px;
-  }
-
-  .button {
-    margin-top: 10px;
-    width: 100%;
-    padding: 10px;
-    font-weight: bold;
-    font-size: 16px;
-    border-radius: 10px;
-    background: #f5f5f5;
-    text-align: center;
-    -webkit-user-select: none;
-  }
-
-  .button:active {
-    opacity: 0.4;
+    margin: 10px 0;
   }
 </style>

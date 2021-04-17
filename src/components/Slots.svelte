@@ -104,6 +104,10 @@
     <p class="load-indicator">🧗 Loading...</p>
   {:then slots}
     <div class="description">
+      <div class="telegram-link">
+        <img class="telegram-icon" alt="icon" src="/telegram.png" />
+        <a href="https://t.me/climbwhere_sg_bot"> @climbwhere_sg_bot </a>
+      </div>
       <small>
         {$gymFilter !== "all"
           ? `Showing information for ${$gymFilter}`
@@ -216,5 +220,23 @@
   .load-indicator {
     margin-top: 30px;
     flex: 1;
+  }
+
+  .telegram-link {
+    padding: 5px 10px;
+    font-size: 0.8em;
+    border-radius: 15px;
+    background: #0088cc1a;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+  }
+
+  .telegram-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
   }
 </style>

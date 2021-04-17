@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  export let title;
+  export let title, iconSrc;
 
   const dispatch = createEventDispatcher();
 
@@ -8,6 +8,9 @@
 </script>
 
 <div on:click={onClick} class="button">
+  {#if iconSrc !== undefined}
+    <img class="button-icon" alt="button icon" src={iconSrc} />
+  {/if}
   {title}
 </div>
 
@@ -22,9 +25,20 @@
     text-align: center;
     -webkit-user-select: none;
     cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
   }
 
   .button:active {
     opacity: 0.3;
+  }
+
+  .button-icon {
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
   }
 </style>
