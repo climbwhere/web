@@ -19,7 +19,7 @@
   };
 </script>
 
-<div class:hidden={!$showFilterMenu} class="filter-widget">
+<div class:hidden={!$showFilterMenu} class="filter-widget drop-shadow">
   <div class="filter-row">
     <h3 class="label">Filters</h3>
     <a class="clear-all-button" on:click={onClearAllButtonClick} href=""

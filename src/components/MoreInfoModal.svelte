@@ -6,7 +6,11 @@
   };
 </script>
 
-<div class:hidden={!$showMoreInfoModal} id="more-info-modal">
+<div
+  class:hidden={!$showMoreInfoModal}
+  id="more-info-modal"
+  class="drop-shadow"
+>
   <h3>Timely climbing gym vacancy information for Singapore.</h3>
   <div class="feedback">
     Created by nerd climbers <a href="https://twitter.com/seanlkx">@seanlkx</a>
@@ -20,7 +24,7 @@
 <style>
   #more-info-modal {
     width: 100%;
-    max-width: 300px;
+    max-width: 400px;
     padding: 15px;
     margin-bottom: 0px;
     background: white;
