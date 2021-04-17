@@ -34,7 +34,7 @@
 <style>
   #more-info-modal {
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     padding: 15px;
     margin-bottom: 0px;
     background: white;

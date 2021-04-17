@@ -8,7 +8,6 @@
   import values from "lodash/values";
   import keys from "lodash/keys";
 
-  import { getDateString, getTimeString } from "../utils/date";
   import NavBar from "./NavBar.svelte";
   import TableRow from "./TableRow.svelte";
   import { query } from "../query";
@@ -38,10 +37,8 @@
       return slots.data.map((slot) => ({
         // add some extra props to help us render things more efficiently
         ...slot,
-        timing: `${getTimeString(new Date(slot.start))} - ${getTimeString(
-          new Date(slot.end)
-        )}`,
-        date: getDateString(new Date(slot.start)),
+        timing: `${moment(slot.start).format("hh:mmA")}`,
+        date: moment(slot.start).format("dddd, D MMMM YYYY"),
         hide: false,
       }));
     })
@@ -104,10 +101,6 @@
     <p class="load-indicator">🧗 Loading...</p>
   {:then slots}
     <div class="description">
-      <div class="telegram-link">
-        <img class="telegram-icon" alt="icon" src="/telegram.png" />
-        <a href="https://t.me/climbwhere_sg_bot"> @climbwhere_sg_bot </a>
-      </div>
       <small>
         {$gymFilter !== "all"
           ? `Showing information for ${$gymFilter}`
@@ -118,12 +111,16 @@
         Last updated {lastUpdated}.
         <a href="" on:click={onRefreshClicked}>Refresh</a></small
       >
+      <div class="telegram-link">
+        <img class="telegram-icon" alt="icon" src="/telegram.png" />
+        <a href="https://t.me/climbwhere_sg_bot"> @climbwhere_sg_bot </a>
+      </div>
     </div>
     <div class="content">
       {#each Object.keys(slots) as date}
         <div
           class:hidden={$dateFilter !== "all" && $dateFilter !== date}
-          class="day"
+          class="day drop-shadow"
         >
           <h3 class="date-header">{date}</h3>
           <table>
@@ -168,10 +165,13 @@
     font-size: 18px;
     border-bottom: 2px solid #f5f5f5;
     padding: 5px;
-    margin-bottom: 5px;
+    margin: 0;
   }
 
   .day {
+    border-radius: 10px;
+    border: solid 1px #f5f5f5;
+    padding: 15px 5px;
     margin-bottom: 20px;
     border-radius: 10px;
     transition-duration: 1s;
@@ -231,7 +231,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 5px 0;
+    margin: 10px 0;
   }
 
   .telegram-icon {
