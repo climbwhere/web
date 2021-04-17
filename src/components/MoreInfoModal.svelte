@@ -45,6 +45,11 @@
     bottom: 0;
     background: white;
   }
+  @media screen and (max-width: 450px) {
+    #more-info-modal {
+      max-width: 100%;
+    }
+  }
 
   .feedback {
     width: 100%;
