@@ -16,7 +16,7 @@
   id="more-info-modal"
   class="drop-shadow"
 >
-  <h3>Timely climbing gym vacancy information for Singapore.</h3>
+  <h4>Timely climbing gym vacancy information for Singapore.</h4>
   <div class="feedback">
     Created by nerd climbers <a href="https://twitter.com/seanlkx">@seanlkx</a>
     and
@@ -49,6 +49,10 @@
     #more-info-modal {
       max-width: 100%;
     }
+  }
+
+  h4 {
+    margin: 10px 0;
   }
 
   .feedback {
