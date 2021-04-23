@@ -1,7 +1,7 @@
 <script>
   import moment from "moment";
   import { writable } from "svelte/store";
-  import fetch from "unfetch";
+  import fetch from "isomorphic-unfetch";
   import groupBy from "lodash/groupBy";
   import sortBy from "lodash/sortBy";
   import flatten from "lodash/flatten";
@@ -12,6 +12,8 @@
   import TableRow from "./TableRow.svelte";
   import { query } from "../query";
   import MoreInfoModal from "./MoreInfoModal.svelte";
+
+  import { getSessions } from "../api";
 
   export let location;
 
@@ -27,6 +29,7 @@
 
   let lastUpdated = "Loading...";
 
+  getSessions();
   const slotsPromise = fetch(
     "https://triomic.github.io/climbing-gym-scraper/sessions.json?rnd=" +
       Math.random()
