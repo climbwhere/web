@@ -6,7 +6,7 @@
     gymFilter,
     dateFilter,
     showAvailableOnly,
-    gymList,
+    gyms,
     dateList;
 
   const onCloseButtonClick = () => {
@@ -42,9 +42,9 @@
     <span class="label">Gym:</span>
     <select bind:value={$gymFilter}>
       <option value="all">All gyms</option>
-      {#each gymList as gym}
-        <option value={gym}>
-          {gym}
+      {#each gyms as gym}
+        <option value={gym.slug}>
+          {gym.name}
         </option>
       {/each}
     </select>

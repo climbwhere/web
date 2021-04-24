@@ -4,7 +4,7 @@
 </script>
 
 <tr
-  class:hidden={(gymFilter !== "all" && gymFilter !== gym) ||
+  class:hidden={(gymFilter !== "all" && gymFilter !== gym.slug) ||
     (showAvailableOnly && spaces < numberOfClimbers)}
   class:warn={spaces < 10}
   class:invalid={spaces < numberOfClimbers}

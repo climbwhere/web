@@ -30,7 +30,7 @@ export const getSessions = async () =>
 // }
 export const getGyms = async () =>
   fetch(API_URL + "/gyms")
-    .then((r) => r.json)
+    .then((r) => r.json())
     .then(({ data }) => data);
 
 export const getLastUpdated = async () =>

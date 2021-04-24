@@ -9,7 +9,7 @@
 </script>
 
 <div on:click={onClick} class="button">
-  {#if iconSrc !== undefined}
+  {#if iconSrc !== ""}
     <img class="button-icon" alt="button icon" src={iconSrc} />
   {/if}
   {title}

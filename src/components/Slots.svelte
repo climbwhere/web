@@ -13,7 +13,7 @@
   import { query } from "../query";
   import MoreInfoModal from "./MoreInfoModal.svelte";
 
-  import { getSessions } from "../api";
+  import { getSessions, getLastUpdated, getGyms } from "../api";
 
   export let location;
 
@@ -24,10 +24,10 @@
   let numberOfClimbers = writable($query.numberOfClimbers || 1);
   let gymFilter = writable($query.gymFilter);
   let sessionData = writable(null);
-  let gymList = [];
-  let dateList = [];
+  let gymData = writable([]);
+  let dateList = ["Loading..."];
 
-  let lastUpdated = "Loading...";
+  let lastUpdated = getLastUpdated();
 
   // TODO: add some sort of load indicator
   async function loadSessions() {
@@ -41,6 +41,13 @@
       )
       .then((sessions) => groupBy(sortBy(sessions, "starts_at"), "date"));
     sessionData.update((_) => newSessionData);
+    loadGyms();
+  }
+
+  async function loadGyms() {
+    const newGymData = await getGyms();
+    console.info(newGymData);
+    gymData.update((_) => newGymData);
   }
 
   onMount(() => {
@@ -53,7 +60,6 @@
   };
 
   sessionData.subscribe((newData) => {
-    gymList = keys(groupBy(flatten(values(newData)), "gym"));
     dateList = keys(newData);
   });
 
@@ -92,7 +98,7 @@
       gymFilter,
       dateFilter,
       showAvailableOnly,
-      gymList,
+      gyms: $gymData,
       dateList,
     }}
   />
@@ -100,11 +106,15 @@
     <small>
       {$gymFilter !== "all"
         ? `Showing information for ${$gymFilter}`
-        : `Showing information for all ${gymList.length} gyms`},
+        : `Showing information for all gyms`},
       {$dateFilter !== "all" ? `on ${$dateFilter}` : "on all dates"}
       for {$numberOfClimbers} climbers.
       <br />
-      Last updated {lastUpdated}.
+      Last updated {#await lastUpdated}
+        loading...
+      {:then lastUpdated}
+        {moment(lastUpdated).fromNow()}
+      {/await}.
       <a href="" on:click={onRefreshClicked}>Refresh</a></small
     >
     <div class="telegram-link">
