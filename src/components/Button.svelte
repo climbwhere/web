@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  export let title, iconSrc;
+  export let title,
+    iconSrc = "";
 
   const dispatch = createEventDispatcher();
 

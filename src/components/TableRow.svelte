@@ -11,14 +11,14 @@
 >
   <td class="gym"
     ><span
-      class:fitbloc={gym === "Fit Bloc"}
-      class:boulderplus={gym === "boulder+"}
-      class:bffclimb={gym === "BFF Climb"}
-      class:oyeyo={gym === "Oyeyo"}
-      class:zvertigo={gym === "Z-Vertigo"}
-      class:boulderworld={gym === "Boulder World"}
-      class:lighthouse={gym === "Lighthouse"}
-      class="badge">{gym}</span
+      class:fitbloc={gym.slug === "fitbloc"}
+      class:boulderplus={gym.slug === "boulder-plus"}
+      class:bffclimb={gym.slug === "bff"}
+      class:oyeyo={gym.slug === "oyeyo"}
+      class:zvertigo={gym.slug === "z-vertigo"}
+      class:boulderworld={gym.slug === "boulder-world"}
+      class:lighthouse={gym.slug === "lighthouse"}
+      class="badge">{gym.name}</span
     ></td
   >
   <td class="timings">{timing}</td>

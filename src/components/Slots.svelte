@@ -1,7 +1,7 @@
 <script>
   import moment from "moment";
+  import { onMount } from "svelte";
   import { writable } from "svelte/store";
-  import fetch from "isomorphic-unfetch";
   import groupBy from "lodash/groupBy";
   import sortBy from "lodash/sortBy";
   import flatten from "lodash/flatten";
@@ -23,40 +23,36 @@
   let dateFilter = writable($query.dateFilter);
   let numberOfClimbers = writable($query.numberOfClimbers || 1);
   let gymFilter = writable($query.gymFilter);
-  let slotData = writable([]);
+  let sessionData = writable(null);
   let gymList = [];
   let dateList = [];
 
   let lastUpdated = "Loading...";
 
-  getSessions();
-  const slotsPromise = fetch(
-    "https://triomic.github.io/climbing-gym-scraper/sessions.json?rnd=" +
-      Math.random()
-  )
-    .then((r) => r.json())
-    .then((slots) => {
-      lastUpdated = moment(slots.last_updated).fromNow();
-      return slots.data.map((slot) => ({
-        // add some extra props to help us render things more efficiently
-        ...slot,
-        timing: `${moment(slot.start).format("hh:mmA")}`,
-        date: moment(slot.start).format("dddd, D/MM"),
-        hide: false,
-      }));
-    })
-    .then((slots) => groupBy(sortBy(slots, "start"), "date"))
-    .then((slots) => {
-      slotData.update((_) => slots);
-      return slots;
-    });
+  // TODO: add some sort of load indicator
+  async function loadSessions() {
+    const newSessionData = await getSessions()
+      .then((sessions) =>
+        sessions.map((session) => ({
+          ...session,
+          timing: moment(session.starts_at).format("hh:mmA"),
+          date: moment(session.starts_at).format("dddd, D/MM"),
+        }))
+      )
+      .then((sessions) => groupBy(sortBy(sessions, "starts_at"), "date"));
+    sessionData.update((_) => newSessionData);
+  }
 
-  const onRefreshClicked = (e) => {
+  onMount(() => {
+    loadSessions();
+  });
+
+  const onRefreshClicked = async (e) => {
     e.preventDefault();
-    window.location.reload();
+    await loadSessions();
   };
 
-  slotData.subscribe((newData) => {
+  sessionData.subscribe((newData) => {
     gymList = keys(groupBy(flatten(values(newData)), "gym"));
     dateList = keys(newData);
   });
@@ -100,27 +96,25 @@
       dateList,
     }}
   />
-  {#await slotsPromise}
-    <p class="load-indicator">🧗 Loading...</p>
-  {:then slots}
-    <div class="description">
-      <small>
-        {$gymFilter !== "all"
-          ? `Showing information for ${$gymFilter}`
-          : `Showing information for all ${gymList.length} gyms`},
-        {$dateFilter !== "all" ? `on ${$dateFilter}` : "on all dates"}
-        for {$numberOfClimbers} climbers.
-        <br />
-        Last updated {lastUpdated}.
-        <a href="" on:click={onRefreshClicked}>Refresh</a></small
-      >
-      <div class="telegram-link">
-        <img class="telegram-icon" alt="icon" src="/telegram.png" />
-        <a href="https://t.me/climbwhere_sg_bot"> @climbwhere_sg_bot </a>
-      </div>
+  <div class="description">
+    <small>
+      {$gymFilter !== "all"
+        ? `Showing information for ${$gymFilter}`
+        : `Showing information for all ${gymList.length} gyms`},
+      {$dateFilter !== "all" ? `on ${$dateFilter}` : "on all dates"}
+      for {$numberOfClimbers} climbers.
+      <br />
+      Last updated {lastUpdated}.
+      <a href="" on:click={onRefreshClicked}>Refresh</a></small
+    >
+    <div class="telegram-link">
+      <img class="telegram-icon" alt="icon" src="/telegram.png" />
+      <a href="https://t.me/climbwhere_sg_bot"> @climbwhere_sg_bot </a>
     </div>
-    <div class="content">
-      {#each Object.keys(slots) as date}
+  </div>
+  <div class="content">
+    {#if $sessionData !== null}
+      {#each Object.keys($sessionData) as date}
         <div
           class:hidden={$dateFilter !== "all" && $dateFilter !== date}
           class="day drop-shadow"
@@ -132,11 +126,12 @@
               <th>Time</th>
               <th class="spaces">Availble Spaces</th>
             </tr>
-            {#each slots[date] as slot}
+            {#each $sessionData[date] as session}
               <TableRow
-                {...slot}
+                gym={session.gym}
+                spaces={session.spaces}
+                timing={session.timing}
                 gymFilter={$gymFilter}
-                dateFilter={$dateFilter}
                 numberOfClimbers={$numberOfClimbers}
                 showAvailableOnly={$showAvailableOnly}
               />
@@ -144,12 +139,11 @@
           </table>
         </div>
       {/each}
-      <MoreInfoModal {showMoreInfoModal} />
-    </div>
-  {:catch error}
-    <p>{error}</p>
-    <p>Please try again.</p>
-  {/await}
+    {:else}
+      <p>Loading...</p>
+    {/if}
+    <MoreInfoModal {showMoreInfoModal} />
+  </div>
 </div>
 
 <style>

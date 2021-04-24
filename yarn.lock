@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@snowpack/plugin-dotenv@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@snowpack/plugin-dotenv/-/plugin-dotenv-2.1.0.tgz#dac77007bf657f999d222318506a850fd7d16875"
+  integrity sha512-NvwB+kQuxKheZLWrRvOgXB8i0cXhuIkljbgCn02fRGCIOigPIDk1jZrnn3x9skqqtul/XvW9dNulVi6Fa7CN6g==
+  dependencies:
+    dotenv "^8.2.0"
+    dotenv-expand "^5.1.0"
+
 "@snowpack/plugin-svelte@^3.5.2":
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/@snowpack/plugin-svelte/-/plugin-svelte-3.5.2.tgz#144d6ff9716ce6878ffeba67811e98b2c3744e7d"
@@ -58,6 +66,16 @@ detect-indent@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-6.0.0.tgz#0abd0f549f69fc6659a254fe96786186b6f528fd"
   integrity sha512-oSyFlqaTHCItVRGK5RmrmjB+CmaMOW7IaNA/kdxqhoa6d17j/5ce9O9eWXmV/KEdRwqpQA+Vqe8a8Bsybu4YnA==
+
+dotenv-expand@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/dotenv-expand/-/dotenv-expand-5.1.0.tgz#3fbaf020bfd794884072ea26b1e9791d45a629f0"
+  integrity sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==
+
+dotenv@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
+  integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
 
 esbuild@^0.8.7:
   version "0.8.57"
