@@ -33,6 +33,7 @@
 
   tr {
     content-visibility: auto;
+    transition-duration: 0.3s;
   }
 
   td {

@@ -4,8 +4,7 @@
   import { writable } from "svelte/store";
   import groupBy from "lodash/groupBy";
   import sortBy from "lodash/sortBy";
-  import flatten from "lodash/flatten";
-  import values from "lodash/values";
+  import isEmpty from "lodash/isEmpty";
   import keys from "lodash/keys";
 
   import NavBar from "./NavBar.svelte";
@@ -26,6 +25,7 @@
   let sessionData = writable(null);
   let gymData = writable([]);
   let dateList = ["Loading..."];
+  let refreshing = false;
 
   let lastUpdated = getLastUpdated();
 
@@ -36,27 +36,31 @@
         sessions.map((session) => ({
           ...session,
           timing: moment(session.starts_at).format("hh:mmA"),
-          date: moment(session.starts_at).format("dddd, D/MM"),
+          date: moment(session.starts_at).format("dddd, DD/MM/YY"),
         }))
       )
       .then((sessions) => groupBy(sortBy(sessions, "starts_at"), "date"));
     sessionData.update((_) => newSessionData);
-    loadGyms();
   }
 
   async function loadGyms() {
     const newGymData = await getGyms();
-    console.info(newGymData);
     gymData.update((_) => newGymData);
   }
 
+  async function loadAll() {
+    refreshing = true;
+    await Promise.all([loadSessions(), loadGyms()]);
+    refreshing = false;
+  }
+
   onMount(() => {
-    loadSessions();
+    loadAll();
   });
 
   const onRefreshClicked = async (e) => {
     e.preventDefault();
-    await loadSessions();
+    loadAll();
   };
 
   sessionData.subscribe((newData) => {
@@ -104,17 +108,23 @@
   />
   <div class="description">
     <small>
-      {$gymFilter !== "all"
-        ? `Showing information for ${$gymFilter}`
+      {$gymFilter !== "all" && !isEmpty($gymData)
+        ? `Showing information for ${
+            $gymData.filter((g) => g.slug === $gymFilter)[0].name
+          }`
         : `Showing information for all gyms`},
       {$dateFilter !== "all" ? `on ${$dateFilter}` : "on all dates"}
       for {$numberOfClimbers} climbers.
       <br />
-      Last updated {#await lastUpdated}
-        loading...
-      {:then lastUpdated}
-        {moment(lastUpdated).fromNow()}
-      {/await}.
+      {#if refreshing}
+        Refreshing...
+      {:else}
+        Last updated {#await lastUpdated}
+          loading...
+        {:then lastUpdated}
+          {moment(lastUpdated).fromNow()}
+        {/await}.
+      {/if}
       <a href="" on:click={onRefreshClicked}>Refresh</a></small
     >
     <div class="telegram-link">
@@ -123,7 +133,7 @@
     </div>
   </div>
   <div class="content">
-    {#if $sessionData !== null}
+    {#if $sessionData !== null && !refreshing}
       {#each Object.keys($sessionData) as date}
         <div
           class:hidden={$dateFilter !== "all" && $dateFilter !== date}
@@ -150,7 +160,7 @@
         </div>
       {/each}
     {:else}
-      <p>Loading...</p>
+      <p class="load-indicator">Loading...</p>
     {/if}
     <MoreInfoModal {showMoreInfoModal} />
   </div>
@@ -227,6 +237,7 @@
   .load-indicator {
     margin-top: 30px;
     flex: 1;
+    text-align: center;
   }
 
   .telegram-link {
