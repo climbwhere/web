@@ -18,10 +18,13 @@
 >
   <h4>Timely climbing gym vacancy information for Singapore.</h4>
   <div class="feedback">
-    Created by nerd climbers <a href="https://twitter.com/seanlkx">@seanlkx</a>
+    Created by nerd climbers <a href="https://www.instagram.com/seanlkx/"
+      >@seanlkx</a
+    >
     and
-    <a href="https://twitter.com/ravernkoh">@ravernkoh</a>. Code open-sourced on
-    <a href="https://github.com/seanlim/climbwhere-sg">Github</a>.
+    <a href="https://www.instagram.com/lowkeyravern/">@ravernkoh</a>. Code
+    open-sourced on
+    <a href="https://github.com/triomic/climbwhere-sg">Github</a>.
   </div>
   <Button
     iconSrc="/telegram.png"
@@ -57,7 +60,7 @@
 
   .feedback {
     width: 100%;
-    font-size: 11px;
+    font-size: 13px;
     margin: 10px 0;
   }
 </style>
