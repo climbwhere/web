@@ -25,7 +25,6 @@
   let sessionData = writable(null);
   let gymData = writable([]);
   let dateList = ["Loading..."];
-  let refreshing = false;
 
   let lastUpdated = getLastUpdated();
 
@@ -49,9 +48,7 @@
   }
 
   async function loadAll() {
-    refreshing = true;
     await Promise.all([loadSessions(), loadGyms()]);
-    refreshing = false;
   }
 
   onMount(() => {
@@ -60,7 +57,7 @@
 
   const onRefreshClicked = async (e) => {
     e.preventDefault();
-    loadAll();
+    window.location.reload();
   };
 
   sessionData.subscribe((newData) => {
@@ -133,7 +130,7 @@
     </div>
   </div>
   <div class="content">
-    {#if $sessionData !== null && !refreshing}
+    {#if $sessionData !== null}
       {#each Object.keys($sessionData) as date}
         <div
           class:hidden={$dateFilter !== "all" && $dateFilter !== date}
