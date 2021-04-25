@@ -1,5 +1,4 @@
 import fetch from "isomorphic-unfetch";
-console.log(import.meta.env);
 const { SNOWPACK_PUBLIC_API_URL: API_URL } = import.meta.env;
 
 // {
