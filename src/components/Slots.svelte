@@ -35,7 +35,7 @@
         sessions.map((session) => ({
           ...session,
           timing: moment(session.starts_at).format("hh:mmA"),
-          date: moment(session.starts_at).format("dddd, DD/MM/YY"),
+          date: moment(session.starts_at).format("ddd, DD/MM/YY"),
         }))
       )
       .then((sessions) => groupBy(sortBy(sessions, "starts_at"), "date"));
