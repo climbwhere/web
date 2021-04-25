@@ -1,17 +1,36 @@
-const CACHE_NAME = "climbwhere-sg-cache-test-2";
-// TODO: update urls to cache on release
+const CACHE_NAME = "climbwhere-sg-cache-v1.0";
+
 const urlsToCache = [
   "/",
   "/index.html",
   "/index.css",
   "/index.js",
+  "/api.js",
+  "/constants.js",
+  "/telegram.png",
+  "/App.svelte.js",
+  "/components/Button.svelte.css",
+  "/components/Button.svelte.css.proxy.js",
+  "/components/Button.svelte.js",
   "/components/Slots.svelte.css",
   "/components/Slots.svelte.css.proxy.js",
   "/components/Slots.svelte.js",
-  "/utils/date.js",
+  "/components/FilterModal.svelte.css",
+  "/components/FilterModal.svelte.css.proxy.js",
+  "/components/FilterModal.svelte.js",
+  "/components/MoreInfoModal.svelte.css",
+  "/components/MoreInfoModal.svelte.css.proxy.js",
+  "/components/MoreInfoModal.svelte.js",
+  "/components/NavBar.svelte.css",
+  "/components/NavBar.svelte.css.proxy.js",
+  "/components/NavBar.svelte.js",
+  "/components/TableRow.svelte.css",
+  "/components/TableRow.svelte.css.proxy.js",
+  "/components/TableRow.svelte.js",
 ];
 
 self.addEventListener("install", function (event) {
+  console.log("Activate");
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
   );

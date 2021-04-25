@@ -1,10 +1,12 @@
 <script>
+  import Button from "./Button.svelte";
+
   export let showFilterMenu,
     numberOfClimbers,
     gymFilter,
     dateFilter,
     showAvailableOnly,
-    gymList,
+    gyms,
     dateList;
 
   const onCloseButtonClick = () => {
@@ -19,7 +21,7 @@
   };
 </script>
 
-<div class:hidden={!$showFilterMenu} class="filter-widget">
+<div class:hidden={!$showFilterMenu} class="filter-widget drop-shadow">
   <div class="filter-row">
     <h3 class="label">Filters</h3>
     <a class="clear-all-button" on:click={onClearAllButtonClick} href=""
@@ -40,9 +42,9 @@
     <span class="label">Gym:</span>
     <select bind:value={$gymFilter}>
       <option value="all">All gyms</option>
-      {#each gymList as gym}
-        <option value={gym}>
-          {gym}
+      {#each gyms as gym}
+        <option value={gym.slug}>
+          {gym.name}
         </option>
       {/each}
     </select>
@@ -60,13 +62,7 @@
     <input type="checkbox" bind:checked={$showAvailableOnly} /> Show available slots
     only
   </p>
-  <div class="feedback">
-    Created by nerd climbers <a href="https://twitter.com/seanlkx">@seanlkx</a>
-    and
-    <a href="https://twitter.com/ravernkoh">@ravernkoh</a>. Code open-sourced on
-    <a href="https://github.com/seanlim/climbwhere-sg">Github</a>.
-  </div>
-  <div class="close-button" on:click={onCloseButtonClick}>Close</div>
+  <Button title="Close" on:click={onCloseButtonClick} />
 </div>
 
 <style>
@@ -114,28 +110,6 @@
   select {
     padding: 3px;
   }
-
-  .feedback {
-    width: 100%;
-    font-size: 11px;
-  }
-
-  .close-button {
-    margin-top: 10px;
-    width: 100%;
-    padding: 10px;
-    font-weight: bold;
-    font-size: 16px;
-    border-radius: 10px;
-    background: #f5f5f5;
-    text-align: center;
-    -webkit-user-select: none;
-  }
-
-  .close-button:active {
-    opacity: 0.4;
-  }
-
   .clear-all-button {
     float: right;
     font-size: 15px;

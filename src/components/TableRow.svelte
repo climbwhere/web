@@ -4,21 +4,21 @@
 </script>
 
 <tr
-  class:hidden={(gymFilter !== "all" && gymFilter !== gym) ||
+  class:hidden={(gymFilter !== "all" && gymFilter !== gym.slug) ||
     (showAvailableOnly && spaces < numberOfClimbers)}
   class:warn={spaces < 10}
   class:invalid={spaces < numberOfClimbers}
 >
-  <td
+  <td class="gym"
     ><span
-      class:fitbloc={gym === "Fit Bloc"}
-      class:boulderplus={gym === "boulder+"}
-      class:bffclimb={gym === "BFF Climb"}
-      class:oyeyo={gym === "Oyeyo"}
-      class:zvertigo={gym === "Z-Vertigo"}
-      class:boulderworld={gym === "Boulder World"}
-      class:lighthouse={gym === "Lighthouse"}
-      class="badge">{gym}</span
+      class:fitbloc={gym.slug === "fitbloc"}
+      class:boulderplus={gym.slug === "boulder-plus"}
+      class:bffclimb={gym.slug === "bff"}
+      class:oyeyo={gym.slug === "oyeyo"}
+      class:zvertigo={gym.slug === "z-vertigo"}
+      class:boulderworld={gym.slug === "boulder-world"}
+      class:lighthouse={gym.slug === "lighthouse"}
+      class="badge">{gym.name}</span
     ></td
   >
   <td class="timings">{timing}</td>
@@ -33,6 +33,7 @@
 
   tr {
     content-visibility: auto;
+    transition-duration: 0.3s;
   }
 
   td {
@@ -44,6 +45,10 @@
   td.spaces {
     text-align: right;
     padding-right: 10px;
+    min-width: 80px;
+  }
+
+  td.gym {
     min-width: 120px;
   }
 
@@ -52,9 +57,6 @@
     padding: 4px 10px;
     border-radius: 15px;
     font-weight: bold;
-  }
-
-  @media screen and (max-width: 500px) {
   }
 
   .fitbloc {
