@@ -16,7 +16,7 @@
   id="more-info-modal"
   class="drop-shadow"
 >
-  <h4>Timely climbing gym vacancy information for Singapore.</h4>
+  <h4>Timely climbing gym booking information for Singapore.</h4>
   <div class="feedback">
     Created by nerd climbers <a href="https://www.instagram.com/seanlkx/"
       >@seanlkx</a
