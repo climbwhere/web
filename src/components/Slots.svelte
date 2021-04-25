@@ -113,15 +113,11 @@
       {$dateFilter !== "all" ? `on ${$dateFilter}` : "on all dates"}
       for {$numberOfClimbers} climbers.
       <br />
-      {#if refreshing}
-        Refreshing...
-      {:else}
-        Last updated {#await lastUpdated}
-          loading...
-        {:then lastUpdated}
-          {moment(lastUpdated).fromNow()}
-        {/await}.
-      {/if}
+      Last updated {#await lastUpdated}
+        loading...
+      {:then lastUpdated}
+        {moment(lastUpdated).fromNow()}
+      {/await}.
       <a href="" on:click={onRefreshClicked}>Refresh</a></small
     >
     <div class="telegram-link">
