@@ -1,4 +1,4 @@
-const CACHE_NAME = "climbwhere-sg-cache-v1";
+const CACHE_NAME = "climbwhere-sg-cache-v1.0";
 
 self.addEventListener("install", function (event) {
   console.log("Install");
