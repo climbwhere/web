@@ -116,8 +116,8 @@
       Last updated {#await lastUpdated}
         loading...
       {:then lastUpdated}
-        {moment(lastUpdated).fromNow()}
-      {/await}.
+        {`${moment(lastUpdated).fromNow()}.`}
+      {/await}
       <a href="" on:click={onRefreshClicked}>Refresh</a></small
     >
     <div class="telegram-link">
