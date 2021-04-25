@@ -54,8 +54,8 @@
     refreshing = false;
   }
 
-  onMount(() => {
-    loadAll();
+  onMount(async () => {
+    await loadAll();
   });
 
   const onRefreshClicked = async (e) => {
