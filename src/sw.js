@@ -30,9 +30,21 @@ const urlsToCache = [
 ];
 
 self.addEventListener("install", function (event) {
-  console.log("Activate");
+  console.log("Install");
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
+  );
+  // purge older caches
+  event.waitUntil(
+    caches.keys().then(function (cacheNames) {
+      return Promise.all(
+        cacheNames
+          .filter((cacheName) => cacheName !== CACHE_NAME)
+          .map((cacheName) => {
+            return caches.delete(cacheName);
+          })
+      );
+    })
   );
 });
 
