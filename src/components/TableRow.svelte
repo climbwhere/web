@@ -1,9 +1,16 @@
 <script>
   export let gym, spaces, timing;
   export let gymFilter, numberOfClimbers, showAvailableOnly;
+
+  import { gymBookingLinks } from "../constants";
+
+  const onRowClicked = () => {
+    window.open(gymBookingLinks[gym.slug], "_blank");
+  };
 </script>
 
 <tr
+  on:click={onRowClicked}
   class:hidden={(gymFilter !== "all" && gymFilter !== gym.slug) ||
     (showAvailableOnly && spaces < numberOfClimbers)}
   class:warn={spaces < 10}
@@ -34,6 +41,7 @@
   tr {
     content-visibility: auto;
     transition-duration: 0.3s;
+    cursor: pointer;
   }
 
   td {
