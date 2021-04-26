@@ -16,15 +16,16 @@
   id="more-info-modal"
   class="drop-shadow"
 >
-  <h4>Timely climbing gym booking information for Singapore.</h4>
+  <h3>Timely climbing gym booking information for Singapore.</h3>
   <div class="feedback">
-    Created by nerd climbers <a href="https://www.instagram.com/seanlkx/"
-      >@seanlkx</a
+    Created with ❤️ by nerd climbers <a
+      href="https://www.instagram.com/seanlkx/">Sean</a
     >
     and
-    <a href="https://www.instagram.com/lowkeyravern/">@ravernkoh</a>. Code
+    <a href="https://www.instagram.com/lowkeyravern/">Ravern</a>. Code
     open-sourced on
-    <a href="https://github.com/triomic/climbwhere-sg">Github</a>.
+    <a href="https://github.com/triomic/climbwhere-sg">Github</a>. Site Hosted
+    on <a href="https://www.netlify.com/">Netlify</a>.
   </div>
   <Button
     iconSrc="/telegram.png"
@@ -38,7 +39,7 @@
   #more-info-modal {
     width: 100%;
     max-width: 350px;
-    padding: 15px;
+    padding: 25px 15px 30px 15px;
     margin-bottom: 0px;
     background: white;
     border-radius: 10px;
@@ -54,13 +55,13 @@
     }
   }
 
-  h4 {
+  h3 {
     margin: 10px 0;
   }
 
   .feedback {
     width: 100%;
-    font-size: 13px;
-    margin: 10px 0;
+    font-size: 16px;
+    margin: 15px 0;
   }
 </style>

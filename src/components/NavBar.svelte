@@ -3,6 +3,10 @@
   export let filterProps, showMoreInfoModal;
 
   const onLogoClick = () => {
+    window.location.reload();
+  };
+
+  const onMoreInfoClick = () => {
     showMoreInfoModal.update((i) => !i);
   };
 
@@ -12,9 +16,10 @@
 
 <nav>
   <div class="left">
-    <div on:click={onLogoClick} class="logo">
+    <div on:click={onLogoClick} class="logo nav-item">
       <img class="logo-image" alt="climb emoji" src="/climb.png" />Climbwhere.sg
     </div>
+    <div on:click={onMoreInfoClick} class="more-info nav-item">&#9432;</div>
   </div>
   <button on:click={onFilterButtonClick} class="filter-button"
     ><img
@@ -41,6 +46,20 @@
 
   .left {
     flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .nav-item {
+    user-select: none;
+  }
+  .more-info {
+    font-weight: bold;
+    font-size: 13px;
+    color: rgb(122, 122, 122);
+    padding: 5px;
+    border-radius: 10px;
   }
 
   .logo {
@@ -56,8 +75,8 @@
     transition-duration: 0.3s;
   }
 
-  .logo:active,
-  .logo:hover {
+  .nav-item:active,
+  .nav-item:hover {
     background: #f5f5f5;
   }
 

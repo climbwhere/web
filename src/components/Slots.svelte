@@ -153,7 +153,7 @@
         </div>
       {/each}
     {:else}
-      <p class="load-indicator">Loading...</p>
+      <p class="load-indicator">🧗 Loading...</p>
     {/if}
     <MoreInfoModal {showMoreInfoModal} />
   </div>
