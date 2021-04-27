@@ -137,7 +137,7 @@
             <tr>
               <th>Gym</th>
               <th>Time</th>
-              <th class="spaces">Availble Spaces</th>
+              <th class="spaces">Available Spaces</th>
             </tr>
             {#each $sessionData[date] as session}
               <TableRow
