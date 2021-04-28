@@ -18,14 +18,14 @@
 >
   <h3>Timely climbing gym booking information for Singapore.</h3>
   <div class="feedback">
-    Created with ❤️ by nerd climbers <a
-      href="https://www.instagram.com/seanlkx/">Sean</a
-    >
-    and
-    <a href="https://www.instagram.com/lowkeyravern/">Ravern</a>. Code
-    open-sourced on
+    Created with ❤️ by nerd climbers. Code open-sourced on
     <a href="https://github.com/triomic/climbwhere-sg">Github</a>. Site Hosted
     on <a href="https://www.netlify.com/">Netlify</a>.
+  </div>
+  <div class="feedback">
+    Got feedback/suggestions? Drop us an email at <a
+      href="mailto:hello@triomic.studio">hello@triomic.studio</a
+    >
   </div>
   <Button
     iconSrc="/telegram.png"
