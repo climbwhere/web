@@ -12,7 +12,7 @@ Climbing with our group of friends became difficult to organise as we didn't kno
 * BFF Climb
 * Oyeyo
 * Z-Vertigo
-* Lighthouse
+* ~~Lighthouse~~ (Removed by owners' request).
 * Boulder World
 * Fit Bloc
 
