@@ -28,9 +28,11 @@
 
   let lastUpdated = getLastUpdated();
 
-  // TODO: add some sort of load indicator
   async function loadSessions() {
     const newSessionData = await getSessions()
+      .then((sessions) =>
+        sessions.filter((session) => session.gym.slug !== "lighthouse")
+      )
       .then((sessions) =>
         sessions.map((session) => ({
           ...session,
