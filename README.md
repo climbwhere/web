@@ -1,6 +1,9 @@
 ![Climbwhere Banner](https://res.cloudinary.com/da3pyp8ki/image/upload/v1619344303/climbwhere_sg_banner.png)
 
+
 ## Timely climbing gym booking information for Singapore. 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f24978be-65f1-41ef-9743-0691952d8a68/deploy-status)](https://app.netlify.com/sites/elastic-franklin-9a8023/deploys)
+
 
 When COVID-19 hit, many climbing gyms in Singapore adopted slot-booking systems in order to ensure safe climbing.
 
