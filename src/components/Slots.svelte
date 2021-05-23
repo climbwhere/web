@@ -126,6 +126,11 @@
       <img class="telegram-icon" alt="icon" src="/telegram.png" />
       <a href="https://t.me/climbwhere_sg_bot"> @climbwhere_sg_bot </a>
     </div>
+    <div class="covid-psa">
+      🚨 In light of the recent COVID situation, most climbing gyms in Singapore
+      have temporarily closed until further notice. Though some climbing gyms
+      remain open, we advise all climbers to stay home.
+    </div>
   </div>
   <div class="content">
     {#if $sessionData !== null}
@@ -251,5 +256,15 @@
     width: 20px;
     height: 20px;
     margin-right: 3px;
+  }
+
+  .covid-psa {
+    padding: 10px;
+    font-size: 0.8em;
+    border-radius: 15px;
+    background: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
   }
 </style>
