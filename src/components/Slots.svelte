@@ -126,11 +126,6 @@
       <img class="telegram-icon" alt="icon" src="/telegram.png" />
       <a href="https://t.me/climbwhere_sg_bot"> @climbwhere_sg_bot </a>
     </div>
-    <div class="covid-psa">
-      🚨 In light of the recent COVID situation, most climbing gyms in Singapore
-      have temporarily closed until further notice. Though some climbing gyms
-      remain open, we advise all climbers to stay home.
-    </div>
   </div>
   <div class="content">
     {#if $sessionData !== null}
@@ -160,7 +155,15 @@
         </div>
       {/each}
     {:else}
-      <p class="load-indicator">🧗 Loading...</p>
+      <div class="skeleton drop-shadow">
+        <div class="skeleton-inner" />
+        <div class="skeleton-inner" />
+        <div class="skeleton-inner" />
+      </div>
+      <div class="skeleton drop-shadow">
+        <div class="skeleton-inner" />
+        <div class="skeleton-inner" />
+      </div>
     {/if}
     <MoreInfoModal {showMoreInfoModal} />
   </div>
@@ -258,13 +261,35 @@
     margin-right: 3px;
   }
 
-  .covid-psa {
-    padding: 10px;
-    font-size: 0.8em;
-    border-radius: 15px;
-    background: #f5f5f5;
+  .skeleton {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 10px;
+    padding: 15px 5px;
     display: flex;
     flex-direction: column;
-    margin: 10px 0;
+    margin-bottom: 20px;
+  }
+  .skeleton-inner {
+    flex: 1;
+    min-height: 30px;
+    background: #f5f5f5;
+    border-radius: 5px;
+    animation: loading 1s infinite ease-in;
+    margin: 3px 0;
+  }
+
+  @keyframes loading {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
   }
 </style>

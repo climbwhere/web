@@ -25,6 +25,7 @@
       class:zvertigo={gym.slug === "z-vertigo"}
       class:boulderworld={gym.slug === "boulder-world"}
       class:lighthouse={gym.slug === "lighthouse"}
+      class:therockschool={gym.slug === "the-rock-school"}
       class="badge">{gym.name}</span
     ></td
   >
@@ -99,6 +100,11 @@
 
   .oyeyo {
     background-color: #ef1e29;
+    color: white;
+  }
+
+  .therockschool {
+    background-color: black;
     color: white;
   }
 
