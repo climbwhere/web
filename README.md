@@ -18,5 +18,5 @@ Climbing with our group of friends became difficult to organise as we didn't kno
 * ~~Lighthouse~~ (Removed by owners' request).
 * Boulder World
 * Fit Bloc
+* The Rock School
 
-As long as this remains the new norm, we'll continue to improve Climbwhere.
