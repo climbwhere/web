@@ -9,7 +9,6 @@
 
   import NavBar from "~/components/NavBar.svelte";
   import TableRow from "~/components/TableRow.svelte";
-  import { query } from "~/query";
   import MoreInfoModal from "~/components/MoreInfoModal.svelte";
 
   import { getSessions, getLastUpdated, getGyms } from "../api";
@@ -18,13 +17,11 @@
 
   let showFilterMenu = writable(false);
   let showMoreInfoModal = writable(false);
-  let showAvailableOnly = writable($query.showAvailableOnly === "true");
-  let dateFilter = writable($query.dateFilter);
-  let numberOfClimbers = writable($query.numberOfClimbers || 1);
-  let gymFilter = writable($query.gymFilter);
+  let showAvailableOnly = writable(false);
+  let dateFilter = writable("all");
+  let gymFilter = writable("all");
   let sessionData = writable(null);
   let gymData = writable([]);
-  let dateList = ["Loading..."];
 
   let lastUpdated = getLastUpdated();
 
@@ -62,50 +59,10 @@
     e.preventDefault();
     window.location.reload();
   };
-
-  sessionData.subscribe((newData) => {
-    dateList = keys(newData);
-  });
-
-  gymFilter.subscribe((newValue) => {
-    query.update((q) => ({
-      ...q,
-      gymFilter: newValue,
-    }));
-  });
-  numberOfClimbers.subscribe((newValue) => {
-    query.update((q) => ({
-      ...q,
-      numberOfClimbers: newValue,
-    }));
-  });
-  dateFilter.subscribe((newValue) => {
-    query.update((q) => ({
-      ...q,
-      dateFilter: newValue,
-    }));
-  });
-  showAvailableOnly.subscribe((newValue) => {
-    query.update((q) => ({
-      ...q,
-      showAvailableOnly: newValue,
-    }));
-  });
 </script>
 
 <div class="container">
-  <NavBar
-    {showMoreInfoModal}
-    filterProps={{
-      showFilterMenu,
-      numberOfClimbers,
-      gymFilter,
-      dateFilter,
-      showAvailableOnly,
-      gyms: $gymData,
-      dateList,
-    }}
-  />
+  <NavBar {showMoreInfoModal} />
   <div class="description">
     <small>
       {$gymFilter !== "all" && !isEmpty($gymData)
@@ -114,7 +71,6 @@
           }`
         : `Showing information for all gyms`},
       {$dateFilter !== "all" ? `on ${$dateFilter}` : "on all dates"}
-      for {$numberOfClimbers} climbers.
       <br />
       Last updated {#await lastUpdated}
         loading...
@@ -148,7 +104,6 @@
                 spaces={session.spaces}
                 timing={session.timing}
                 gymFilter={$gymFilter}
-                numberOfClimbers={$numberOfClimbers}
                 showAvailableOnly={$showAvailableOnly}
               />
             {/each}
@@ -229,19 +184,8 @@
     margin-top: 10px;
   }
 
-  p {
-    margin-top: 5px;
-    margin-bottom: 0;
-  }
-
   .hidden {
     display: none;
-  }
-
-  .load-indicator {
-    margin-top: 30px;
-    flex: 1;
-    text-align: center;
   }
 
   .telegram-link {

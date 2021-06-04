@@ -1,6 +1,5 @@
 <script>
-  import FilterModal from "./FilterModal.svelte";
-  export let filterProps, showMoreInfoModal;
+  export let showMoreInfoModal;
 
   const onLogoClick = () => {
     window.location.reload();
@@ -9,9 +8,6 @@
   const onMoreInfoClick = () => {
     showMoreInfoModal.update((i) => !i);
   };
-
-  const onFilterButtonClick = () =>
-    filterProps.showFilterMenu.update((i) => !i);
 </script>
 
 <nav>
@@ -21,14 +17,6 @@
     </div>
     <div on:click={onMoreInfoClick} class="more-info nav-item">&#9432;</div>
   </div>
-  <button on:click={onFilterButtonClick} class="filter-button"
-    ><img
-      class="filter-button-icon"
-      alt="filter button"
-      src="/filter-results-button.png"
-    /></button
-  >
-  <FilterModal {...filterProps} />
 </nav>
 
 <style>

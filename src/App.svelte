@@ -6,9 +6,11 @@
   export let url = window.location.pathname;
 </script>
 
-<Router {url}>
-  <Route path="/" component={SlotsScreen} />
-</Router>
+<div>
+  <Router {url}>
+    <Route path="/" component={SlotsScreen} />
+  </Router>
+</div>
 
 <style>
 </style>

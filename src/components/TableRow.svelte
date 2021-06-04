@@ -1,6 +1,6 @@
 <script>
   export let gym, spaces, timing;
-  export let gymFilter, numberOfClimbers, showAvailableOnly;
+  export let gymFilter, showAvailableOnly;
 
   import { gymBookingLinks } from "~/constants";
 
@@ -12,9 +12,9 @@
 <tr
   on:click={onRowClicked}
   class:hidden={(gymFilter !== "all" && gymFilter !== gym.slug) ||
-    (showAvailableOnly && spaces < numberOfClimbers)}
+    (showAvailableOnly && spaces < 1)}
   class:warn={spaces < 10}
-  class:invalid={spaces < numberOfClimbers}
+  class:invalid={spaces < 1}
 >
   <td class="gym"
     ><span
