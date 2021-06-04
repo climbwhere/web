@@ -2,7 +2,7 @@
   export let gym, spaces, timing;
   export let gymFilter, numberOfClimbers, showAvailableOnly;
 
-  import { gymBookingLinks } from "../constants";
+  import { gymBookingLinks } from "~/constants";
 
   const onRowClicked = () => {
     window.open(gymBookingLinks[gym.slug], "_blank");

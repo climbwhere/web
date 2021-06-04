@@ -7,10 +7,10 @@
   import isEmpty from "lodash/isEmpty";
   import keys from "lodash/keys";
 
-  import NavBar from "./NavBar.svelte";
-  import TableRow from "./TableRow.svelte";
-  import { query } from "../query";
-  import MoreInfoModal from "./MoreInfoModal.svelte";
+  import NavBar from "~/components/NavBar.svelte";
+  import TableRow from "~/components/TableRow.svelte";
+  import { query } from "~/query";
+  import MoreInfoModal from "~/components/MoreInfoModal.svelte";
 
   import { getSessions, getLastUpdated, getGyms } from "../api";
 
@@ -37,11 +37,12 @@
         sessions.map((session) => ({
           ...session,
           timing: moment(session.starts_at).format("hh:mmA"),
-          date: moment(session.starts_at).format("ddd, DD/MM/YY"),
+          date: moment(session.starts_at).format("ddd DD/MM/YY"),
         }))
       )
       .then((sessions) => groupBy(sortBy(sessions, "starts_at"), "date"));
     sessionData.update((_) => newSessionData);
+    console.info($sessionData);
   }
 
   async function loadGyms() {

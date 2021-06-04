@@ -1,6 +1,7 @@
 <script>
-  import { Router, Link, Route } from "svelte-routing";
-  import Slots from "./components/Slots.svelte";
+  import { Router, Route } from "svelte-routing";
+
+  import Slots from "~/screens/SlotsScreen.svelte";
 
   export let url = window.location.pathname;
 </script>
