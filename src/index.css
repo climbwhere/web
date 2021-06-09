@@ -3,10 +3,13 @@
 body {
   font-family: "Inter", sans-serif;
   font-size: 18px;
-  overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  max-height: 100vh;
 }
 
 * {
@@ -21,4 +24,8 @@ body {
   -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.07);
   -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.07);
   box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.07);
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

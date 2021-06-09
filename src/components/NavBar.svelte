@@ -21,6 +21,7 @@
 
 <style>
   nav {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,6 +29,7 @@
     padding: 10px 5px;
     border: #f5f5f5 solid 1px;
     background: white;
+
     position: sticky;
     top: 0px;
     border-radius: 0 0 15px 15px;
@@ -73,24 +75,5 @@
     width: 20px;
     height: 20px;
     margin-right: 5px;
-  }
-
-  .filter-button {
-    width: 35px;
-    height: 35px;
-    background: white;
-    border-radius: 5px;
-    border: 2px solid #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    outline: none;
-    cursor: pointer;
-  }
-
-  .filter-button-icon {
-    width: 20px;
-    height: 20px;
-    flex: 1;
   }
 </style>

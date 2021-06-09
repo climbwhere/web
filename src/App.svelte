@@ -1,7 +1,6 @@
 <script>
   import { Router, Route } from "svelte-routing";
 
-  import SlotsScreen from "~/screens/SlotsScreen.svelte";
   import Slots from "~/screens/Slots/index.svelte";
   import NavBar from "~/components/NavBar.svelte";
 
@@ -17,8 +16,10 @@
 
 <style>
   .container {
+    overflow: hidden;
     margin: auto;
     width: 100%;
+    max-height: 100vh;
     max-width: 800px;
     display: flex;
     flex-direction: column;

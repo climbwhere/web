@@ -1,5 +1,5 @@
 <script>
-  export let gym, spaces, timing;
+  export let gym, spaces, timing, hide;
 
   import { gymBookingLinks } from "~/constants";
   import GymBadge from "./GymBadge.svelte";
@@ -9,7 +9,12 @@
   };
 </script>
 
-<tr on:click={onRowClicked} class:warn={spaces < 10} class:invalid={spaces < 1}>
+<tr
+  on:click={onRowClicked}
+  class:hidden={hide}
+  class:warn={spaces < 10}
+  class:invalid={spaces < 1}
+>
   <td class="gym"><GymBadge {gym} /> </td>
   <td class="timings">{timing}</td>
   <td class="spaces"> <span class="badge">{spaces}</span></td>

@@ -1,5 +1,5 @@
 <script>
-  export let sessionsRequest;
+  export let sessionsRequest, dateFilter;
   import TableRow from "./TableRow.svelte";
 </script>
 
@@ -15,6 +15,7 @@
       </thead>
       {#each sessions as session}
         <TableRow
+          hide={session._date !== dateFilter}
           gym={session.gym}
           spaces={session.spaces}
           timing={session._time}
@@ -28,7 +29,8 @@
   .container {
     width: 100%;
     overflow-y: scroll;
-    height: 300px;
+    flex: 1;
+    height: 100%;
   }
 
   table {
