@@ -43,7 +43,7 @@
   }
 
   .date-box {
-    border: solid 2px #f5f5f5;
+    border: solid 3px #f5f5f5;
     padding: 15px 0px;
     display: flex;
     flex-direction: column;
@@ -54,10 +54,13 @@
     margin: 0 5px;
     background: white;
     border-radius: 15px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    -webkit-user-select: none;
   }
 
   .date-box.selected {
-    border: solid 2px rgb(0, 119, 255);
+    border: solid 3px rgb(0, 119, 255);
   }
 
   .date-title {
