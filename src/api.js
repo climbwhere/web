@@ -1,4 +1,7 @@
 import fetch from "isomorphic-unfetch";
+import moment from "moment";
+import groupBy from "lodash/groupBy";
+import sortBy from "lodash/sortBy";
 const { SNOWPACK_PUBLIC_API_URL: API_URL } = import.meta.env;
 
 // {
@@ -18,7 +21,18 @@ const { SNOWPACK_PUBLIC_API_URL: API_URL } = import.meta.env;
 export const getSessions = async () =>
   fetch(API_URL + "/sessions")
     .then((r) => r.json())
-    .then(({ data }) => data);
+    .then(({ data: sessions }) => sessions)
+    .then((sessions) =>
+      sessions.map((session) => ({
+        ...session,
+        _time: moment(session.starts_at).format("hh:mmA"),
+        _date: moment(session.starts_at).format("DD/MM/YY"),
+      }))
+    )
+    .catch((error) => {
+      console.error(error);
+      throw error;
+    });
 
 // { "id": "7c74a543-6584-48bc-8962-57192dd9e9f8",
 //   "slug": "bff",
@@ -30,9 +44,17 @@ export const getSessions = async () =>
 export const getGyms = async () =>
   fetch(API_URL + "/gyms")
     .then((r) => r.json())
-    .then(({ data }) => data);
+    .then(({ data }) => data)
+    .catch((error) => {
+      console.error(error);
+      throw error;
+    });
 
 export const getLastUpdated = async () =>
   fetch(API_URL + "/snapshots/latest")
     .then((r) => r.json())
-    .then(({ data: { created_at } }) => created_at);
+    .then(({ data: { created_at } }) => created_at)
+    .catch((error) => {
+      console.error(error);
+      throw error;
+    });

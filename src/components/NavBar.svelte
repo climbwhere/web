@@ -26,10 +26,11 @@
     align-items: center;
     width: 100%;
     padding: 10px 5px;
-    border-bottom: #f5f5f5 solid 2px;
+    border: #f5f5f5 solid 1px;
     background: white;
     position: sticky;
     top: 0px;
+    border-radius: 0 0 15px 15px;
   }
 
   .left {
