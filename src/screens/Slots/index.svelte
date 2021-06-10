@@ -7,10 +7,13 @@
   import DatePicker from "./components/DatePicker.svelte";
   import GymPicker from "./components/GymPicker.svelte";
 
-  const sessionsRequest = getSessions();
+  const sessionsRequest = getSessions().then((sessions) => {
+    dateFilter = uniq(sessions.map((s) => s._date))[0]; // sets earliest retrieved dates
+    return sessions;
+  });
   const lastUpdatedRequest = getLastUpdated();
 
-  let dateFilter = moment().format("DD/MM/YY");
+  let dateFilter = moment().format("DD/MM/YY"); // current date as a "guess"
   let gymFilter = [];
 </script>
 
