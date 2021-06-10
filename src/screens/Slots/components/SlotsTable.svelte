@@ -32,7 +32,6 @@
     width: 100%;
     overflow-y: scroll;
     flex: 1;
-    height: 100%;
   }
 
   table {

@@ -14,7 +14,7 @@
     if (!selectedGyms.includes(gymSlug)) {
       selectedGyms = [...selectedGyms, gymSlug];
     } else {
-      selectedGyms = selectedGyms.filter((g) => g.slug === gymSlug);
+      selectedGyms = selectedGyms.filter((g) => g !== gymSlug);
     }
   };
 </script>
@@ -36,7 +36,6 @@
 
 <style>
   .container {
-    flex: 1;
     padding: 10px 0;
     display: flex;
     flex-wrap: wrap;

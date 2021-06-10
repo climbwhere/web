@@ -34,7 +34,8 @@
     display: flex;
     flex-direction: row;
     padding: 10px;
-    min-height: 80px;
+    min-height: 90px;
+    max-height: 90px;
   }
 
   h3 {

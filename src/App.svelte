@@ -16,6 +16,7 @@
 
 <style>
   .container {
+    flex: 1;
     overflow: hidden;
     margin: auto;
     width: 100%;

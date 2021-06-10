@@ -9,7 +9,7 @@ body {
   display: flex;
   flex-flow: column;
   width: 100%;
-  max-height: 100vh;
+  height: 100vh;
 }
 
 * {
@@ -17,6 +17,7 @@ body {
 }
 
 .badge {
+  max-height: 30px;
   background: #f5f5f5;
   padding: 4px 10px;
   margin: 3px;

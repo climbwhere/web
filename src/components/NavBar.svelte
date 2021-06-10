@@ -22,17 +22,18 @@
 <style>
   nav {
     flex: 1;
+    max-height: 50px;
+    min-height: 50px;
+
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     padding: 10px 5px;
-    border: #f5f5f5 solid 1px;
+    border-bottom: #f5f5f5 solid 2px;
     background: white;
-
     position: sticky;
     top: 0px;
-    border-radius: 0 0 15px 15px;
   }
 
   .left {
