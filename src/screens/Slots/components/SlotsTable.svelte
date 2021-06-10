@@ -1,12 +1,15 @@
 <script>
   import isEmpty from "lodash/isEmpty";
-  export let sessionsRequest, dateFilter, gymFilter;
+
   import TableRow from "./TableRow.svelte";
+  import Skeleton from "~/components/Skeleton/SlotsTableSkeleton.svelte";
+
+  export let sessionsRequest, dateFilter, gymFilter;
 </script>
 
 <div class="container">
   {#await sessionsRequest}
-    loading...
+    <Skeleton />
   {:then sessions}
     <table>
       <thead>

@@ -1,5 +1,4 @@
 <script>
-  import { Link } from "svelte-routing";
   import uniq from "lodash/uniq";
   import moment from "moment";
 
@@ -16,12 +15,7 @@
 </script>
 
 <div class="container">
-  {#await sessionsRequest then sessions}
-    <DatePicker
-      bind:selectedDate={dateFilter}
-      dates={uniq(sessions.map((s) => s._date))}
-    />
-  {/await}
+  <DatePicker bind:selectedDate={dateFilter} {sessionsRequest} />
   <GymPicker bind:selectedGyms={gymFilter} />
   <SlotsTable {sessionsRequest} {dateFilter} {gymFilter} />
   <footer>

@@ -1,7 +1,10 @@
 <script>
   import moment from "moment";
+  import uniq from "lodash/uniq";
 
-  export let dates, selectedDate;
+  import Skeleton from "~/components/Skeleton/DatePickerSkeleton.svelte";
+
+  export let sessionsRequest, selectedDate;
 
   const handleDateBoxClick = (d) => (e) => {
     e.preventDefault();
@@ -10,20 +13,24 @@
 </script>
 
 <div class="container">
-  {#each dates as date}
-    <div
-      class="date-box"
-      class:selected={selectedDate === date}
-      on:click={handleDateBoxClick(date)}
-    >
-      <h3>
-        {moment(date, "DD/MM/YY").format("DD")}
-      </h3>
-      <span class="date-title">
-        {moment(date, "DD/MM/YY").format("ddd").toUpperCase()}
-      </span>
-    </div>
-  {/each}
+  {#await sessionsRequest}
+    <Skeleton />
+  {:then sessions}
+    {#each uniq(sessions.map((s) => s._date)) as date}
+      <div
+        class="date-box"
+        class:selected={selectedDate === date}
+        on:click={handleDateBoxClick(date)}
+      >
+        <h3>
+          {moment(date, "DD/MM/YY").format("DD")}
+        </h3>
+        <span class="date-title">
+          {moment(date, "DD/MM/YY").format("ddd").toUpperCase()}
+        </span>
+      </div>
+    {/each}
+  {/await}
 </div>
 
 <style>

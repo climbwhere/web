@@ -3,6 +3,8 @@
 
   import { getGyms } from "~/api";
   import GymBadge from "./GymBadge.svelte";
+  import Skeleton from "~/components/Skeleton/GymPickerSkeleton.svelte";
+
   export let selectedGyms;
 
   const gymsRequest = getGyms();
@@ -23,7 +25,7 @@
 
 <div class="container">
   {#await gymsRequest}
-    loading gyms...
+    <Skeleton />
   {:then gyms}
     {#each gyms as gym}
       <GymBadge
@@ -40,6 +42,7 @@
 
 <style>
   .container {
+    width: 100%;
     padding: 10px 5px;
     display: flex;
     flex-wrap: wrap;
