@@ -1,5 +1,12 @@
 {
-  "name": "Climbwhere",
+  "name": "Climbwhere.sg",
+  "description": "Timely slot information for Singapore climbing gyms.",
+  "display": "standalone",
+  "start_url": "/",
+  "background_color": "#FFFFFF",
+  "scope": "/",
+  "theme_color": "#ffffff",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "/android-icon-36x36.png",
