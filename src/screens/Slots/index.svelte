@@ -35,6 +35,5 @@
     flex-flow: column;
     align-items: center;
     justify-content: center;
-    border: red solid 1px;
   }
 </style>

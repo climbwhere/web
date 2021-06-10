@@ -40,10 +40,9 @@
 
 <style>
   .container {
-    padding: 10px 0;
+    padding: 10px 5px;
     display: flex;
     flex-wrap: wrap;
-    border: red solid 1px;
   }
 
   .outline {

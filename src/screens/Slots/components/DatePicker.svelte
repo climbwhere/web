@@ -33,7 +33,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    padding: 10px;
+    padding: 10px 0;
     min-height: 90px;
     max-height: 90px;
   }
@@ -44,6 +44,9 @@
   }
 
   .date-box {
+    flex: 1;
+    min-width: 80px;
+    max-width: 80px;
     border: solid 3px #f5f5f5;
     padding: 15px 0px;
     display: flex;
@@ -51,7 +54,6 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    flex: 1;
     margin: 0 5px;
     background: white;
     border-radius: 15px;
