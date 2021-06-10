@@ -1,4 +1,4 @@
-![Climbwhere Banner](https://res.cloudinary.com/da3pyp8ki/image/upload/v1619344303/climbwhere_sg_banner.png)
+<img src="https://user-images.githubusercontent.com/8543107/121490522-afec1a80-ca07-11eb-88fa-7d8210c54670.png" />
 
 
 ## Timely climbing gym booking information for Singapore. 
