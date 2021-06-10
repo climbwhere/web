@@ -1,7 +1,5 @@
 import fetch from "isomorphic-unfetch";
 import moment from "moment";
-import groupBy from "lodash/groupBy";
-import sortBy from "lodash/sortBy";
 const { SNOWPACK_PUBLIC_API_URL: API_URL } = import.meta.env;
 
 // {

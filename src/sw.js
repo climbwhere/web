@@ -1,4 +1,4 @@
-const CACHE_NAME = "climbwhere-sg-cache-v2-1";
+const CACHE_NAME = "climbwhere-sg-cache-v2-2";
 
 const urlsToCache = [
   "/",

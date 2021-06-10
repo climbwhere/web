@@ -4,10 +4,18 @@
   import Slots from "~/screens/Slots/index.svelte";
   import NavBar from "~/components/NavBar.svelte";
 
-  export let url = window.location.pathname;
+  export let url = window.location.pathname,
+    env;
 </script>
 
 <div class="container">
+  {#if env === "production"}
+    <script
+      async
+      defer
+      data-website-id="0cf66065-68c8-4368-87b5-b3bee9d160be"
+      src="https://umami.triomic.dev/umami.js"></script>
+  {/if}
   <NavBar />
   <Router {url}>
     <Route path="/" component={Slots} />
