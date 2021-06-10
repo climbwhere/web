@@ -1,7 +1,8 @@
 <script>
   export let gym,
     onClick = () => {},
-    gymSelected = false;
+    gymSelected = false,
+    gymUnselected = false;
 
   const handleBadgeClick = (e) => {
     e.preventDefault();
@@ -11,6 +12,7 @@
 
 <span
   class:selected={gymSelected}
+  class:unselected={gymUnselected}
   on:click={handleBadgeClick}
   class:fitbloc={gym.slug === "fitbloc"}
   class:boulder-plus={gym.slug === "boulder-plus"}

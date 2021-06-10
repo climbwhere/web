@@ -1,4 +1,6 @@
 <script>
+  import isEmpty from "lodash/isEmpty";
+
   import { getGyms } from "~/api";
   import GymBadge from "./GymBadge.svelte";
   export let selectedGyms;
@@ -28,6 +30,8 @@
         {gym}
         onClick={handleGymClick}
         gymSelected={selectedGyms.includes(gym.slug)}
+        gymUnselected={!isEmpty(selectedGyms) &&
+          !selectedGyms.includes(gym.slug)}
       />
     {/each}
     <span class="badge outline" on:click={handleClearAll}>Clear All</span>

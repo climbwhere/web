@@ -35,6 +35,10 @@ body {
   border: solid 2px rgb(0, 119, 255);
 }
 
+.badge.unselected {
+  opacity: 0.3;
+}
+
 .hidden {
   display: none;
 }
