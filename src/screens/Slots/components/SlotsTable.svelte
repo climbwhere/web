@@ -25,7 +25,7 @@
       {/each}
     </table>
     {#if isEmpty(sessions.filter((s) => !(s._date !== dateFilter || (!isEmpty(gymFilter) && !gymFilter.includes(s.gym.slug)))))}
-      <div class="empty"><p>Nothing to see here!</p></div>
+      <div class="empty"><p>🦥 No slots found 🦥</p></div>
     {/if}
   {/await}
 </div>
