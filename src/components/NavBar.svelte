@@ -12,7 +12,7 @@
   </div>
   <a href="https://t.me/climbwhere_sg_bot">
     <img class="telegram-logo" src="/telegram.png" alt="telegram-logo" />
-    t.me/climbwhere_sg_bot
+    <span class="r">t.me/climbwhere_sg_bot</span>
   </a>
   <a href="https://github.com/climbwhere/web">
     <img
@@ -87,5 +87,11 @@
     width: 20px;
     height: 20px;
     margin-right: 5px;
+  }
+
+  @media only screen and (max-width: 460px) {
+    .r {
+      display: none;
+    }
   }
 </style>
