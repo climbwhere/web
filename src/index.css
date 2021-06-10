@@ -16,6 +16,23 @@ body {
   box-sizing: border-box;
 }
 
+.badge {
+  background: #f5f5f5;
+  padding: 4px 10px;
+  margin: 3px;
+  border-radius: 15px;
+  font-weight: bold;
+  white-space: nowrap;
+  border: transparent solid 2px;
+  transition-duration: 0.3s;
+  cursor: pointer;
+  -webkit-user-select: none;
+}
+
+.badge.selected {
+  border: solid 2px rgb(0, 119, 255);
+}
+
 .hidden {
   display: none;
 }

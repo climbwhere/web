@@ -1,8 +1,17 @@
 <script>
-  export let gym;
+  export let gym,
+    onClick = () => {},
+    gymSelected = false;
+
+  const handleBadgeClick = (e) => {
+    e.preventDefault();
+    onClick(gym.slug);
+  };
 </script>
 
 <span
+  class:selected={gymSelected}
+  on:click={handleBadgeClick}
   class:fitbloc={gym.slug === "fitbloc"}
   class:boulder-plus={gym.slug === "boulder-plus"}
   class:bff={gym.slug === "bff"}
@@ -15,13 +24,6 @@
 >
 
 <style>
-  .badge {
-    background: #f5f5f5;
-    padding: 4px 10px;
-    border-radius: 15px;
-    font-weight: bold;
-  }
-
   .fitbloc {
     background-color: #7b112a;
     color: white;

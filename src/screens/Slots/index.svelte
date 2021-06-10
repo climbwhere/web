@@ -1,15 +1,17 @@
 <script>
   import uniq from "lodash/uniq";
-  import { getSessions, getGyms, getLastUpdated } from "~/api";
-  import GymBadge from "./components/GymBadge.svelte";
+  import moment from "moment";
+
+  import { getSessions, getLastUpdated } from "~/api";
   import SlotsTable from "./components/SlotsTable.svelte";
   import DatePicker from "./components/DatePicker.svelte";
+  import GymPicker from "./components/GymPicker.svelte";
 
   const sessionsRequest = getSessions();
-  const gymsRequest = getGyms();
   const lastUpdatedRequest = getLastUpdated();
 
-  let dateFilter = "11/06/21";
+  let dateFilter = moment().format("DD/MM/YY");
+  let gymFilter = [];
 </script>
 
 <div class="container">
@@ -19,16 +21,8 @@
       dates={uniq(sessions.map((s) => s._date))}
     />
   {/await}
-  <div class="gym-picker">
-    {#await gymsRequest}
-      Loading...
-    {:then gyms}
-      {#each gyms as gym}
-        <GymBadge {gym} />
-      {/each}
-    {/await}
-  </div>
-  <SlotsTable {sessionsRequest} {dateFilter} />
+  <GymPicker bind:selectedGyms={gymFilter} />
+  <SlotsTable {sessionsRequest} {dateFilter} {gymFilter} />
 </div>
 
 <style>

@@ -1,5 +1,6 @@
 <script>
-  export let sessionsRequest, dateFilter;
+  import isEmpty from "lodash/isEmpty";
+  export let sessionsRequest, dateFilter, gymFilter;
   import TableRow from "./TableRow.svelte";
 </script>
 
@@ -15,7 +16,8 @@
       </thead>
       {#each sessions as session}
         <TableRow
-          hide={session._date !== dateFilter}
+          hide={session._date !== dateFilter ||
+            (!isEmpty(gymFilter) && !gymFilter.includes(session.gym.slug))}
           gym={session.gym}
           spaces={session.spaces}
           timing={session._time}
