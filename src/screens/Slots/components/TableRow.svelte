@@ -23,19 +23,18 @@
 <style>
   tr:hover,
   tr:active {
-    background: aliceblue;
+    background: rgba(186, 223, 255, 0.733);
   }
 
   tr {
     content-visibility: auto;
-    transition-duration: 0.3s;
+    transition-duration: 0.4s;
     cursor: pointer;
   }
 
   td {
     font-size: 0.9em;
-    padding: 10px 5px;
-    border-top: solid 0.5px #f5f5f5;
+    padding: 11px 5px;
   }
 
   td.spaces {
@@ -49,12 +48,11 @@
   }
 
   .warn {
-    background-color: #e67d2243;
+    color: rgb(252, 180, 46);
   }
 
   .invalid {
-    background: rgba(255, 175, 166, 0.284);
-    color: #e63946;
+    color: #ff4151;
     text-decoration: line-through;
   }
 </style>

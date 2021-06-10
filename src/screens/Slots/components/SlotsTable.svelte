@@ -24,6 +24,9 @@
         />
       {/each}
     </table>
+    {#if isEmpty(sessions.filter((s) => !(s._date !== dateFilter || (!isEmpty(gymFilter) && !gymFilter.includes(s.gym.slug)))))}
+      <div class="empty"><p>Nothing to see here!</p></div>
+    {/if}
   {/await}
 </div>
 
@@ -32,6 +35,18 @@
     width: 100%;
     overflow-y: scroll;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .empty {
+    display: flex;
+    text-align: center;
+    flex: 1;
+  }
+
+  .empty > p {
+    margin: auto;
   }
 
   table {
