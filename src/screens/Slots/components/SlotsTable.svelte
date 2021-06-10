@@ -60,6 +60,7 @@
     position: sticky;
     top: 0px;
     background: white;
+    border-bottom: #f5f5f5 solid 2px;
   }
 
   th {

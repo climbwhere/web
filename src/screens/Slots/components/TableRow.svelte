@@ -30,6 +30,7 @@
     content-visibility: auto;
     transition-duration: 0.4s;
     cursor: pointer;
+    margin-top: 1px;
   }
 
   td {

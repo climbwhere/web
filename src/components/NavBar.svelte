@@ -1,12 +1,6 @@
 <script>
-  export let showMoreInfoModal;
-
   const onLogoClick = () => {
     window.location.reload();
-  };
-
-  const onMoreInfoClick = () => {
-    showMoreInfoModal.update((i) => !i);
   };
 </script>
 
@@ -15,15 +9,24 @@
     <div on:click={onLogoClick} class="logo nav-item">
       <img class="logo-image" alt="climb emoji" src="/climb.png" />Climbwhere.sg
     </div>
-    <div on:click={onMoreInfoClick} class="more-info nav-item">&#9432;</div>
   </div>
+  <a href="https://t.me/climbwhere_sg_bot">
+    <img class="telegram-logo" src="/telegram.png" alt="telegram-logo" />
+    t.me/climbwhere_sg_bot
+  </a>
+  <a href="https://github.com/climbwhere/web">
+    <img
+      src="https://img.shields.io/github/stars/climbwhere/web?style=social"
+      alt="GitHub badge"
+    />
+  </a>
 </nav>
 
 <style>
   nav {
     flex: 1;
-    max-height: 50px;
-    min-height: 50px;
+    max-height: 55px;
+    min-height: 55px;
 
     display: flex;
     justify-content: center;
@@ -36,6 +39,21 @@
     top: 0px;
   }
 
+  .telegram-logo {
+    width: 18px;
+    height: 18px;
+    margin: 3px;
+  }
+
+  a {
+    font-size: 11px;
+    text-decoration: none;
+    color: gray;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+
   .left {
     flex: 1;
     display: flex;
@@ -45,13 +63,6 @@
 
   .nav-item {
     user-select: none;
-  }
-  .more-info {
-    font-weight: bold;
-    font-size: 13px;
-    color: rgb(122, 122, 122);
-    padding: 5px;
-    border-radius: 10px;
   }
 
   .logo {
