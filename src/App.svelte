@@ -8,7 +8,7 @@
     env;
 </script>
 
-<div class="container">
+<svelte:head>
   {#if env === "production"}
     <script
       async
@@ -16,6 +16,9 @@
       data-website-id="0cf66065-68c8-4368-87b5-b3bee9d160be"
       src="https://umami.triomic.dev/umami.js"></script>
   {/if}
+</svelte:head>
+
+<div class="container">
   <NavBar />
   <Router {url}>
     <Route path="/" component={Slots} />
