@@ -3,14 +3,40 @@
 body {
   font-family: "Inter", sans-serif;
   font-size: 18px;
-  overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  height: 100vh;
 }
 
 * {
   box-sizing: border-box;
+}
+
+.badge {
+  max-height: 30px;
+  min-height: 30px;
+  background: #f5f5f5;
+  padding: 4px 10px;
+  margin: 3px;
+  border-radius: 15px;
+  font-weight: bold;
+  white-space: nowrap;
+  border: transparent solid 2px;
+  transition-duration: 0.3s;
+  cursor: pointer;
+  -webkit-user-select: none;
+}
+
+.badge.selected {
+  border: solid 2px rgb(0, 119, 255);
+}
+
+.badge.unselected {
+  opacity: 0.3;
 }
 
 .hidden {
@@ -21,4 +47,8 @@ body {
   -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.07);
   -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.07);
   box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.07);
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

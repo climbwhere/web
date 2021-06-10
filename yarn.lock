@@ -179,6 +179,11 @@ pify@^2.3.0:
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
   integrity sha1-7RQaasBDqEnqWISY59yosVMw6Qw=
 
+plugin-resolve-alias@^1.0.5:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/plugin-resolve-alias/-/plugin-resolve-alias-1.0.6.tgz#123e18502dfff2c428ff8b541a4d26b4a96a2e0b"
+  integrity sha512-RmZz86llpNtAmN8fn5EFNmeL8uWYbffv7wFzfHBBhU1zrPkQiDrayo9rkYwaTbao0ffN1uHKX9QN7vU/XnATfQ==
+
 query-string@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-7.0.0.tgz#aaad2c8d5c6a6d0c6afada877fecbd56af79e609"
@@ -223,6 +228,13 @@ rollup@^2.34.0:
   integrity sha512-Gk76XHTggulWPH95q8V62bw6uqDH6UGvbD6LOa3QUyhuMF3eOuaeDHR7SLm1T9faitkpNrqzUAVYx47klcMnlA==
   optionalDependencies:
     fsevents "~2.3.1"
+
+snowpack-resolve-alias@^1.2.8:
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/snowpack-resolve-alias/-/snowpack-resolve-alias-1.2.8.tgz#55be98985a608e5782be76e7e312545254a20dc6"
+  integrity sha512-CQqAmgLhMTwXnqsjFwuQhcpgm0uBLwcpTMDagCraN3fEdUqzivZCarSTscVP5wvbmf574+bAn26ESGqRQ49L2Q==
+  dependencies:
+    plugin-resolve-alias "^1.0.5"
 
 snowpack@^3.0.1:
   version "3.0.13"

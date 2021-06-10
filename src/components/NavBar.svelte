@@ -1,17 +1,7 @@
 <script>
-  import FilterModal from "./FilterModal.svelte";
-  export let filterProps, showMoreInfoModal;
-
   const onLogoClick = () => {
     window.location.reload();
   };
-
-  const onMoreInfoClick = () => {
-    showMoreInfoModal.update((i) => !i);
-  };
-
-  const onFilterButtonClick = () =>
-    filterProps.showFilterMenu.update((i) => !i);
 </script>
 
 <nav>
@@ -19,20 +9,25 @@
     <div on:click={onLogoClick} class="logo nav-item">
       <img class="logo-image" alt="climb emoji" src="/climb.png" />Climbwhere.sg
     </div>
-    <div on:click={onMoreInfoClick} class="more-info nav-item">&#9432;</div>
   </div>
-  <button on:click={onFilterButtonClick} class="filter-button"
-    ><img
-      class="filter-button-icon"
-      alt="filter button"
-      src="/filter-results-button.png"
-    /></button
-  >
-  <FilterModal {...filterProps} />
+  <a href="https://t.me/climbwhere_sg_bot">
+    <img class="telegram-logo" src="/telegram.png" alt="telegram-logo" />
+    <span class="r">t.me/climbwhere_sg_bot</span>
+  </a>
+  <a href="https://github.com/climbwhere/web">
+    <img
+      src="https://img.shields.io/github/stars/climbwhere/web?style=social"
+      alt="GitHub badge"
+    />
+  </a>
 </nav>
 
 <style>
   nav {
+    flex: 1;
+    max-height: 55px;
+    min-height: 55px;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,6 +39,21 @@
     top: 0px;
   }
 
+  .telegram-logo {
+    width: 18px;
+    height: 18px;
+    margin: 3px;
+  }
+
+  a {
+    font-size: 11px;
+    text-decoration: none;
+    color: gray;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+
   .left {
     flex: 1;
     display: flex;
@@ -53,13 +63,6 @@
 
   .nav-item {
     user-select: none;
-  }
-  .more-info {
-    font-weight: bold;
-    font-size: 13px;
-    color: rgb(122, 122, 122);
-    padding: 5px;
-    border-radius: 10px;
   }
 
   .logo {
@@ -86,22 +89,9 @@
     margin-right: 5px;
   }
 
-  .filter-button {
-    width: 35px;
-    height: 35px;
-    background: white;
-    border-radius: 5px;
-    border: 2px solid #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    outline: none;
-    cursor: pointer;
-  }
-
-  .filter-button-icon {
-    width: 20px;
-    height: 20px;
-    flex: 1;
+  @media only screen and (max-width: 460px) {
+    .r {
+      display: none;
+    }
   }
 </style>

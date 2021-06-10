@@ -1,13 +1,31 @@
 <script>
-  import { Router, Link, Route } from "svelte-routing";
-  import Slots from "./components/Slots.svelte";
+  import { Router, Route } from "svelte-routing";
+
+  import Slots from "~/screens/Slots/index.svelte";
+  import NavBar from "~/components/NavBar.svelte";
 
   export let url = window.location.pathname;
 </script>
 
-<Router {url}>
-  <Route path="/" component={Slots} />
-</Router>
+<div class="container">
+  <NavBar />
+  <Router {url}>
+    <Route path="/" component={Slots} />
+  </Router>
+</div>
 
 <style>
+  .container {
+    flex: 1;
+    overflow: hidden;
+    margin: auto;
+    width: 100%;
+    max-height: 100vh;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+  }
 </style>
