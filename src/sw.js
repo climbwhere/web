@@ -1,4 +1,4 @@
-const CACHE_NAME = "climbwhere-sg-cache-v2-9";
+const CACHE_NAME = "climbwhere-sg-cache-v2-10";
 
 const urlsToCache = [
   "/",
@@ -35,7 +35,6 @@ const urlsToCache = [
 ];
 
 self.addEventListener("install", function (event) {
-  return;
   console.log("Install");
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
@@ -59,7 +58,6 @@ self.addEventListener("activate", function (event) {
 });
 
 self.addEventListener("fetch", function (event) {
-  return;
   // skip requests for extensions
   if (!(event.request.url.indexOf("http") === 0)) return;
 
