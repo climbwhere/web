@@ -14,15 +14,7 @@
   class:selected={gymSelected}
   class:unselected={gymUnselected}
   on:click={handleBadgeClick}
-  class:fitbloc={gym.slug === "fitbloc"}
-  class:boulder-plus={gym.slug === "boulder-plus"}
-  class:bff={gym.slug === "bff"}
-  class:oyeyo={gym.slug === "oyeyo"}
-  class:z-vertigo={gym.slug === "z-vertigo"}
-  class:boulder-world={gym.slug === "boulder-world"}
-  class:lighthouse={gym.slug === "lighthouse"}
-  class:the-rock-school={gym.slug === "the-rock-school"}
-  class="badge">{gym.name}</span
+  class={`badge ${gym.slug}`}>{gym.name}</span
 >
 
 <style>
@@ -64,5 +56,10 @@
   .the-rock-school {
     background-color: black;
     color: white;
+  }
+
+  .boulder-planet {
+    background-color: #e1b6a5;
+    color: #181818;
   }
 </style>
