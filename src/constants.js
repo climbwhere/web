@@ -16,4 +16,5 @@ export const gymBookingLinks = {
     "https://www.picktime.com/566fe29b-2e46-4a73-ad85-c16bfc64b34b",
   fitbloc: "https://fitbloc.com/booking/",
   "the-rock-school": "https://therockschool.sg/schedule/",
+  "boulder-planet": "https://www.boulderplanet.sg/bookings",
 };
