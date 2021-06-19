@@ -17,4 +17,7 @@ export const gymBookingLinks = {
   fitbloc: "https://fitbloc.com/booking/",
   "the-rock-school": "https://therockschool.sg/schedule/",
   "boulder-planet": "https://www.boulderplanet.sg/bookings",
+  "boulder-movement-downtown": "https://www.boulderm.com/register",
+  "boulder-movement-tai-seng": "https://www.boulderm.com/register",
+  "boulder-movement-rochor": "https://www.boulderm.com/register",
 };

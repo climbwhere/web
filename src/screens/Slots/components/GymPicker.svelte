@@ -23,7 +23,7 @@
   };
 </script>
 
-<div class="container">
+<div class="container" class:selected={!isEmpty(selectedGyms)}>
   {#await gymsRequest}
     <Skeleton />
   {:then gyms}
@@ -42,10 +42,18 @@
 
 <style>
   .container {
-    width: 100%;
-    padding: 3px 5px;
+    width: 98%;
+    padding: 5px;
+    border: 2px solid #f5f5f5;
     display: flex;
     flex-wrap: wrap;
+    max-height: 15vh;
+    overflow-y: scroll;
+    border-radius: 10px;
+  }
+
+  .container.selected {
+    border: 2px solid rgb(0, 119, 255);
   }
 
   .outline {

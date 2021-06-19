@@ -45,8 +45,8 @@
   }
 
   footer {
+    border-top: 2px solid #f5f5f5;
     color: gray;
-    background: #f5f5f5;
     width: 100%;
     position: sticky;
     bottom: 0;

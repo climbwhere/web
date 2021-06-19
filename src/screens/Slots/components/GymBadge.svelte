@@ -62,4 +62,11 @@
     background-color: #e1b6a5;
     color: #181818;
   }
+
+  .boulder-movement-downtown,
+  .boulder-movement-tai-seng,
+  .boulder-movement-rochor {
+    background-color: #ee4469;
+    color: white;
+  }
 </style>
