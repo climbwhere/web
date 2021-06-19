@@ -19,4 +19,6 @@ Climbing with our group of friends became difficult to organise as we didn't kno
 * Boulder World
 * Fit Bloc
 * The Rock School
+* Boulder Planet
+* Boulder Movement
 
