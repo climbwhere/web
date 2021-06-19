@@ -59,7 +59,7 @@
 
   th {
     text-align: left;
-    font-size: 0.7em;
+    font-size: 0.5em;
     position: sticky;
     top: 0px;
     background: white;

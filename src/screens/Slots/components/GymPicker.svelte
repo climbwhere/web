@@ -43,7 +43,7 @@
 <style>
   .container {
     width: 100%;
-    padding: 10px 5px;
+    padding: 3px 5px;
     display: flex;
     flex-wrap: wrap;
   }

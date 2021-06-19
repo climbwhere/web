@@ -42,6 +42,7 @@
     text-align: right;
     padding-right: 10px;
     min-width: 80px;
+    font-size: 1.1em;
   }
 
   td.gym {
