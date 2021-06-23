@@ -21,24 +21,27 @@
 
 <div class="container">
   <NavBar />
-  <Router {url}>
-    <Route path="/" component={Slots} />
-    <Route path="/report" component={Report} />
-  </Router>
+  <div class="content">
+    <Router {url}>
+      <Route path="/" component={Slots} />
+      <Route path="/report" component={Report} />
+    </Router>
+  </div>
 </div>
 
 <style>
   .container {
-    flex: 1;
-    overflow: hidden;
     margin: auto;
+    height: 100%;
     width: 100%;
-    max-height: 100vh;
     max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     background: white;
+    border: red solid 2px;
+    display: grid;
+    grid-template-rows: 55px auto;
+  }
+
+  .content {
+    overflow-y: scroll;
   }
 </style>

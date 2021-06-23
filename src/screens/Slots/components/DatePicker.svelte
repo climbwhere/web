@@ -36,13 +36,12 @@
 <style>
   .container {
     flex: 1;
+    max-height: 90px;
     overflow-x: scroll;
     width: 100%;
     display: flex;
     flex-direction: row;
     padding: 10px 0;
-    min-height: 90px;
-    max-height: 90px;
   }
 
   h3 {

@@ -23,32 +23,37 @@
   };
 </script>
 
-<div class="container" class:selected={!isEmpty(selectedGyms)}>
-  {#await gymsRequest}
-    <Skeleton />
-  {:then gyms}
-    {#each gyms as gym}
-      <GymBadge
-        {gym}
-        onClick={handleGymClick}
-        gymSelected={selectedGyms.includes(gym.slug)}
-        gymUnselected={!isEmpty(selectedGyms) &&
-          !selectedGyms.includes(gym.slug)}
-      />
-    {/each}
-    <span class="badge outline" on:click={handleClearAll}>Clear All</span>
-  {/await}
+<div class="container">
+  <div class="gyms">
+    {#await gymsRequest}
+      <Skeleton />
+    {:then gyms}
+      {#each gyms as gym}
+        <GymBadge
+          {gym}
+          onClick={handleGymClick}
+          gymSelected={selectedGyms.includes(gym.slug)}
+          gymUnselected={!isEmpty(selectedGyms) &&
+            !selectedGyms.includes(gym.slug)}
+        />
+      {/each}
+      <span class="badge outline" on:click={handleClearAll}>Clear All</span>
+    {/await}
+  </div>
 </div>
 
 <style>
   .container {
-    width: 98%;
-    padding: 5px;
+    flex: 1;
+    margin-left: 20px;
+    max-width: 300px;
+  }
+
+  .gyms {
+    padding: 10px;
     border: 2px solid #f5f5f5;
     display: flex;
     flex-wrap: wrap;
-    max-height: 15vh;
-    overflow-y: scroll;
     border-radius: 10px;
   }
 

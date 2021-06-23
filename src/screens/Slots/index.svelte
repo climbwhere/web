@@ -20,8 +20,10 @@
 
 <div class="container">
   <DatePicker bind:selectedDate={dateFilter} {sessionsRequest} />
-  <GymPicker bind:selectedGyms={gymFilter} />
-  <SlotsTable {sessionsRequest} {dateFilter} {gymFilter} />
+  <div class="row">
+    <SlotsTable {sessionsRequest} {dateFilter} {gymFilter} />
+    <GymPicker bind:selectedGyms={gymFilter} />
+  </div>
   <footer>
     {#await lastUpdatedRequest}
       Loading...
@@ -36,22 +38,30 @@
 
 <style>
   .container {
-    flex: 1;
-    overflow: hidden;
-    margin: auto;
+    height: 100%;
     width: 100%;
+    margin: auto;
+    overflow: visible;
     display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+  }
+
+  .row {
+    border: green 2px solid;
+    flex: 1;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap-reverse;
+    overflow-y: scroll;
   }
 
   footer {
+    flex: 1;
+    max-height: 50px;
+    background: white;
     border-top: 2px solid #f5f5f5;
     color: gray;
     width: 100%;
-    position: sticky;
-    bottom: 0;
     padding: 5px 10px;
     font-size: 12px;
   }

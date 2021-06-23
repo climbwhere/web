@@ -25,10 +25,6 @@
 
 <style>
   nav {
-    flex: 1;
-    max-height: 55px;
-    min-height: 55px;
-
     display: flex;
     justify-content: center;
     align-items: center;

@@ -35,11 +35,19 @@
 
 <style>
   .container {
-    width: 100%;
     overflow-y: scroll;
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    height: 100%;
+    min-width: 400px;
+    padding: 3px;
+
+    -webkit-box-shadow: 0px -3px 10px 1px rgba(0, 0, 0, 0.13);
+    -moz-box-shadow: 0px -3px 10px 1px rgba(0, 0, 0, 0.13);
+    box-shadow: 0px -3px 10px 1px rgba(0, 0, 0, 0.13);
+
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: yellow 2px solid;
   }
 
   .empty {
