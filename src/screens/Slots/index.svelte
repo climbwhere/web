@@ -1,6 +1,7 @@
 <script>
   import uniq from "lodash/uniq";
   import moment from "moment";
+  import { Link } from "svelte-routing";
 
   import { getSessions, getLastUpdated } from "~/api";
   import SlotsTable from "./components/SlotsTable.svelte";
@@ -25,9 +26,10 @@
     {#await lastUpdatedRequest}
       Loading...
     {:then lastUpdated}
-      <b>Last updated {moment(lastUpdated).fromNow()}.</b> Data from respective gyms'
-      websites are retrieved every two minutes or so and is not guaranteed to be
-      up to date.
+      <b>Last updated {moment(lastUpdated).fromNow()}.</b> Data from respective
+      gyms' websites are retrieved every two minutes or so and is not guaranteed
+      to be up to date. Spotted incorrect data?
+      <Link to="report">report here</Link>.
     {/await}
   </footer>
 </div>

@@ -1,6 +1,7 @@
 <script>
+  import { navigate } from "svelte-routing";
   const onLogoClick = () => {
-    window.location.reload();
+    navigate("/");
   };
 </script>
 
