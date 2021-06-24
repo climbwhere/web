@@ -11,11 +11,13 @@
     <label for="report_type">Wrong Data</label>
     <input type="radio" bind:group={type} value="Bug" />
     <label for="report_type">Bug</label>
+    <input type="radio" bind:group={type} value="Feedback" />
+    <label for="report_type">Feedback</label>
   </span>
 
   <textarea
     bind:value={description}
-    placeholder="Describe the issue..."
+    placeholder="Type your message here..."
     disabled={isNil(type)}
   />
 

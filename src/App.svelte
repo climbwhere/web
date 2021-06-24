@@ -3,6 +3,7 @@
 
   import Slots from "~/screens/Slots/index.svelte";
   import Report from "~/screens/Report.svelte";
+  import Status from "~/screens/Status.svelte";
   import About from "~/screens/About.svelte";
   import NavBar from "~/components/NavBar.svelte";
 
@@ -27,6 +28,7 @@
       <Route path="/" component={Slots} />
       <Route path="/report" component={Report} />
       <Route path="/about" component={About} />
+      <Route path="/status" component={Status} />
     </Router>
   </div>
 </div>

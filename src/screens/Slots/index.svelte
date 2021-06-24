@@ -2,11 +2,17 @@
   import uniq from "lodash/uniq";
   import moment from "moment";
   import { Link } from "svelte-routing";
+  import isNil from "lodash/isNil";
+  import isEmpty from "lodash/isEmpty";
 
-  import { getSessions, getLastUpdated } from "~/api";
+  import { getSessions, getLastUpdated, getScraperStatus } from "~/api";
   import SlotsTable from "./components/SlotsTable.svelte";
   import DatePicker from "./components/DatePicker.svelte";
   import GymPicker from "./components/GymPicker.svelte";
+
+  const hasErrorsPromise = getScraperStatus().then(
+    (data) => !isEmpty(Object.values(data).filter((gym) => !isNil(gym.error)))
+  );
 
   const sessionsRequest = getSessions().then((sessions) => {
     dateFilter = uniq(sessions.map((s) => s._date))[0]; // sets earliest retrieved dates
@@ -31,12 +37,22 @@
     />
   </div>
   <footer>
-    {#await lastUpdatedRequest}
+    {#await Promise.all([lastUpdatedRequest, hasErrorsPromise])}
       Loading...
-    {:then lastUpdated}
-      <b>Last updated {moment(lastUpdated).fromNow()}.</b>
-      <Link to="about">More about</Link> this site. Spot incorrect data?
+    {:then [lastUpdated, hasErrors]}
+      <Link to="status">
+        <span class="status-icon material-icons" class:error={hasErrors}
+          >{hasErrors ? "report_problem" : "check_circle"}</span
+        >
+        <b
+          >Last updated {moment(lastUpdated).fromNow()}{hasErrors
+            ? " with errors"
+            : ""}.</b
+        >
+      </Link>
+      Something not quite right?
       <Link to="report">report here</Link>.
+      <Link to="about">About</Link>.
     {/await}
   </footer>
 </div>
@@ -70,5 +86,12 @@
     width: 100%;
     padding: 5px 10px;
     font-size: 0.6em;
+  }
+
+  .status-icon {
+    font-size: 14px;
+  }
+  .status-icon.error {
+    color: red;
   }
 </style>

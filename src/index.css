@@ -106,6 +106,10 @@ body {
   margin: 3px;
 }
 
+a {
+  color: gray;
+}
+
 @keyframes loading {
   0% {
     opacity: 1;
