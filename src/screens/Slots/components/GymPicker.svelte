@@ -23,44 +23,40 @@
   };
 </script>
 
-<div class="container">
-  <div class="gyms">
-    {#await gymsRequest}
-      <Skeleton />
-    {:then gyms}
-      {#each gyms as gym}
-        <GymBadge
-          {gym}
-          onClick={handleGymClick}
-          gymSelected={selectedGyms.includes(gym.slug)}
-          gymUnselected={!isEmpty(selectedGyms) &&
-            !selectedGyms.includes(gym.slug)}
-        />
-      {/each}
-      <span class="badge outline" on:click={handleClearAll}>Clear All</span>
-    {/await}
-  </div>
+<div class="gyms">
+  {#await gymsRequest}
+    <Skeleton />
+  {:then gyms}
+    {#each gyms as gym}
+      <GymBadge
+        {gym}
+        onClick={handleGymClick}
+        gymSelected={selectedGyms.includes(gym.slug)}
+        gymUnselected={!isEmpty(selectedGyms) &&
+          !selectedGyms.includes(gym.slug)}
+      />
+    {/each}
+    <span class="badge outline" on:click={handleClearAll}>Clear All</span>
+  {/await}
 </div>
 
 <style>
-  .container {
-    flex: 1;
-    margin-left: 20px;
-    max-width: 300px;
-  }
-
   .gyms {
-    padding: 10px;
+    width: 400px;
+    margin-left: 10px;
+    padding: 5px;
     border: 2px solid #f5f5f5;
     display: flex;
     flex-wrap: wrap;
     border-radius: 10px;
   }
 
-  .container.selected {
-    border: 2px solid rgb(0, 119, 255);
+  @media only screen and (max-width: 800px) {
+    .gyms {
+      width: 100%;
+      margin-bottom: 10px;
+    }
   }
-
   .outline {
     background: white;
     border-color: #f5f5f5;

@@ -20,7 +20,7 @@
 
 <div class="container">
   <DatePicker bind:selectedDate={dateFilter} {sessionsRequest} />
-  <div class="row">
+  <div class="content">
     <SlotsTable {sessionsRequest} {dateFilter} {gymFilter} />
     <GymPicker bind:selectedGyms={gymFilter} />
   </div>
@@ -28,9 +28,7 @@
     {#await lastUpdatedRequest}
       Loading...
     {:then lastUpdated}
-      <b>Last updated {moment(lastUpdated).fromNow()}.</b> Data from respective
-      gyms' websites are retrieved every two minutes or so and is not guaranteed
-      to be up to date. Spotted incorrect data?
+      <b>Last updated {moment(lastUpdated).fromNow()}.</b> Spot incorrect data?
       <Link to="report">report here</Link>.
     {/await}
   </footer>
@@ -41,28 +39,31 @@
     height: 100%;
     width: 100%;
     margin: auto;
-    overflow: visible;
     display: flex;
     flex-direction: column;
   }
 
-  .row {
-    border: green 2px solid;
+  .content {
     flex: 1;
     display: flex;
     flex-flow: row;
     flex-wrap: wrap-reverse;
     overflow-y: scroll;
+    align-items: flex-end;
   }
 
+  @media only screen and (max-width: 800px) {
+    .content {
+      flex-flow: column-reverse;
+      padding: 0 5px 0 5px;
+    }
+  }
   footer {
-    flex: 1;
-    max-height: 50px;
     background: white;
     border-top: 2px solid #f5f5f5;
     color: gray;
     width: 100%;
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 0.6em;
   }
 </style>

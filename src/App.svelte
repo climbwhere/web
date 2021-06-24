@@ -36,12 +36,11 @@
     width: 100%;
     max-width: 800px;
     background: white;
-    border: red solid 2px;
     display: grid;
     grid-template-rows: 55px auto;
   }
 
   .content {
-    overflow-y: scroll;
+    overflow-y: hidden;
   }
 </style>

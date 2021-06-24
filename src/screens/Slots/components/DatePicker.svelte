@@ -36,6 +36,7 @@
 <style>
   .container {
     flex: 1;
+    min-height: 90px;
     max-height: 90px;
     overflow-x: scroll;
     width: 100%;

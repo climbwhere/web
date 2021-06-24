@@ -38,22 +38,20 @@
     overflow-y: scroll;
     flex: 1;
     height: 100%;
-    min-width: 400px;
-    padding: 3px;
-
-    -webkit-box-shadow: 0px -3px 10px 1px rgba(0, 0, 0, 0.13);
-    -moz-box-shadow: 0px -3px 10px 1px rgba(0, 0, 0, 0.13);
-    box-shadow: 0px -3px 10px 1px rgba(0, 0, 0, 0.13);
-
+    width: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    border: yellow 2px solid;
+    border: solid #f5f5f5 2px;
+    border-bottom: none;
   }
 
   .empty {
     display: flex;
     text-align: center;
     flex: 1;
+    height: 100px;
+    font-weight: 600;
+    font-size: 19px;
   }
 
   .empty > p {
@@ -67,7 +65,7 @@
 
   th {
     text-align: left;
-    font-size: 0.7em;
+    font-size: 0.6em;
     position: sticky;
     top: 0px;
     background: white;
@@ -81,6 +79,6 @@
   th.spaces {
     text-align: right;
     padding-right: 10px;
-    min-width: 120px;
+    min-width: 50px;
   }
 </style>
