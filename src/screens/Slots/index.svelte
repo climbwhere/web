@@ -85,7 +85,7 @@
     color: gray;
     width: 100%;
     padding: 5px 10px;
-    font-size: 0.6em;
+    font-size: 0.8em;
   }
 
   .status-icon {

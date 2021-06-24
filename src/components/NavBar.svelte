@@ -66,7 +66,7 @@
 
   .logo {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
     display: flex;
     user-select: none;
     padding: 5px 8px;
@@ -74,7 +74,7 @@
     border-radius: 10px;
     cursor: pointer;
     transition-duration: 0.3s;
-    line-height: 28px;
+    line-height: 25px;
   }
 
   .nav-item:active,
@@ -83,8 +83,8 @@
   }
 
   .logo-image {
-    width: 28px;
-    height: 28px;
+    width: 25px;
+    height: 25px;
     margin-right: 5px;
   }
 

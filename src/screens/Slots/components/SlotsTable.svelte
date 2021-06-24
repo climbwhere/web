@@ -91,7 +91,7 @@
 
   th {
     text-align: left;
-    font-size: 0.6em;
+    font-size: 0.8em;
     position: sticky;
     top: 0px;
     background: white;
