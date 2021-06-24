@@ -7,7 +7,7 @@ export default function scrollWheel (node){
 	node.addEventListener('wheel', handleScrollWheel)
 	return {
 		destroy() {
-				e.removeEventListener('wheel', handleScrollWheel)
+				node.removeEventListener('wheel', handleScrollWheel)
 		}
 	}
 }
