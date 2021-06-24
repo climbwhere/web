@@ -3,11 +3,37 @@
 
   import TableRow from "./TableRow.svelte";
   import Skeleton from "~/components/Skeleton/SlotsTableSkeleton.svelte";
+  import scrollWheel from "~/actions/scrollWheel";
+  import pannable from "~/actions/pannable";
 
-  export let sessionsRequest, dateFilter, gymFilter;
+  export let sessionsRequest,
+    dateFilter,
+    gymFilter,
+    extended = false;
+
+  function handleScrollWheel(e) {
+    const { deltaY } = e.detail;
+    extended = deltaY > 0;
+  }
+
+  function handlePanMove(e) {
+    const { dy, offsetY } = e.detail;
+    if (dy < 0) {
+      extended = true;
+    }
+    if (dy > 0 && offsetY <= 100) {
+      extended = false;
+    }
+  }
 </script>
 
-<div class="container">
+<div
+  class="container"
+  use:pannable
+  on:panmove={handlePanMove}
+  use:scrollWheel
+  on:scrollWheel={handleScrollWheel}
+>
   {#await sessionsRequest}
     <Skeleton />
   {:then sessions}

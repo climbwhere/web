@@ -8,7 +8,9 @@
 <nav>
   <div class="left">
     <div on:click={onLogoClick} class="logo nav-item">
-      <img class="logo-image" alt="climb emoji" src="/climb.png" />Climbwhere.sg
+      <img class="logo-image" alt="climb emoji" src="/climb.png" /><span
+        >Climbwhere.sg</span
+      >
     </div>
   </div>
   <a href="https://t.me/climbwhere_sg_bot">
@@ -73,6 +75,7 @@
     border-radius: 10px;
     cursor: pointer;
     transition-duration: 0.3s;
+    line-height: 25px;
   }
 
   .nav-item:active,
@@ -81,8 +84,8 @@
   }
 
   .logo-image {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     margin-right: 5px;
   }
 

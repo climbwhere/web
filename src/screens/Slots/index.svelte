@@ -16,13 +16,19 @@
 
   let dateFilter = moment().format("DD/MM/YY"); // current date as a "guess"
   let gymFilter = [];
+  let shouldHideGyms;
 </script>
 
 <div class="container">
   <DatePicker bind:selectedDate={dateFilter} {sessionsRequest} />
   <div class="content">
-    <SlotsTable {sessionsRequest} {dateFilter} {gymFilter} />
-    <GymPicker bind:selectedGyms={gymFilter} />
+    <SlotsTable
+      {sessionsRequest}
+      {dateFilter}
+      {gymFilter}
+      bind:extended={shouldHideGyms}
+    />
+    <GymPicker bind:selectedGyms={gymFilter} {shouldHideGyms} />
   </div>
   <footer>
     {#await lastUpdatedRequest}
