@@ -27,7 +27,12 @@
   {#await gymsRequest}
     <Skeleton />
   {:then gyms}
-    <h3 class="title">Gyms</h3>
+    <span class="header">
+      <h3 class="title">Gyms</h3>
+      <span class:collapsed={shouldHideGyms} class="expand-icon material-icons">
+        expand_more
+      </span>
+    </span>
     <span class="gyms" class:collapsed={shouldHideGyms}>
       {#each gyms as gym}
         <GymBadge
@@ -45,20 +50,42 @@
 
 <style>
   .container {
-    width: 400px;
+    width: 100%;
     max-height: 30vh;
-    margin-left: 10px;
     padding: 10px 5px;
     overflow: hidden;
     border: 2px solid #f5f5f5;
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
+    margin-bottom: 10px;
+  }
+
+  .header {
+    display: flex;
+    flex-flow: row;
+  }
+
+  .expand-icon {
+    transition: all 0.3s ease-in-out;
+    transform: rotateZ(180deg);
+    line-height: 30px;
+    font-size: 36px;
+  }
+
+  .expand-icon.collapsed {
+    transform: rotateZ(0deg);
   }
 
   .gyms {
     display: flex;
     flex-wrap: wrap;
     transition: all 0.3s ease-in-out;
+  }
+  .gyms.collapsed {
+    opacity: 0;
+  }
+  .container.collapsed {
+    max-height: 55px;
   }
 
   .title {
@@ -69,18 +96,6 @@
     margin: 5px 0;
   }
 
-  @media only screen and (max-width: 800px) {
-    .container {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    .gyms.collapsed {
-      opacity: 0;
-    }
-    .container.collapsed {
-      max-height: 60px;
-    }
-  }
   .outline {
     background: white;
     border-color: #f5f5f5;

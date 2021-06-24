@@ -22,13 +22,13 @@
 <div class="container">
   <DatePicker bind:selectedDate={dateFilter} {sessionsRequest} />
   <div class="content">
+    <GymPicker bind:selectedGyms={gymFilter} {shouldHideGyms} />
     <SlotsTable
       {sessionsRequest}
       {dateFilter}
       {gymFilter}
       bind:extended={shouldHideGyms}
     />
-    <GymPicker bind:selectedGyms={gymFilter} {shouldHideGyms} />
   </div>
   <footer>
     {#await lastUpdatedRequest}
@@ -52,16 +52,14 @@
   .content {
     flex: 1;
     display: flex;
-    flex-flow: row;
-    flex-wrap: wrap-reverse;
+    flex-flow: column;
     overflow-y: scroll;
     align-items: flex-end;
   }
 
   @media only screen and (max-width: 800px) {
     .content {
-      flex-flow: column-reverse;
-      padding: 0 5px 0 5px;
+      padding: 5px;
     }
   }
   footer {
