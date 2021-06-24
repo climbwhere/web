@@ -11,6 +11,7 @@
 
   const handleClearAll = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     selectedGyms = [];
   };
 
@@ -21,14 +22,21 @@
       selectedGyms = selectedGyms.filter((g) => g !== gymSlug);
     }
   };
+
+  const handleToggle = (e) => {
+    e.preventDefault();
+    shouldHideGyms = !shouldHideGyms;
+  };
 </script>
 
-<div class="container" class:collapsed={shouldHideGyms}>
+<div class="container" on:click={handleToggle} class:collapsed={shouldHideGyms}>
   {#await gymsRequest}
     <Skeleton />
   {:then gyms}
     <span class="header">
-      <h3 class="title">Gyms</h3>
+      <h3 class="title">
+        Gym Filters {#if !isEmpty(selectedGyms)}({selectedGyms.length}){/if}
+      </h3>
       <span class:collapsed={shouldHideGyms} class="expand-icon material-icons">
         expand_more
       </span>
@@ -58,6 +66,7 @@
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
     margin-bottom: 10px;
+    cursor: pointer;
   }
 
   .header {
@@ -90,7 +99,7 @@
 
   .title {
     width: 100%;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     padding-left: 5px;
     margin: 5px 0;
