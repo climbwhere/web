@@ -1,27 +1,23 @@
 <script>
-  import isNil from "lodash/isNil";
+  import isEmpty from "lodash/isEmpty";
 
-  let type, description;
+  let message = "";
 </script>
 
 <div class="container">
-  <h2>Report an issue</h2>
-  <span class="radios">
-    <input type="radio" bind:group={type} value="Wrong Data" />
-    <label for="report_type">Wrong Data</label>
-    <input type="radio" bind:group={type} value="Bug" />
-    <label for="report_type">Bug</label>
-    <input type="radio" bind:group={type} value="Feedback" />
-    <label for="report_type">Feedback</label>
-  </span>
+  <h3>Report an issue</h3>
+  <p>Feedback and feature requests are welcome too!</p>
 
   <textarea
-    bind:value={description}
+    maxlength="800"
+    bind:value={message}
     placeholder="Type your message here..."
-    disabled={isNil(type)}
   />
+  <span class="word-count">
+    {message.length}/800
+  </span>
 
-  <button disabled={isNil(type)}>Submit</button>
+  <button disabled={isEmpty(message)}>Submit</button>
 </div>
 
 <style>
@@ -35,14 +31,41 @@
     padding: 0 10px;
   }
 
-  .radios {
-    margin-bottom: 10px;
-  }
-
   textarea {
     height: 150px;
     resize: none;
-    padding: 5px;
+    padding: 10px 5px;
+    margin-bottom: 5px;
+    background: #f5f5f5;
+    border: none;
+    border-radius: 10px;
+  }
+
+  .word-count {
+    color: gray;
+    font-size: 11px;
     margin-bottom: 10px;
+  }
+
+  p {
+    margin: 10px 0;
+    line-height: 23px;
+  }
+
+  h3 {
+    margin: 15px 0 0 0;
+  }
+
+  button {
+    color: black;
+    font-weight: bold;
+    background: #f5f5f5;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: none;
+  }
+
+  button:active {
+    opacity: 0.5;
   }
 </style>

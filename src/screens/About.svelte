@@ -4,13 +4,13 @@
 </script>
 
 <div class="container">
-  <h3>Why does this exist?</h3>
   <p>
     When COVID-19 hit, many climbing gyms in Singapore adopted slot-booking
-    systems in order to ensure safe climbing. Climbing with our group of friends
-    became difficult to organise as we didn't know which gyms had enough
-    capacity, unless we tediously checked each of their booking sites ahead of
-    time.
+    systems in order to limit capacity and reduce risks.
+  </p>
+  <p>
+    With the high demand, it can be very tedious to search for open time slots
+    across all gyms.
   </p>
   <p>
     <b>We built Climbwhere.sg to help with that.</b> The website shows aggregated
@@ -28,8 +28,8 @@
   <h3>Who are we?</h3>
   <p>
     We are <a href="https://instagram.com/bouldermonster69">Sean</a> and
-    <a href="https://www.instagram.com/lowkeyravern/">Ravern</a>. Find us
-    bouldering around local climbing gyms, 👀 do say hi!
+    <a href="https://www.instagram.com/lowkeyravern/">Ravern</a>. If you see us
+    around, 👀 do say hi!
   </p>
 
   <h3>Like our work?</h3>
