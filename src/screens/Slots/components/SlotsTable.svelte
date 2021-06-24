@@ -67,7 +67,7 @@
     width: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    border: solid #f5f5f5 2px;
+    border: solid #f5f5f5 3px;
     border-bottom: none;
   }
 

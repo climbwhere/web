@@ -3,6 +3,7 @@
 
   import Slots from "~/screens/Slots/index.svelte";
   import Report from "~/screens/Report.svelte";
+  import About from "~/screens/About.svelte";
   import NavBar from "~/components/NavBar.svelte";
 
   export let url = window.location.pathname,
@@ -25,6 +26,7 @@
     <Router {url}>
       <Route path="/" component={Slots} />
       <Route path="/report" component={Report} />
+      <Route path="/about" component={About} />
     </Router>
   </div>
 </div>

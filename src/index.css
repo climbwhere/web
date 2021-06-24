@@ -59,7 +59,7 @@ body {
 }
 
 .badge.selected {
-  border: solid 2px rgb(0, 119, 255);
+  border: solid 2px #4361ee;
 }
 
 .badge.unselected {

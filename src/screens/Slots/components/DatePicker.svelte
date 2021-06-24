@@ -70,11 +70,11 @@
   }
 
   .date-box.selected {
-    border: solid 3px rgb(0, 119, 255);
+    border: solid 3px #4361ee;
   }
 
   .date-title {
-    color: rgb(243, 87, 70);
+    color: #f44545;
     font-weight: 600;
     font-size: 14px;
   }

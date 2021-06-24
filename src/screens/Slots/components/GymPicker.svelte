@@ -62,7 +62,7 @@
     max-height: 30vh;
     padding: 10px 5px;
     overflow: hidden;
-    border: 2px solid #f5f5f5;
+    border: 3px solid #f5f5f5;
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
     margin-bottom: 10px;

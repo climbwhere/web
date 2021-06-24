@@ -23,7 +23,7 @@
 <style>
   tr:hover,
   tr:active {
-    background: rgba(186, 223, 255, 0.733);
+    background: #a2d2ff9c;
   }
 
   tr {
@@ -34,7 +34,6 @@
   }
 
   td {
-    font-size: 0.9em;
     padding: 11px 5px;
   }
 
@@ -50,11 +49,11 @@
   }
 
   .warn {
-    color: rgb(252, 180, 46);
+    color: #ffad49;
   }
 
   .invalid {
-    color: #ff4151;
+    color: #f44545;
     text-decoration: line-through;
   }
 </style>

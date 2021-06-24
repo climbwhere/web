@@ -34,7 +34,8 @@
     {#await lastUpdatedRequest}
       Loading...
     {:then lastUpdated}
-      <b>Last updated {moment(lastUpdated).fromNow()}.</b> Spot incorrect data?
+      <b>Last updated {moment(lastUpdated).fromNow()}.</b>
+      <Link to="about">More about</Link> this site. Spot incorrect data?
       <Link to="report">report here</Link>.
     {/await}
   </footer>
@@ -59,12 +60,12 @@
 
   @media only screen and (max-width: 800px) {
     .content {
-      padding: 5px;
+      padding: 0 5px;
     }
   }
   footer {
     background: white;
-    border-top: 2px solid #f5f5f5;
+    border-top: 1px solid #f5f5f5;
     color: gray;
     width: 100%;
     padding: 5px 10px;
