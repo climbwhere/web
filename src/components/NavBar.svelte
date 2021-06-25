@@ -35,7 +35,8 @@
     border-bottom: #f5f5f5 solid 3px;
     background: white;
     position: sticky;
-    top: 0px;
+    top: env(safe-area-inset-top);
+    z-index: 1;
   }
 
   .telegram-logo {
