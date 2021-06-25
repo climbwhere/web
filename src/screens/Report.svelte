@@ -1,7 +1,30 @@
 <script>
   import isEmpty from "lodash/isEmpty";
+  import { navigate } from "svelte-routing";
 
-  let message = "";
+  import { postReport } from "~/api";
+
+  let message = "",
+    error = "",
+    loading = false,
+    submitted = false;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    loading = true;
+    try {
+      submitted = await postReport(message);
+    } catch (err) {
+      error = err;
+    }
+    loading = false;
+
+    if (!submitted) {
+      return;
+    }
+
+    setTimeout(() => navigate("/about"), 1500);
+  };
 </script>
 
 <div class="container">
@@ -17,7 +40,17 @@
     {message.length}/800
   </span>
 
-  <button disabled={isEmpty(message)}>Submit</button>
+  <button
+    on:click={handleSubmit}
+    class:success={submitted}
+    disabled={isEmpty(message) || submitted}
+    >{submitted
+      ? "Thank you for your feedback!"
+      : loading
+      ? "Submitting..."
+      : "Submit"}</button
+  >
+  {error}
 </div>
 
 <style>
@@ -67,5 +100,9 @@
 
   button:active {
     opacity: 0.5;
+  }
+
+  button.success {
+    color: green;
   }
 </style>

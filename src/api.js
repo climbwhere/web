@@ -50,3 +50,15 @@ export const getScraperStatus = async () =>
       console.error(error);
       throw error;
     });
+
+export const postReport = async (message) =>
+  fetch(API_URL + "/report", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message }),
+  })
+    .then((r) => r.ok)
+    .catch((error) => {
+      console.error(error);
+      throw error;
+    });
