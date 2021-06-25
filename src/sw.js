@@ -1,4 +1,4 @@
-const CACHE_NAME = "climbwhere-sg-cache-v2-13";
+const CACHE_NAME = "climbwhere-sg-cache-v3-0";
 
 const urlsToCache = [
   "/",
@@ -32,6 +32,15 @@ const urlsToCache = [
   "/screens/Slots/components/TableRow.svelte.css",
   "/screens/Slots/components/TableRow.svelte.css.proxy.js",
   "/screens/Slots/components/TableRow.svelte.js",
+  "/screens/About/index.svelte.css",
+  "/screens/About/index.svelte.css.proxy.js",
+  "/screens/About/index.svelte.js",
+  "/screens/Report/index.svelte.css",
+  "/screens/Report/index.svelte.css.proxy.js",
+  "/screens/Report/index.svelte.js",
+  "/screens/Status/index.svelte.css",
+  "/screens/Status/index.svelte.css.proxy.js",
+  "/screens/Status/index.svelte.js",
 ];
 
 self.addEventListener("install", function (event) {
