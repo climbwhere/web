@@ -50,7 +50,7 @@
       ? "Submitting..."
       : "Submit"}</button
   >
-  {error}
+  <span class="error">{error}</span>
 </div>
 
 <style>
@@ -104,5 +104,10 @@
 
   button.success {
     color: green;
+  }
+
+  .error {
+    margin: 10px 0;
+    color: red;
   }
 </style>
