@@ -1,13 +1,16 @@
 <script>
+  import { navigate } from "svelte-routing";
   const onLogoClick = () => {
-    window.location.reload();
+    navigate("/");
   };
 </script>
 
 <nav>
   <div class="left">
     <div on:click={onLogoClick} class="logo nav-item">
-      <img class="logo-image" alt="climb emoji" src="/climb.png" />Climbwhere.sg
+      <img class="logo-image" alt="logo" src="/logo.png" /><span
+        >Climbwhere.sg</span
+      >
     </div>
   </div>
   <a href="https://t.me/climbwhere_sg_bot">
@@ -24,16 +27,12 @@
 
 <style>
   nav {
-    flex: 1;
-    max-height: 55px;
-    min-height: 55px;
-
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     padding: 10px 5px;
-    border-bottom: #f5f5f5 solid 2px;
+    border-bottom: #f5f5f5 solid 3px;
     background: white;
     position: sticky;
     top: 0px;
@@ -70,12 +69,12 @@
     font-size: 18px;
     display: flex;
     user-select: none;
-    padding: 5px;
-    width: 170px;
+    padding: 5px 8px;
     text-align: center;
     border-radius: 10px;
     cursor: pointer;
     transition-duration: 0.3s;
+    line-height: 25px;
   }
 
   .nav-item:active,
@@ -84,8 +83,8 @@
   }
 
   .logo-image {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     margin-right: 5px;
   }
 

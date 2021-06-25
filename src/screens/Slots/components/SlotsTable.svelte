@@ -3,11 +3,37 @@
 
   import TableRow from "./TableRow.svelte";
   import Skeleton from "~/components/Skeleton/SlotsTableSkeleton.svelte";
+  import scrollWheel from "~/actions/scrollWheel";
+  import pannable from "~/actions/pannable";
 
-  export let sessionsRequest, dateFilter, gymFilter;
+  export let sessionsRequest,
+    dateFilter,
+    gymFilter,
+    extended = false;
+
+  function handleScrollWheel(e) {
+    const { deltaY } = e.detail;
+    extended = deltaY > 0;
+  }
+
+  function handlePanMove(e) {
+    const { dy, offsetY } = e.detail;
+    if (dy < 0) {
+      extended = true;
+    }
+    if (dy > 0 && offsetY <= 100) {
+      extended = false;
+    }
+  }
 </script>
 
-<div class="container">
+<div
+  class="container"
+  use:pannable
+  on:panmove={handlePanMove}
+  use:scrollWheel
+  on:scrollWheel={handleScrollWheel}
+>
   {#await sessionsRequest}
     <Skeleton />
   {:then sessions}
@@ -35,17 +61,23 @@
 
 <style>
   .container {
-    width: 100%;
     overflow-y: scroll;
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: solid #f5f5f5 3px;
+    border-bottom: none;
   }
 
   .empty {
     display: flex;
     text-align: center;
     flex: 1;
+    height: 100px;
+    font-weight: 600;
+    font-size: 19px;
   }
 
   .empty > p {
@@ -59,7 +91,7 @@
 
   th {
     text-align: left;
-    font-size: 0.7em;
+    font-size: 0.8em;
     position: sticky;
     top: 0px;
     background: white;
@@ -73,6 +105,6 @@
   th.spaces {
     text-align: right;
     padding-right: 10px;
-    min-width: 120px;
+    min-width: 50px;
   }
 </style>
