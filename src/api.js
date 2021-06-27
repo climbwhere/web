@@ -52,7 +52,7 @@ export const getScraperStatus = async () =>
     });
 
 export const postReport = async (message) =>
-  fetch(API_URL + "/report", {
+  fetch(API_URL + "/feedback/report", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ message }),

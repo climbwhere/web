@@ -51,7 +51,7 @@
         >
       </Link>
       Something not quite right?
-      <Link to="report">report here</Link>.
+      <Link to="report">Report it here</Link>.
       <Link to="about">About</Link>.
     {/await}
   </footer>
