@@ -5,9 +5,7 @@
   import GymBadge from "./GymBadge.svelte";
   import Skeleton from "~/components/Skeleton/GymPickerSkeleton.svelte";
 
-  export let selectedGyms, shouldHideGyms;
-
-  const gymsRequest = getGyms();
+  export let selectedGyms, shouldHideGyms, gymsRequest;
 
   const handleClearAll = (e) => {
     e.preventDefault();

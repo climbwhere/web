@@ -5,30 +5,57 @@
   import isNil from "lodash/isNil";
   import isEmpty from "lodash/isEmpty";
 
-  import { getSessions, getLastUpdated, getScraperStatus } from "~/api";
+  import {
+    getSessions,
+    getLastUpdated,
+    getScraperStatus,
+    getGyms,
+  } from "~/api";
   import SlotsTable from "./components/SlotsTable.svelte";
   import DatePicker from "./components/DatePicker.svelte";
   import GymPicker from "./components/GymPicker.svelte";
 
-  const hasErrorsPromise = getScraperStatus().then(
-    (data) => !isEmpty(Object.values(data).filter((gym) => !isNil(gym.error)))
-  );
-
-  const sessionsRequest = getSessions().then((sessions) => {
-    dateFilter = uniq(sessions.map((s) => s._date))[0]; // sets earliest retrieved dates
-    return sessions;
-  });
-  const lastUpdatedRequest = getLastUpdated();
-
   let dateFilter = moment().format("DD/MM/YY"); // current date as a "guess"
   let gymFilter = [];
   let shouldHideGyms;
+  let refreshing = false;
+
+  const handleSessionsResponse = (sessions) => {
+    dateFilter = uniq(sessions.map((s) => s._date))[0]; // sets earliest retrieved dates
+    return sessions;
+  };
+  const handleScraperStatus = (data) => (data) =>
+    !isEmpty(Object.values(data).filter((gym) => !isNil(gym.error)));
+
+  let sessionsRequest, lastUpdatedRequest, hasErrorsRequest, gymsRequest;
+
+  const loadData = async () => {
+    refreshing = true;
+    sessionsRequest = getSessions().then(handleSessionsResponse);
+    lastUpdatedRequest = getLastUpdated();
+    hasErrorsRequest = getScraperStatus().then(handleScraperStatus);
+    gymsRequest = getGyms();
+
+    Promise.all([
+      sessionsRequest,
+      lastUpdatedRequest,
+      hasErrorsRequest,
+      gymsRequest,
+    ]).then(() => (refreshing = false));
+  };
+
+  loadData();
+
+  const handleReload = (e) => {
+    // create new requests
+    loadData();
+  };
 </script>
 
 <div class="container">
   <DatePicker bind:selectedDate={dateFilter} {sessionsRequest} />
   <div class="content">
-    <GymPicker bind:selectedGyms={gymFilter} {shouldHideGyms} />
+    <GymPicker bind:selectedGyms={gymFilter} {shouldHideGyms} {gymsRequest} />
     <SlotsTable
       {sessionsRequest}
       {dateFilter}
@@ -36,8 +63,17 @@
       bind:extended={shouldHideGyms}
     />
   </div>
+  <div
+    class:hidden={shouldHideGyms}
+    class="refresh drop-shadow"
+    on:click={handleReload}
+  >
+    <span class:rotating={refreshing} class="refresh-icon material-icons">
+      refresh
+    </span>
+  </div>
   <footer>
-    {#await Promise.all([lastUpdatedRequest, hasErrorsPromise])}
+    {#await Promise.all([lastUpdatedRequest, hasErrorsRequest])}
       Loading...
     {:then [lastUpdated, hasErrors]}
       <Link to="status">
@@ -93,5 +129,45 @@
   }
   .status-icon.error {
     color: red;
+  }
+
+  .refresh {
+    text-align: center;
+    position: absolute;
+    z-index: 10;
+    bottom: 50px;
+    right: 5vw;
+    font-size: 21px;
+    line-height: 53px;
+    height: 50px;
+    width: 50px;
+    background: white;
+    border: solid 3px #f5f5f5;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .rotating {
+    -webkit-animation: rotating 1.4s ease-out infinite;
+    -moz-animation: rotating 1.4s ease-out infinite;
+    -ms-animation: rotating 1.4s ease-out infinite;
+    -o-animation: rotating 1.4s ease-out infinite;
+    animation: rotating 1.4s ease-out infinite;
+  }
+  @keyframes rotating {
+    from {
+      -ms-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -ms-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
   }
 </style>
