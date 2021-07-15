@@ -14,6 +14,7 @@
   import SlotsTable from "./components/SlotsTable.svelte";
   import DatePicker from "./components/DatePicker.svelte";
   import GymPicker from "./components/GymPicker.svelte";
+  import RefreshButton from "./components/RefreshButton.svelte";
 
   let dateFilter = moment().format("DD/MM/YY"); // current date as a "guess"
   let gymFilter = [];
@@ -24,7 +25,7 @@
     dateFilter = uniq(sessions.map((s) => s._date))[0]; // sets earliest retrieved dates
     return sessions;
   };
-  const handleScraperStatus = (data) => (data) =>
+  const handleScraperStatus = (data) =>
     !isEmpty(Object.values(data).filter((gym) => !isNil(gym.error)));
 
   let sessionsRequest, lastUpdatedRequest, hasErrorsRequest, gymsRequest;
@@ -45,11 +46,6 @@
   };
 
   loadData();
-
-  const handleReload = (e) => {
-    // create new requests
-    loadData();
-  };
 </script>
 
 <div class="container">
@@ -63,15 +59,7 @@
       bind:extended={shouldHideGyms}
     />
   </div>
-  <div
-    class:hidden={shouldHideGyms}
-    class="refresh drop-shadow"
-    on:click={handleReload}
-  >
-    <span class:rotating={refreshing} class="refresh-icon material-icons">
-      refresh
-    </span>
-  </div>
+  <RefreshButton hidden={shouldHideGyms} {refreshing} on:click={loadData} />
   <footer>
     {#await Promise.all([lastUpdatedRequest, hasErrorsRequest])}
       Loading...
@@ -129,45 +117,5 @@
   }
   .status-icon.error {
     color: red;
-  }
-
-  .refresh {
-    text-align: center;
-    position: absolute;
-    z-index: 10;
-    bottom: 50px;
-    right: 5vw;
-    font-size: 21px;
-    line-height: 53px;
-    height: 50px;
-    width: 50px;
-    background: white;
-    border: solid 3px #f5f5f5;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-
-  .rotating {
-    -webkit-animation: rotating 1.4s ease-out infinite;
-    -moz-animation: rotating 1.4s ease-out infinite;
-    -ms-animation: rotating 1.4s ease-out infinite;
-    -o-animation: rotating 1.4s ease-out infinite;
-    animation: rotating 1.4s ease-out infinite;
-  }
-  @keyframes rotating {
-    from {
-      -ms-transform: rotate(0deg);
-      -moz-transform: rotate(0deg);
-      -webkit-transform: rotate(0deg);
-      -o-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-    to {
-      -ms-transform: rotate(360deg);
-      -moz-transform: rotate(360deg);
-      -webkit-transform: rotate(360deg);
-      -o-transform: rotate(360deg);
-      transform: rotate(360deg);
-    }
   }
 </style>
