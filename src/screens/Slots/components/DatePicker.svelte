@@ -1,6 +1,7 @@
 <script>
   import moment from "moment";
   import uniq from "lodash/uniq";
+  import isEmpty from "lodash/isEmpty";
 
   import Skeleton from "~/components/Skeleton/DatePickerSkeleton.svelte";
 
@@ -30,6 +31,11 @@
         </span>
       </div>
     {/each}
+    {#if isEmpty(sessions)}
+      <div class="empty">
+        <b>Looks like there are currently no sessions...</b>
+      </div>
+    {/if}
   {/await}
 </div>
 
@@ -43,6 +49,13 @@
     display: flex;
     flex-direction: row;
     padding: 10px 0;
+  }
+
+  .empty {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   h3 {
