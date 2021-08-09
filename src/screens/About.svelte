@@ -5,16 +5,15 @@
 
 <div class="container">
   <p>
-    When COVID-19 hit, many climbing gyms in Singapore adopted slot-booking
-    systems in order to limit capacity and reduce risks.
+    This website shows aggregated climbing gym slot information from multiple
+    climbing and bouldering gyms in Singapore.
   </p>
+
+  <h3>Why did we make this?</h3>
   <p>
-    With the high demand, it can be very tedious to search for open time slots
-    across all gyms.
-  </p>
-  <p>
-    <b>We built Climbwhere.sg to help with that.</b> The website shows aggregated
-    climbing gym slot information from multiple climbing and bouldering gyms in Singapore.
+    Due to COVID-19, many local climbing gyms are forced to lower their max
+    capacities. The high demand for climbing gym slots nowadays makes it very
+    tedious to look for gyms and open timeslots.
   </p>
 
   <h3>Where is this data from?</h3>
@@ -27,17 +26,22 @@
 
   <h3>Who are we?</h3>
   <p>
-    We are <a href="https://instagram.com/bouldermonster69">Sean</a> and
-    <a href="https://www.instagram.com/lowkeyravern/">Ravern</a>. If you see us
-    around, 👀 do say hi!
+    This website was designed and built by <a href="https://sean.place">Sean</a
+    >, and its scrapers were built by
+    <a href="https://www.instagram.com/lowkeyravern/">Ravern</a>. Technicalities
+    of the site explained
+    <a href="https://sean.place/blog/climbwhere-sg/">here</a> for fellow web people.
   </p>
 
-  <h3>Like our work?</h3>
   <p>
-    <a href="https://www.buymeacoffee.com/seanlim">buy us a coffee!</a>
+    Like our work? <a href="https://www.buymeacoffee.com/seanlim"
+      >buy us a coffee!</a
+    >
   </p>
 
-  <p>© {moment().year()} Climbwhere · All rights reserved.</p>
+  <small>
+    <p>© {moment().year()} Climbwhere · All rights reserved.</p>
+  </small>
 </div>
 
 <style>

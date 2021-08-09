@@ -23,7 +23,7 @@
       return;
     }
 
-    setTimeout(() => navigate("/about"), 1500);
+    setTimeout(() => navigate("/"), 1500);
   };
 </script>
 
