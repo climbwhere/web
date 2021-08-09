@@ -1,7 +1,7 @@
 <script>
   import uniq from "lodash/uniq";
   import moment from "moment";
-  import { Link } from "svelte-routing";
+  import { Link, navigate } from "svelte-routing";
   import isNil from "lodash/isNil";
   import isEmpty from "lodash/isEmpty";
 
@@ -19,7 +19,7 @@
   let dateFilter = moment().format("DD/MM/YY"); // current date as a "guess"
   let gymFilter = [];
   let shouldHideGyms;
-  let refreshing = false;
+  let loading = false;
 
   const handleSessionsResponse = (sessions) => {
     dateFilter = uniq(sessions.map((s) => s._date))[0]; // sets earliest retrieved dates
@@ -31,7 +31,7 @@
   let sessionsRequest, lastUpdatedRequest, hasErrorsRequest, gymsRequest;
 
   const loadData = async () => {
-    refreshing = true;
+    loading = true;
     sessionsRequest = getSessions().then(handleSessionsResponse);
     lastUpdatedRequest = getLastUpdated();
     hasErrorsRequest = getScraperStatus().then(handleScraperStatus);
@@ -42,7 +42,14 @@
       lastUpdatedRequest,
       hasErrorsRequest,
       gymsRequest,
-    ]).then(() => (refreshing = false));
+    ])
+      .then(() => {
+        loading = false;
+      })
+      .catch(async (errors) => {
+        loading = false;
+        navigate("/error");
+      });
   };
 
   loadData();
@@ -59,7 +66,11 @@
       bind:extended={shouldHideGyms}
     />
   </div>
-  <RefreshButton hidden={shouldHideGyms} {refreshing} on:click={loadData} />
+  <RefreshButton
+    hidden={shouldHideGyms}
+    refreshing={loading}
+    on:click={loadData}
+  />
   <footer>
     {#await Promise.all([lastUpdatedRequest, hasErrorsRequest])}
       Loading...
