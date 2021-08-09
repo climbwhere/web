@@ -65,7 +65,10 @@
       Loading...
     {:then [lastUpdated, hasErrors]}
       <Link to="status">
-        <span class="status-icon material-icons" class:error={hasErrors}
+        <span
+          class="status-icon material-icons"
+          class:error={hasErrors}
+          aria-label="Status icon"
           >{hasErrors ? "report_problem" : "check_circle"}</span
         >
         <b

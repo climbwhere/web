@@ -7,13 +7,16 @@
 
 <nav>
   <div class="left">
-    <div on:click={onLogoClick} class="logo nav-item">
-      <img class="logo-image" alt="logo" src="/logo.png" /><span
-        >Climbwhere.sg</span
-      >
+    <div on:click={onLogoClick} class="logo nav-item" aria-label="Check Slots">
+      <img
+        class="logo-image"
+        alt="logo"
+        src="/logo.png"
+        aria-label="logo"
+      /><span>Climbwhere.sg</span>
     </div>
   </div>
-  <a href="https://t.me/climbwhere_sg_bot">
+  <a href="https://t.me/climbwhere_sg_bot" aria-label="Telegram bot">
     <img class="telegram-logo" src="/telegram.png" alt="telegram-logo" />
     <span class="r">t.me/climbwhere_sg_bot</span>
   </a>
