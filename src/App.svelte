@@ -5,6 +5,7 @@
   import Report from "~/screens/Report.svelte";
   import Status from "~/screens/Status.svelte";
   import About from "~/screens/About.svelte";
+  import NotFound from "~/screens/NotFound.svelte";
   import NavBar from "~/components/NavBar.svelte";
 
   export let url = window.location.pathname,
@@ -29,6 +30,7 @@
       <Route path="/report" component={Report} />
       <Route path="/about" component={About} />
       <Route path="/status" component={Status} />
+      <Route path="" component={NotFound} />
     </Router>
   </div>
 </div>
