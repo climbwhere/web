@@ -14,6 +14,7 @@
   class:hidden={hide}
   class:warn={spaces < 10}
   class:invalid={spaces < 1}
+  class="umami--click--table-row-click"
 >
   <td class="gym"><GymBadge {gym} /> </td>
   <td class="timings">{timing}</td>

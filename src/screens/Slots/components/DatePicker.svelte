@@ -19,7 +19,7 @@
   {:then sessions}
     {#each uniq(sessions.map((s) => s._date)) as date}
       <div
-        class="date-box"
+        class="date-box umami--click--click-date-filter"
         class:selected={selectedDate === date}
         on:click={handleDateBoxClick(date)}
       >

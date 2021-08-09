@@ -15,7 +15,7 @@
   class:selected={gymSelected}
   class:unselected={gymUnselected}
   on:click={handleBadgeClick}
-  class={`badge ${gym.slug}`}>{gym.name}</span
+  class={`badge ${gym.slug} umami--click--${gym.slug}-click`}>{gym.name}</span
 >
 
 <style>
