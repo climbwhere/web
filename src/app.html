@@ -1,12 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="/favicon.png" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		%svelte.head%
-	</head>
-	<body>
-		<div id="svelte">%svelte.body%</div>
-	</body>
+
+<head>
+	<meta charset="utf-8" />
+	<!-- Primary Meta Tags -->
+	<title>Climbwhere.sg</title>
+	<meta name="title" content="Climbwhere.sg - Timely climbing gym slot information in Singapore.">
+	<meta name="description"
+		content="Climbwhere.sg shows aggregated climbing gym slot information from multiple climbing and bouldering gyms in Singapore. We retrieve gym slot information directly from the respective gyms' websites every 2 minutes or so. Data is not guaranteed to be accurate or up to date.">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	</meta>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	</meta>
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://www.climbwhere.sg/">
+	<meta property="og:title" content="Climbwhere.sg">
+	<meta property="og:description" content="Timely climbing gym slot information in Singapore.">
+	<meta property="og:image" content="https://www.climbwhere.sg/banner_large.png">
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image">
+	<meta property="twitter:url" content="https://www.climbwhere.sg/">
+	<meta property="twitter:title" content="Climbwhere.sg">
+	<meta property="twitter:description" content="Timely climbing gym slot information in Singapore.">
+	<meta property="twitter:image" content="https://www.climbwhere.sg/banner_large.png">
+	<!-- Icons -->
+	<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+	<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+	<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+	<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png" />
+	<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+	<link rel="icon" href="/favicon.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png" />
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+	<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+	<link rel="manifest" href="/manifest.json" />
+	<meta name="msapplication-TileColor" content="#ffffff" />
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+	<meta name="theme-color" content="#ffffff" />
+	<!-- Ext CSS -->
+	<link async defer rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+		integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+		crossorigin="anonymous" />
+	<link async defer rel="stylesheet" type="text/css" href="/global.css" />
+	%svelte.head%
+</head>
+
+
+<div class="top-spacer"></div>
+<div class="bottom-spacer"></div>
+
+<body>
+	<div id="svelte">%svelte.body%</div>
+</body>
+
 </html>
