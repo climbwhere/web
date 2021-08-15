@@ -1,26 +1,35 @@
 <script context="module" lang="ts">
-  const { VITE_API_URL: API_URL } = import.meta.env;
+  import { getGyms } from "$lib/api";
 
   export async function load({ page, fetch, session, context }) {
-    const { data: gyms } = await fetch(`${API_URL}/gyms`).then((r) => r.json());
-    return { props: { gyms } };
+    const gyms = await getGyms();
+    return { props: { initialData: gyms } };
   }
 </script>
 
 <script lang="ts">
-  export let gyms: Gym[] = [];
+  import { goto } from "$app/navigation";
+  import { createGymsStore } from "$lib/stores";
+  export let initialData;
+
+  const gyms = createGymsStore(initialData);
+
+  const handleAllGymsClick = (e) => {
+    e.preventDefault();
+    goto("/all");
+  };
 </script>
 
 <h2>Select gym:</h2>
 <div class="gyms">
-  {#each gyms as gym}
+  {#each $gyms as gym}
     <span class={`badge ${gym.slug}`}>
       {gym.name}
     </span>
   {/each}
 </div>
 <b> or </b>
-<button>See all gyms</button>
+<button on:click={handleAllGymsClick}>See all gyms</button>
 
 <style>
   .gyms {

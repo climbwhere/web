@@ -8,3 +8,5 @@ type Gym = {
   phone: string;
   slug: string;
 };
+
+type Session = {};
