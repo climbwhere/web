@@ -33,5 +33,6 @@
   }
   .content {
     overflow-y: hidden;
+    padding: 10px;
   }
 </style>

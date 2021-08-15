@@ -11,10 +11,32 @@
   export let gyms: Gym[] = [];
 </script>
 
-<h1>Where are you climbing today?</h1>
-<p>Select a gym to get started</p>
-{#each gyms as gym}
-  <p>{gym.name}</p>
-{/each}
-<p>or</p>
+<h2>Select gym:</h2>
+<div class="gyms">
+  {#each gyms as gym}
+    <span class={`badge ${gym.slug}`}>
+      {gym.name}
+    </span>
+  {/each}
+</div>
+<b> or </b>
 <button>See all gyms</button>
+
+<style>
+  .gyms {
+    display: flex;
+    flex-wrap: wrap;
+    background: #f5f5f54f;
+    border: solid #f5f5f5 2px;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    margin: 10px 0;
+  }
+  button {
+    margin-left: 5px;
+  }
+</style>

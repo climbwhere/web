@@ -64,6 +64,20 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+button {
+  padding: 10px 15px;
+  border: none;
+  background: black;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  transition-duration: 0.3s;
+}
+
+button:active {
+  opacity: 0.5;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -81,6 +95,10 @@ body {
   transition-duration: 0.3s;
   cursor: pointer;
   -webkit-user-select: none;
+}
+
+.badge:active {
+  opacity: 0.5;
 }
 
 .badge.selected {
@@ -145,4 +163,56 @@ a {
   100% {
     opacity: 1;
   }
+}
+
+.fitbloc {
+  background-color: #7b112a;
+  color: white;
+}
+
+.boulder-plus {
+  background-color: #652580;
+  color: white;
+}
+
+.bff {
+  background-color: #ea078d;
+  color: black;
+}
+
+.boulder-world {
+  background-color: #0c606b;
+  color: white;
+}
+
+.lighthouse {
+  background-color: #9e0102;
+  color: white;
+}
+
+.z-vertigo {
+  background-color: yellow;
+  color: black;
+}
+
+.oyeyo {
+  background-color: #ef1e29;
+  color: white;
+}
+
+.the-rock-school {
+  background-color: black;
+  color: white;
+}
+
+.boulder-planet {
+  background-color: #e1b6a5;
+  color: #181818;
+}
+
+.boulder-movement-downtown,
+.boulder-movement-tai-seng,
+.boulder-movement-rochor {
+  background-color: #ee4469;
+  color: white;
 }
