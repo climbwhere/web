@@ -13,5 +13,8 @@
 
 <h1>Where are you climbing today?</h1>
 <p>Select a gym to get started</p>
-
+{#each gyms as gym}
+  <p>{gym.name}</p>
+{/each}
 <p>or</p>
+<button>See all gyms</button>
