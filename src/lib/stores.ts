@@ -15,15 +15,16 @@ export const createGymsStore = (initialData: Gym[]) =>
     };
   });
 
-export const createSessionsStore = readable<Session[]>([], (set) => {
-  const refresherInterval = setInterval(
-    async () => getSessions().then(set),
-    REFRESH_INTERVAL
-  );
-  return () => {
-    clearInterval(refresherInterval);
-  };
-});
+export const createSessionsStore = (initialData: Session[]) =>
+  readable<Session[]>(initialData, (set) => {
+    const refresherInterval = setInterval(
+      async () => getSessions().then(set),
+      REFRESH_INTERVAL
+    );
+    return () => {
+      clearInterval(refresherInterval);
+    };
+  });
 
 export const createLastUpdatedStore = readable<Date>(null, (set) => {
   const refresherInterval = setInterval(

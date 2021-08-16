@@ -9,4 +9,10 @@ type Gym = {
   slug: string;
 };
 
-type Session = {};
+type Session = {
+  id: string;
+  spaces: number;
+  starts_at: Date;
+  ends_at: Date;
+  gym: Gym;
+};
