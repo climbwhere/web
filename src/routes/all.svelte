@@ -28,11 +28,49 @@
 
 <script lang="ts">
   import SessionsTable from "$lib/components/SessionsTable.svelte";
-  import { createGymsStore, createSessionsStore } from "$lib/stores";
+  import {
+    createGymsStore,
+    createLastUpdatedStore,
+    createSessionsStore,
+    sessionDates,
+  } from "$lib/stores";
+  import dayjs from "dayjs";
+  import RelativeTime from "dayjs/plugin/relativeTime";
+
   export let initialData;
+  dayjs.extend(RelativeTime);
 
   const sessions = createSessionsStore(initialData.sessions);
   const gyms = createGymsStore(initialData.gyms);
+  const dates = sessionDates(sessions);
+  const lastUpdated = createLastUpdatedStore;
 </script>
 
+{dayjs($lastUpdated).fromNow()}
+<div class="gyms">
+  {#each $dates as date}
+    <span class="badge">
+      {dayjs(date).format("DD/MM/YY")}
+    </span>
+  {/each}
+</div>
+<div class="gyms">
+  {#each $gyms as gym}
+    <span class={`badge ${gym.slug}`}>
+      {gym.name}
+    </span>
+  {/each}
+</div>
 <SessionsTable {sessions} />
+
+<style>
+  .gyms {
+    display: flex;
+    flex-wrap: wrap;
+    background: #f5f5f54f;
+    border: solid #f5f5f5 2px;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+</style>
