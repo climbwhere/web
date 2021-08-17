@@ -36,21 +36,22 @@
     sessionDates,
   } from "$lib/stores";
   import dayjs from "dayjs";
-  import RelativeTime from "dayjs/plugin/relativeTime.js";
 
   export let initialData;
-  dayjs.extend(RelativeTime);
 
   const sessions = createSessionsStore(initialData.sessions);
   const gyms = createGymsStore(initialData.gyms);
   const dates = sessionDates(sessions);
 </script>
 
-<div class="gyms">
+<div class="dates">
   {#each $dates as date}
-    <span class="badge">
-      {DAYS_OF_WEEK[dayjs(date).day()]}
-    </span>
+    <div class="date-box">
+      <span class="date-title">
+        {DAYS_OF_WEEK[dayjs(date).day()]}
+      </span>
+      <h3>{dayjs(date).get("date")}</h3>
+    </div>
   {/each}
 </div>
 <div class="gyms">
@@ -71,5 +72,46 @@
     border-radius: 20px;
     padding: 10px;
     margin-bottom: 10px;
+  }
+
+  h3 {
+    margin: 3px 0 0 0;
+  }
+  .dates {
+    flex: 1;
+    min-height: 90px;
+    max-height: 90px;
+    overflow-x: scroll;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0;
+    border: solid red 1px;
+  }
+  .date-box {
+    flex: 1;
+    min-width: 70px;
+    max-width: 70px;
+    border: solid 3px #f5f5f5;
+    padding: 15px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 5px;
+    background: white;
+    border-radius: 15px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    -webkit-user-select: none;
+  }
+  .date-box.selected {
+    border: solid 3px #4361ee;
+  }
+  .date-title {
+    color: #f44545;
+    font-weight: bold;
+    font-size: 12px;
   }
 </style>

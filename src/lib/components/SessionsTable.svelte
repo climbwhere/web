@@ -3,30 +3,42 @@
   export let sessions: SvelteStore<Session[]>;
 </script>
 
-<table>
-  <thead>
-    <th>Gym</th>
-    <th>Time</th>
-    <th class="spaces">Available Spaces</th>
-  </thead>
-  {#each $sessions as session}
-    <tr class:warn={session.spaces < 10} class:invalid={session.spaces < 1}>
-      <td class="gym">
-        <span class={`badge ${session.gym.slug}`}>
-          {session.gym.name}
-        </span>
-      </td>
-      <td>{dayjs(session.starts_at).format("DD/MM/YY hh:mmA")}</td>
-      <td class="spaces">
-        <span class="badge">
-          {session.spaces}
-        </span>
-      </td>
-    </tr>
-  {/each}
-</table>
+<div class="container">
+  <table>
+    <thead>
+      <th>Gym</th>
+      <th>Time</th>
+      <th class="spaces">Available Spaces</th>
+    </thead>
+    {#each $sessions as session}
+      <tr class:warn={session.spaces < 10} class:invalid={session.spaces < 1}>
+        <td class="gym">
+          <span class={`badge ${session.gym.slug}`}>
+            {session.gym.name}
+          </span>
+        </td>
+        <td>{dayjs(session.starts_at).format("DD/MM/YY hh:mmA")}</td>
+        <td class="spaces">
+          <span class="badge">
+            {session.spaces}
+          </span>
+        </td>
+      </tr>
+    {/each}
+  </table>
+</div>
 
 <style>
+  .container {
+    overflow-y: scroll;
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: solid #f5f5f5 3px;
+    border-bottom: none;
+  }
   table {
     width: 100%;
     border-collapse: collapse;

@@ -33,5 +33,6 @@
   }
   .content {
     padding: 10px;
+    overflow: scroll;
   }
 </style>
