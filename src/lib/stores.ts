@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 
 import { getGyms, getLastUpdated, getSessions } from "$lib/api";
 
-const REFRESH_INTERVAL = 1000; // 1 minute interval
+const REFRESH_INTERVAL = 60000; // 1 minute interval
 
 export const createGymsStore = (initialData: Gym[]) =>
   readable<Gym[]>(initialData, (set) => {

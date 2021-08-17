@@ -28,6 +28,7 @@
 
 <script lang="ts">
   import SessionsTable from "$lib/components/SessionsTable.svelte";
+  import { DAYS_OF_WEEK } from "$lib/constants";
   import {
     createGymsStore,
     createLastUpdatedStore,
@@ -43,14 +44,12 @@
   const sessions = createSessionsStore(initialData.sessions);
   const gyms = createGymsStore(initialData.gyms);
   const dates = sessionDates(sessions);
-  const lastUpdated = createLastUpdatedStore;
 </script>
 
-{dayjs($lastUpdated).fromNow()}
 <div class="gyms">
   {#each $dates as date}
     <span class="badge">
-      {dayjs(date).format("DD/MM/YY")}
+      {DAYS_OF_WEEK[dayjs(date).day()]}
     </span>
   {/each}
 </div>

@@ -28,6 +28,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@types/lodash": "^4.14.172",
     "dayjs": "^1.10.6",
     "lodash": "^4.17.21"
   }
