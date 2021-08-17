@@ -1,5 +1,5 @@
 import { readable, derived } from "svelte/store";
-import uniqBy from "lodash/uniqBy";
+import uniqBy from "lodash/uniqBy.js";
 import dayjs from "dayjs";
 
 import { getGyms, getLastUpdated, getSessions } from "$lib/api";
