@@ -28,19 +28,19 @@ export const createSessionsStore = (initialData: Session[]) =>
     };
   });
 
-export const createLastUpdatedStore = readable<Date>(null, (set) => {
-  const refresherInterval = setInterval(
-    async () => getLastUpdated().then(set),
-    REFRESH_INTERVAL
-  );
-  return () => {
-    clearInterval(refresherInterval);
-  };
-});
+export const createLastUpdatedStore = (initialData: Date) =>
+  readable<Date>(initialData, (set) => {
+    const refresherInterval = setInterval(
+      async () => getLastUpdated().then(set),
+      REFRESH_INTERVAL
+    );
+    return () => {
+      clearInterval(refresherInterval);
+    };
+  });
 
 export const sessionDates = (sessionStore) =>
   derived(sessionStore, ($sessions: Session[]) => {
-    console.info($sessions);
     return uniqBy($sessions, (s) => dayjs(s.starts_at).format("DD/MM/YY")).map(
       (s) => s.starts_at
     );
