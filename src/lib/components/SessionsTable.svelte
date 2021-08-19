@@ -1,88 +1,106 @@
 <script lang="ts">
+  import { DAYS_OF_WEEK } from "$lib/constants";
   import dayjs from "dayjs";
+  import { keys } from "lodash";
+  import groupBy from "lodash/groupBy.js";
   export let sessions: SvelteStore<Session[]>;
+
+  let groupedSessions = groupBy(
+    $sessions,
+    (session) =>
+      `${DAYS_OF_WEEK[dayjs(session.starts_at).day()]}, ${dayjs(
+        session.starts_at
+      ).format("DD/MM/YY")}`
+  );
 </script>
 
 <div class="container">
-  <table>
-    <thead>
-      <th>Gym</th>
-      <th>Time</th>
-      <th class="spaces">Available Spaces</th>
-    </thead>
-    {#each $sessions as session}
-      <tr class:warn={session.spaces < 10} class:invalid={session.spaces < 1}>
-        <td class="gym">
-          <span class={`badge ${session.gym.slug}`}>
-            {session.gym.name}
+  {#each Object.keys(groupedSessions) as date}
+    <div class="column">
+      <div class="column-header">
+        {date}
+      </div>
+      {#each groupedSessions[date] as session}
+        <div
+          class={`session ${session.gym.slug}`}
+          class:warn={session.spaces < 10}
+          class:invalid={session.spaces < 1}
+        >
+          <div>
+            <p class="gym">
+              {session.gym.name}
+            </p>
+            <p>
+              {dayjs(session.starts_at).format("DD/MM/YY hh:mmA")}
+            </p>
+          </div>
+          <span class="spaces">
+            {session.spaces} Spaces
           </span>
-        </td>
-        <td>{dayjs(session.starts_at).format("DD/MM/YY hh:mmA")}</td>
-        <td class="spaces">
-          <span class="badge">
-            {session.spaces}
-          </span>
-        </td>
-      </tr>
-    {/each}
-  </table>
+        </div>
+      {/each}
+    </div>
+  {/each}
 </div>
 
 <style>
+  p {
+    margin: 0;
+  }
   .container {
-    overflow-y: scroll;
+    overflow-x: scroll;
     flex: 1;
     height: 100%;
-    width: 100%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border: solid #f5f5f5 3px;
-    border-bottom: none;
+    display: flex;
+    flex-direction: row;
   }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  th {
-    text-align: left;
-    font-size: 0.8em;
-    position: sticky;
-    top: 0px;
-    background: white;
-    border-bottom: #f5f5f5 solid 2px;
-  }
-  th {
-    padding: 10px 5px;
+  .column {
+    flex: 1;
+    min-width: 350px;
+    margin-right: 15px;
+    border-right: solid #f5f5f5 2px;
+    padding: 0 15px 0 0;
+    overflow-y: scroll;
   }
 
-  th.spaces {
-    text-align: right;
-    padding-right: 10px;
-    min-width: 50px;
+  .column-header {
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 5px 0;
   }
-  tr:hover,
-  tr:active {
+
+  .session:hover,
+  .session:active {
     background: #a2d2ff9c;
   }
-  tr {
+  .session {
     content-visibility: auto;
     transition-duration: 0.4s;
     cursor: pointer;
     margin-top: 1px;
+    width: 100%;
+    max-width: 400px;
+    margin: 10px 0;
+    padding: 10px 15px;
+    border-radius: 5px;
   }
-  td {
-    padding: 11px 5px;
-  }
-
-  td.spaces {
+  .spaces {
+    position: absolute;
+    top: 25%;
+    right: 8px;
     text-align: right;
     padding-right: 10px;
-    min-width: 80px;
-    font-size: 1.1em;
+    font-weight: bold;
+    background: white;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
   }
 
-  td.gym {
-    min-width: 120px;
+  .gym {
+    font-weight: bold;
   }
 
   .warn {

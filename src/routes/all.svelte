@@ -79,21 +79,24 @@
   }
   .dates {
     flex: 1;
-    min-height: 90px;
-    max-height: 90px;
+    min-height: 80px;
+    max-height: 80px;
     overflow-x: scroll;
     width: 100%;
     display: flex;
     flex-direction: row;
-    padding: 10px 0;
+    align-items: center;
+    padding: 5px 0;
     border: solid red 1px;
   }
   .date-box {
     flex: 1;
-    min-width: 70px;
-    max-width: 70px;
-    border: solid 3px #f5f5f5;
-    padding: 15px 0px;
+    min-width: 60px;
+    max-width: 60px;
+    min-height: 60px;
+    max-height: 60px;
+    padding: 5px;
+    border: solid 2px #f5f5f5;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -101,7 +104,7 @@
     text-align: center;
     margin: 0 5px;
     background: white;
-    border-radius: 15px;
+    border-radius: 50%;
     transition-duration: 0.2s;
     cursor: pointer;
     -webkit-user-select: none;
@@ -110,8 +113,7 @@
     border: solid 3px #4361ee;
   }
   .date-title {
-    color: #f44545;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 9px;
   }
 </style>

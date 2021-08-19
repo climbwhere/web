@@ -32,7 +32,10 @@
     grid-template-rows: 55px auto;
   }
   .content {
+    height: 100vh;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
     overflow: scroll;
   }
 </style>
