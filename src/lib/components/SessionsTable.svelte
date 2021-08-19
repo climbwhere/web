@@ -47,18 +47,31 @@
     flex-direction: row;
   }
   .column {
+    content-visibility: auto;
     flex: 1;
     min-width: 300px;
     margin-right: 15px;
     border-right: solid #f5f5f5 2px;
     padding: 0 15px 0 0;
     overflow-y: scroll;
+    transition-duration: 0.2s;
+    opacity: 0.5;
+  }
+
+  .column:hover {
+    min-width: 400px;
+    opacity: 1;
   }
 
   .timeslot {
-    margin: 30px 0;
-    border-top: solid #f5f5f5 2px;
-    padding: 10px 0 0 0;
+    margin: 20px 0;
+    padding: 10px;
+    transition-duration: 0.2s;
+    border-radius: 10px;
+  }
+
+  .timeslot:hover {
+    background: aliceblue;
   }
 
   .column-header {
