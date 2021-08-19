@@ -1,8 +1,9 @@
 <script lang="ts">
   import { getSessionsByDateTime } from "$lib/stores";
-  import dayjs from "dayjs";
+  import type { Writable } from "svelte/store";
 
   export let sessionsStore: SvelteStore<Session[]>;
+  export let gymFilter: Writable<[]>;
   const sessionsByDateTime = getSessionsByDateTime(sessionsStore);
 </script>
 
@@ -12,25 +13,29 @@
       <div class="column-header">
         {date}
       </div>
-      {#each Object.keys($sessionsByDateTime[date]) as time}
-        <div class="timeslot">
-          <i>{time.split(" ")[1]}</i>
-          {#each $sessionsByDateTime[date][time] as session}
-            <div
-              class={`session ${session.gym.slug}`}
-              class:warn={session.spaces < 10}
-              class:invalid={session.spaces < 1}
-            >
-              <span class="gym">
-                {session.gym.name}
-              </span>
-              <span class="spaces">
-                {session.spaces} Spaces
-              </span>
-            </div>
-          {/each}
-        </div>
-      {/each}
+      <div>
+        {#each Object.keys($sessionsByDateTime[date]) as time}
+          <div class="timeslot">
+            <i>{time.split(" ")[1]}</i>
+            {#each $sessionsByDateTime[date][time] as session}
+              {#if !$gymFilter.includes(session.gym.slug)}
+                <div
+                  class={`session ${session.gym.slug}`}
+                  class:warn={session.spaces < 10}
+                  class:invalid={session.spaces < 1}
+                >
+                  <span class="gym">
+                    {session.gym.name}
+                  </span>
+                  <span class="spaces">
+                    {session.spaces} Spaces
+                  </span>
+                </div>
+              {/if}
+            {/each}
+          </div>
+        {/each}
+      </div>
     </div>
   {/each}
 </div>
@@ -40,62 +45,64 @@
     margin: 0;
   }
   .container {
-    overflow-x: scroll;
+    overflow-y: scroll;
     flex: 1;
     height: 100%;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
   }
   .column {
     content-visibility: auto;
     flex: 1;
-    min-width: 300px;
-    margin-right: 15px;
-    border-right: solid #f5f5f5 2px;
-    padding: 0 15px 0 0;
-    overflow-y: scroll;
-    transition-duration: 0.2s;
-    opacity: 0.5;
+    margin-top: 15px;
+    min-width: 33%;
+    max-width: 450px;
+    padding: 10px;
   }
 
-  .column:hover {
-    min-width: 400px;
-    opacity: 1;
+  @media only screen and (max-width: 800px) {
+    .column {
+      width: 100%;
+      min-width: 50%;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+    }
   }
 
   .timeslot {
-    margin: 20px 0;
-    padding: 10px;
-    transition-duration: 0.2s;
+    padding: 5px 0;
     border-radius: 10px;
   }
 
   .timeslot:hover {
     background: aliceblue;
   }
-
   .column-header {
     background: white;
     position: sticky;
     top: 0;
     z-index: 1;
-    padding: 5px 0;
+    padding: 10px 0;
     font-size: 1.1em;
     font-weight: bold;
   }
-
   .session:hover,
   .session:active {
     background: #a2d2ff9c;
   }
   .session {
     content-visibility: auto;
-    transition-duration: 0.4s;
     cursor: pointer;
     width: 100%;
-    max-width: 400px;
     margin: 5px 0;
-    padding: 10px 15px;
+    padding: 5px 10px;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -107,7 +114,7 @@
     font-weight: bold;
     background: white;
     color: black;
-    padding: 5px 10px;
+    padding: 5px;
     border-radius: 5px;
   }
 

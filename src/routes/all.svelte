@@ -33,21 +33,27 @@
     createLastUpdatedStore,
     createSessionsStore,
   } from "$lib/stores";
+  import { writable } from "svelte/store";
 
   export let initialData;
+  let gymFilter = writable([]);
 
   const sessions = createSessionsStore(initialData.sessions);
   const gyms = createGymsStore(initialData.gyms);
+
+  const handleGymFilterClick = (slug) => () => {
+    gymFilter.set([...$gymFilter, slug]);
+  };
 </script>
 
 <div class="gyms">
   {#each $gyms as gym}
-    <span class={`badge ${gym.slug}`}>
+    <span class={`badge ${gym.slug}`} on:click={handleGymFilterClick(gym.slug)}>
       {gym.name}
     </span>
   {/each}
 </div>
-<SessionsTable sessionsStore={sessions} />
+<SessionsTable sessionsStore={sessions} {gymFilter} />
 
 <style>
   .gyms {
