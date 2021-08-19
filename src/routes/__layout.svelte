@@ -26,7 +26,6 @@
     margin: auto;
     height: 100%;
     width: 100%;
-    max-width: 800px;
     background: white;
     display: grid;
     grid-template-rows: 55px auto;

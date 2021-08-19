@@ -1,42 +1,34 @@
 <script lang="ts">
-  import { DAYS_OF_WEEK } from "$lib/constants";
+  import { getSessionsByDateTime } from "$lib/stores";
   import dayjs from "dayjs";
-  import { keys } from "lodash";
-  import groupBy from "lodash/groupBy.js";
-  export let sessions: SvelteStore<Session[]>;
 
-  let groupedSessions = groupBy(
-    $sessions,
-    (session) =>
-      `${DAYS_OF_WEEK[dayjs(session.starts_at).day()]}, ${dayjs(
-        session.starts_at
-      ).format("DD/MM/YY")}`
-  );
+  export let sessionsStore: SvelteStore<Session[]>;
+  const sessionsByDateTime = getSessionsByDateTime(sessionsStore);
 </script>
 
 <div class="container">
-  {#each Object.keys(groupedSessions) as date}
+  {#each Object.keys($sessionsByDateTime) as date}
     <div class="column">
       <div class="column-header">
         {date}
       </div>
-      {#each groupedSessions[date] as session}
-        <div
-          class={`session ${session.gym.slug}`}
-          class:warn={session.spaces < 10}
-          class:invalid={session.spaces < 1}
-        >
-          <div>
-            <p class="gym">
-              {session.gym.name}
-            </p>
-            <p>
-              {dayjs(session.starts_at).format("DD/MM/YY hh:mmA")}
-            </p>
-          </div>
-          <span class="spaces">
-            {session.spaces} Spaces
-          </span>
+      {#each Object.keys($sessionsByDateTime[date]) as time}
+        <div class="timeslot">
+          <i>{time.split(" ")[1]}</i>
+          {#each $sessionsByDateTime[date][time] as session}
+            <div
+              class={`session ${session.gym.slug}`}
+              class:warn={session.spaces < 10}
+              class:invalid={session.spaces < 1}
+            >
+              <span class="gym">
+                {session.gym.name}
+              </span>
+              <span class="spaces">
+                {session.spaces} Spaces
+              </span>
+            </div>
+          {/each}
         </div>
       {/each}
     </div>
@@ -56,11 +48,17 @@
   }
   .column {
     flex: 1;
-    min-width: 350px;
+    min-width: 300px;
     margin-right: 15px;
     border-right: solid #f5f5f5 2px;
     padding: 0 15px 0 0;
     overflow-y: scroll;
+  }
+
+  .timeslot {
+    margin: 30px 0;
+    border-top: solid #f5f5f5 2px;
+    padding: 10px 0 0 0;
   }
 
   .column-header {
@@ -69,6 +67,8 @@
     top: 0;
     z-index: 1;
     padding: 5px 0;
+    font-size: 1.1em;
+    font-weight: bold;
   }
 
   .session:hover,
@@ -79,17 +79,16 @@
     content-visibility: auto;
     transition-duration: 0.4s;
     cursor: pointer;
-    margin-top: 1px;
     width: 100%;
     max-width: 400px;
-    margin: 10px 0;
+    margin: 5px 0;
     padding: 10px 15px;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
   }
   .spaces {
-    position: absolute;
-    top: 25%;
-    right: 8px;
+    float: right;
     text-align: right;
     padding-right: 10px;
     font-weight: bold;
@@ -101,6 +100,7 @@
 
   .gym {
     font-weight: bold;
+    flex: 1;
   }
 
   .warn {
