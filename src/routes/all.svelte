@@ -63,7 +63,7 @@
     border: solid #f5f5f5 2px;
     border-radius: 20px;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   h3 {

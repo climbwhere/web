@@ -98,7 +98,6 @@
     background: #a2d2ff9c;
   }
   .session {
-    content-visibility: auto;
     cursor: pointer;
     width: 100%;
     margin: 5px 0;
