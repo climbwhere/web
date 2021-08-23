@@ -4,7 +4,7 @@
 
   export let sessionsStore: SvelteStore<Session[]>;
   export let gymFilter: Writable<[]>;
-  const sessionsByDateTime = getSessionsByDateTime(sessionsStore);
+  const sessionsByDateTime = getSessionsByDateTime(sessionsStore, gymFilter);
 </script>
 
 <div class="container">
