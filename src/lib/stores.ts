@@ -1,5 +1,6 @@
 import { readable, derived, Readable } from "svelte/store";
 import groupBy from "lodash/groupBy.js";
+import isEmpty from "lodash/isEmpty.js";
 import dayjs from "dayjs";
 
 import { getGyms, getLastUpdated, getSessions } from "$lib/api";
@@ -40,14 +41,16 @@ export const createLastUpdatedStore = (initialData: Date) =>
     };
   });
 
-export const getSessionsByDateTime = (
+export const getSessionsTableData = (
   sessionStore: Readable<Session[]>,
   gymFilter: Readable<string[]>
 ) =>
   derived([sessionStore, gymFilter], ([$sessions, $gymFilter]) => {
     let dateTimeSessions = {};
     // filter gyms
-    const ss = $sessions.filter((s) => !$gymFilter.includes(s.gym.slug));
+    const ss = isEmpty($gymFilter)
+      ? $sessions
+      : $sessions.filter((s) => $gymFilter.includes(s.gym.slug));
     // group into date
     const dateSessions = groupBy(ss, (session) => {
       const date = dayjs(session.starts_at);

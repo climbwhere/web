@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { getSessionsByDateTime } from "$lib/stores";
+  import { getSessionsTableData } from "$lib/stores";
   import type { Writable } from "svelte/store";
 
   export let sessionsStore: SvelteStore<Session[]>;
   export let gymFilter: Writable<[]>;
-  const sessionsByDateTime = getSessionsByDateTime(sessionsStore, gymFilter);
+  const sessionsByDateTime = getSessionsTableData(sessionsStore, gymFilter);
 </script>
 
 <div class="container">
@@ -18,20 +18,18 @@
           <div class="timeslot">
             <i>{time.split(" ")[1]}</i>
             {#each $sessionsByDateTime[date][time] as session}
-              {#if !$gymFilter.includes(session.gym.slug)}
-                <div
-                  class={`session ${session.gym.slug}`}
-                  class:warn={session.spaces < 10}
-                  class:invalid={session.spaces < 1}
-                >
-                  <span class="gym">
-                    {session.gym.name}
-                  </span>
-                  <span class="spaces">
-                    {session.spaces} Spaces
-                  </span>
-                </div>
-              {/if}
+              <div
+                class={`session ${session.gym.slug}`}
+                class:warn={session.spaces < 10}
+                class:invalid={session.spaces < 1}
+              >
+                <span class="gym">
+                  {session.gym.name}
+                </span>
+                <span class="spaces">
+                  {session.spaces} Spaces
+                </span>
+              </div>
             {/each}
           </div>
         {/each}

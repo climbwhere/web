@@ -28,11 +28,8 @@
 
 <script lang="ts">
   import SessionsTable from "$lib/components/SessionsTable.svelte";
-  import {
-    createGymsStore,
-    createLastUpdatedStore,
-    createSessionsStore,
-  } from "$lib/stores";
+  import { createGymsStore, createSessionsStore } from "$lib/stores";
+  import { isEmpty } from "lodash";
   import { writable } from "svelte/store";
 
   export let initialData;
@@ -42,13 +39,22 @@
   const gyms = createGymsStore(initialData.gyms);
 
   const handleGymFilterClick = (slug) => () => {
-    gymFilter.set([...$gymFilter, slug]);
+    if ($gymFilter.includes(slug)) {
+      gymFilter.set($gymFilter.filter((g) => g !== slug));
+    } else {
+      gymFilter.set([...$gymFilter, slug]);
+    }
   };
 </script>
 
 <div class="gyms">
   {#each $gyms as gym}
-    <span class={`badge ${gym.slug}`} on:click={handleGymFilterClick(gym.slug)}>
+    <span
+      class={`badge ${gym.slug}`}
+      class:selected={$gymFilter.includes(gym.slug)}
+      class:unselected={!isEmpty($gymFilter) && !$gymFilter.includes(gym.slug)}
+      on:click={handleGymFilterClick(gym.slug)}
+    >
       {gym.name}
     </span>
   {/each}
