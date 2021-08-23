@@ -1,13 +1,36 @@
 <script lang="ts">
   import { getSessionsTableData } from "$lib/stores";
   import type { Writable } from "svelte/store";
+  import scrollWheel from "$lib/actions/scrollWheel";
+  import pannable from "$lib/actions/pannable";
 
+  export let extended = false;
   export let sessionsStore: SvelteStore<Session[]>;
   export let gymFilter: Writable<[]>;
   const sessionsByDateTime = getSessionsTableData(sessionsStore, gymFilter);
+
+  function handleScrollWheel(e) {
+    const { deltaY } = e.detail;
+    extended = deltaY > 0;
+  }
+  function handlePanMove(e) {
+    const { dy, offsetY } = e.detail;
+    if (dy < 0) {
+      extended = true;
+    }
+    if (dy > 0 && offsetY <= 100) {
+      extended = false;
+    }
+  }
 </script>
 
-<div class="container">
+<div
+  class="container"
+  use:pannable
+  on:panmove={handlePanMove}
+  use:scrollWheel
+  on:scrollWheel={handleScrollWheel}
+>
   {#each Object.keys($sessionsByDateTime) as date}
     <div class="column">
       <div class="column-header">
@@ -39,9 +62,6 @@
 </div>
 
 <style>
-  p {
-    margin: 0;
-  }
   .container {
     overflow-y: scroll;
     flex: 1;

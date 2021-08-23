@@ -26,13 +26,13 @@
     margin: auto;
     height: 100%;
     width: 100%;
-    max-width: 910px;
+    max-width: 1000px;
     background: white;
     display: grid;
     grid-template-rows: 55px auto;
   }
   .content {
-    height: 100vh;
+    height: calc(100vh - 55px);
     padding: 10px;
     display: flex;
     flex-direction: column;

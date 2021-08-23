@@ -34,56 +34,111 @@
 
   export let initialData;
   let gymFilter = writable([]);
+  let hideGyms;
 
   const sessions = createSessionsStore(initialData.sessions);
   const gyms = createGymsStore(initialData.gyms);
 
-  const handleGymFilterClick = (slug) => () => {
+  const handleGymFilterClick = (slug) => (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     if ($gymFilter.includes(slug)) {
       gymFilter.set($gymFilter.filter((g) => g !== slug));
     } else {
       gymFilter.set([...$gymFilter, slug]);
     }
   };
+
+  const handleGymFilterSeeAll = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    gymFilter.set([]);
+  };
+
+  const handleGymPickerToggle = (e) => {
+    e.preventDefault();
+    hideGyms = !hideGyms;
+  };
 </script>
 
-<h3>Filter by gym:</h3>
-<div class="gyms">
-  {#each $gyms as gym}
-    <span
-      class={`badge ${gym.slug}`}
-      class:selected={$gymFilter.includes(gym.slug)}
-      class:unselected={!isEmpty($gymFilter) && !$gymFilter.includes(gym.slug)}
-      on:click={handleGymFilterClick(gym.slug)}
-    >
-      {gym.name}
+<div
+  class="gyms-container"
+  class:collapsed={hideGyms}
+  on:click={handleGymPickerToggle}
+>
+  <div class="gym-header">
+    <h3>
+      Gym Filters {#if !isEmpty($gymFilter)}({$gymFilter.length}){/if}
+    </h3>
+    <span class:collapsed={hideGyms} class="expand-icon material-icons">
+      expand_more
     </span>
-  {/each}
-  <span
-    class="badge"
-    class:unselected={isEmpty($gymFilter)}
-    on:click={() => {
-      gymFilter.set([]);
-    }}
-  >
-    See All
+  </div>
+  <span class="gyms" class:collapsed={hideGyms}>
+    {#each $gyms as gym}
+      <span
+        class={`badge ${gym.slug}`}
+        class:selected={$gymFilter.includes(gym.slug)}
+        class:unselected={!isEmpty($gymFilter) &&
+          !$gymFilter.includes(gym.slug)}
+        on:click={handleGymFilterClick(gym.slug)}
+      >
+        {gym.name}
+      </span>
+    {/each}
+    <span
+      class="badge"
+      class:unselected={isEmpty($gymFilter)}
+      on:click={handleGymFilterSeeAll}
+    >
+      See All
+    </span>
   </span>
 </div>
-<SessionsTable sessionsStore={sessions} {gymFilter} />
+<SessionsTable bind:extended={hideGyms} sessionsStore={sessions} {gymFilter} />
 
 <style>
-  .gyms {
-    display: flex;
-    flex-wrap: wrap;
+  .gyms-container {
     background: #f5f5f54f;
     border: solid #f5f5f5 2px;
     border-radius: 20px;
     padding: 10px;
     margin-bottom: 5px;
+    transition: all 0.3s ease-in-out;
+    max-height: 50vh;
+    cursor: pointer;
   }
-
+  .gyms {
+    display: flex;
+    flex-wrap: wrap;
+    transition: all 0.3s ease-in-out;
+    margin-top: 5px;
+  }
+  .gym-header {
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+    align-items: center;
+  }
+  .expand-icon {
+    transition: all 0.3s ease-in-out;
+    transform: rotateZ(180deg);
+    line-height: 30px;
+    font-size: 36px;
+  }
+  .expand-icon.collapsed {
+    transform: rotateZ(0deg);
+  }
+  .gyms.collapsed {
+    opacity: 0;
+  }
+  .gyms-container.collapsed {
+    max-height: 55px;
+  }
   h3 {
-    margin: 10px 0;
+    margin: 0;
+    font-size: 1.1em;
+    flex: 1;
   }
   .dates {
     flex: 1;
