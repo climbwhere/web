@@ -16,7 +16,7 @@
       <div>
         {#each Object.keys($sessionsByDateTime[date]) as time}
           <div class="timeslot">
-            <i>{time.split(" ")[1]}</i>
+            {time.split(" ")[1]}
             {#each $sessionsByDateTime[date][time] as session}
               <div
                 class={`session ${session.gym.slug}`}
@@ -88,7 +88,7 @@
     top: 0;
     z-index: 1;
     padding: 10px 0;
-    font-size: 1.1em;
+    font-size: 0.9em;
     font-weight: bold;
   }
   .session:hover,

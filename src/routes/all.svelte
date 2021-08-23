@@ -47,6 +47,7 @@
   };
 </script>
 
+<h3>Filter by gym:</h3>
 <div class="gyms">
   {#each $gyms as gym}
     <span
@@ -58,6 +59,15 @@
       {gym.name}
     </span>
   {/each}
+  <span
+    class="badge"
+    class:unselected={isEmpty($gymFilter)}
+    on:click={() => {
+      gymFilter.set([]);
+    }}
+  >
+    See All
+  </span>
 </div>
 <SessionsTable sessionsStore={sessions} {gymFilter} />
 
@@ -73,7 +83,7 @@
   }
 
   h3 {
-    margin: 3px 0 0 0;
+    margin: 10px 0;
   }
   .dates {
     flex: 1;
