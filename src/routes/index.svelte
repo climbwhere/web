@@ -21,20 +21,22 @@
 </script>
 
 <div class="container">
-  <h2>Select gym:</h2>
   <div class="gyms">
     {#each $gyms as gym}
       <div class="gym">
         <img
+          class="gym-image"
           src="https://walltopia.com/images/projects/boulderplus/42580221_300701643858582_2333244153237864448_o.jpg"
         />
-        <bold>{gym.name}</bold>
-        {gym.address}
+        <div class="gym-details">
+          <span class={`badge ${gym.slug}`}>{gym.name}</span>
+          {gym.address}
+        </div>
       </div>
     {/each}
   </div>
 </div>
-<div class="bottom-bar">
+<div class="bottom-bar drop-shadow">
   <button on:click={handleAllGymsClick}>See all gyms</button>
 </div>
 
@@ -42,6 +44,8 @@
   .container {
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    padding: 5px;
   }
   .gyms {
     flex: 1;
@@ -56,18 +60,21 @@
     justify-content: flex-start;
     align-items: flex-start;
     width: 50%;
-    border: red solid 1px;
   }
 
-  .gym img {
-    width: 200px;
+  .gym-image {
+    flex: 1;
+    max-width: 200px;
   }
 
-  h2 {
-    margin: 10px 0;
+  .gym-details {
+    flex: 1;
+    height: 100%;
+    padding: 10px;
   }
+
   button {
-    min-width: 400px;
+    min-width: 500px;
     max-width: 600px;
   }
 
@@ -82,14 +89,14 @@
     align-items: center;
     justify-content: center;
   }
-
-  @media only screen and (max-width: 460px) {
-    button {
-      min-width: 100%;
-    }
-
+  @media only screen and (max-width: 900px) {
     .gym {
       width: 100%;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    button {
+      min-width: 100%;
     }
   }
 </style>
