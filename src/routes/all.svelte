@@ -61,43 +61,54 @@
   };
 </script>
 
-<div
-  class="gyms-container"
-  class:collapsed={hideGyms}
-  on:click={handleGymPickerToggle}
->
-  <div class="gym-header">
-    <h3>
-      Gym Filters {#if !isEmpty($gymFilter)}({$gymFilter.length}){/if}
-    </h3>
-    <span class:collapsed={hideGyms} class="expand-icon material-icons">
-      expand_more
+<div class="container">
+  <div
+    class="gyms-container"
+    class:collapsed={hideGyms}
+    on:click={handleGymPickerToggle}
+  >
+    <div class="gym-header">
+      <h3>
+        Gym Filters {#if !isEmpty($gymFilter)}({$gymFilter.length}){/if}
+      </h3>
+      <span class:collapsed={hideGyms} class="expand-icon material-icons">
+        expand_more
+      </span>
+    </div>
+    <span class="gyms" class:collapsed={hideGyms}>
+      {#each $gyms as gym}
+        <span
+          class={`badge ${gym.slug}`}
+          class:selected={$gymFilter.includes(gym.slug)}
+          class:unselected={!isEmpty($gymFilter) &&
+            !$gymFilter.includes(gym.slug)}
+          on:click={handleGymFilterClick(gym.slug)}
+        >
+          {gym.name}
+        </span>
+      {/each}
+      <span
+        class="badge"
+        class:unselected={isEmpty($gymFilter)}
+        on:click={handleGymFilterSeeAll}
+      >
+        See All
+      </span>
     </span>
   </div>
-  <span class="gyms" class:collapsed={hideGyms}>
-    {#each $gyms as gym}
-      <span
-        class={`badge ${gym.slug}`}
-        class:selected={$gymFilter.includes(gym.slug)}
-        class:unselected={!isEmpty($gymFilter) &&
-          !$gymFilter.includes(gym.slug)}
-        on:click={handleGymFilterClick(gym.slug)}
-      >
-        {gym.name}
-      </span>
-    {/each}
-    <span
-      class="badge"
-      class:unselected={isEmpty($gymFilter)}
-      on:click={handleGymFilterSeeAll}
-    >
-      See All
-    </span>
-  </span>
+  <SessionsTable
+    bind:extended={hideGyms}
+    sessionsStore={sessions}
+    {gymFilter}
+  />
 </div>
-<SessionsTable bind:extended={hideGyms} sessionsStore={sessions} {gymFilter} />
 
 <style>
+  .container {
+    height: calc(100vh - 55px);
+    padding: 10px;
+    flex: 1;
+  }
   .gyms-container {
     background: #f5f5f54f;
     border: solid #f5f5f5 2px;
@@ -113,6 +124,7 @@
     flex-wrap: wrap;
     transition: all 0.3s ease-in-out;
     margin-top: 5px;
+    content-visibility: auto;
   }
   .gym-header {
     display: flex;

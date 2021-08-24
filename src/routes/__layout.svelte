@@ -33,9 +33,8 @@
   }
   .content {
     height: calc(100vh - 55px);
-    padding: 10px;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
+    overflow: hidden;
   }
 </style>

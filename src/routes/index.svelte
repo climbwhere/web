@@ -21,8 +21,8 @@
 </script>
 
 <div class="container">
+  <h2>Select gym:</h2>
   <div class="gyms">
-    <h2>Select gym:</h2>
     {#each $gyms as gym}
       <div class="gym">
         <img
@@ -33,6 +33,8 @@
       </div>
     {/each}
   </div>
+</div>
+<div class="bottom-bar">
   <button on:click={handleAllGymsClick}>See all gyms</button>
 </div>
 
@@ -44,8 +46,7 @@
   .gyms {
     flex: 1;
     display: flex;
-    flex-direction: column;
-    padding: 10px 0;
+    flex-wrap: wrap;
     margin-bottom: 10px;
   }
 
@@ -54,6 +55,8 @@
     margin-bottom: 20px;
     justify-content: flex-start;
     align-items: flex-start;
+    width: 50%;
+    border: red solid 1px;
   }
 
   .gym img {
@@ -64,7 +67,29 @@
     margin: 10px 0;
   }
   button {
+    min-width: 400px;
+    max-width: 600px;
+  }
+
+  .bottom-bar {
     position: sticky;
-    bottom: 10px;
+    bottom: 0px;
+    margin: auto;
+    background: white;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media only screen and (max-width: 460px) {
+    button {
+      min-width: 100%;
+    }
+
+    .gym {
+      width: 100%;
+    }
   }
 </style>

@@ -64,7 +64,7 @@
 <style>
   .container {
     overflow-y: scroll;
-    flex: 1;
+    padding-bottom: 50px;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -73,7 +73,7 @@
   .column {
     content-visibility: auto;
     flex: 1;
-    margin-top: 15px;
+    margin-top: 5px;
     min-width: 33%;
     max-width: 450px;
     padding: 10px;
@@ -116,6 +116,7 @@
     background: #a2d2ff9c;
   }
   .session {
+    content-visibility: auto;
     cursor: pointer;
     width: 100%;
     margin: 5px 0;
