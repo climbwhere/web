@@ -20,32 +20,51 @@
   };
 </script>
 
-<h2>Select gym:</h2>
-<div class="gyms">
-  {#each $gyms as gym}
-    <span class={`badge ${gym.slug}`}>
-      {gym.name}
-    </span>
-  {/each}
+<div class="container">
+  <div class="gyms">
+    <h2>Select gym:</h2>
+    {#each $gyms as gym}
+      <div class="gym">
+        <img
+          src="https://walltopia.com/images/projects/boulderplus/42580221_300701643858582_2333244153237864448_o.jpg"
+        />
+        <bold>{gym.name}</bold>
+        {gym.address}
+      </div>
+    {/each}
+  </div>
+  <button on:click={handleAllGymsClick}>See all gyms</button>
 </div>
-<b> or </b>
-<button on:click={handleAllGymsClick}>See all gyms</button>
 
 <style>
-  .gyms {
+  .container {
     display: flex;
-    flex-wrap: wrap;
-    background: #f5f5f54f;
-    border: solid #f5f5f5 2px;
-    border-radius: 20px;
-    padding: 10px;
+    flex-direction: column;
+  }
+  .gyms {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
     margin-bottom: 10px;
+  }
+
+  .gym {
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .gym img {
+    width: 200px;
   }
 
   h2 {
     margin: 10px 0;
   }
   button {
-    margin-left: 5px;
+    position: sticky;
+    bottom: 10px;
   }
 </style>
