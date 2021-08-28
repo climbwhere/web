@@ -24,13 +24,10 @@
   <div class="gyms">
     {#each $gyms as gym}
       <div class="gym">
-        <img
-          class="gym-image"
-          src="https://walltopia.com/images/projects/boulderplus/42580221_300701643858582_2333244153237864448_o.jpg"
-        />
+        <img class="gym-image" src={gym["image_url"]} />
         <div class="gym-details">
-          <span class={`badge ${gym.slug}`}>{gym.name}</span>
-          {gym.address}
+          <h3>{gym.name}</h3>
+          {gym.website_url}
         </div>
       </div>
     {/each}
@@ -56,15 +53,25 @@
 
   .gym {
     display: flex;
-    margin-bottom: 20px;
+    margin: 10px;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 50%;
+    padding: 15px 10px;
+    border-radius: 10px;
+    border: solid #f5f5f5 2px;
+    width: 100%;
   }
 
   .gym-image {
     flex: 1;
-    max-width: 200px;
+    max-width: 300px;
+    height: 200px;
+    object-fit: cover;
+    overflow: hidden;
+  }
+
+  h3 {
+    margin: 0;
   }
 
   .gym-details {
