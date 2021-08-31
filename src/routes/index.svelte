@@ -1,109 +1,194 @@
 <script context="module" lang="ts">
-  import { getGyms } from "$lib/api";
+  import {
+    getGyms,
+    getLastUpdated,
+    getScraperStatus,
+    getSessions,
+  } from "$lib/api";
 
   export async function load({ page, fetch, session, context }) {
-    const gyms = await getGyms();
-    return { props: { initialData: gyms } };
+    const res = await Promise.all([
+      getGyms(),
+      getSessions(),
+      getLastUpdated(),
+      getScraperStatus(),
+    ]);
+    return {
+      props: {
+        initialData: {
+          gyms: res[0],
+          sessions: res[1],
+          lastUpdated: res[2],
+          scraperStatus: res[3],
+        },
+      },
+    };
   }
 </script>
 
 <script lang="ts">
-  import { goto } from "$app/navigation";
-  import { createGymsStore } from "$lib/stores";
+  import SessionsTable from "$lib/components/SessionsTable.svelte";
+  import { createGymsStore, createSessionsStore } from "$lib/stores";
+  import { isEmpty } from "lodash";
+  import { writable } from "svelte/store";
+
   export let initialData;
+  let gymFilter = writable([]);
+  let hideGyms;
 
-  const gyms = createGymsStore(initialData);
+  const sessions = createSessionsStore(initialData.sessions);
+  const gyms = createGymsStore(initialData.gyms);
 
-  const handleAllGymsClick = (e) => {
+  const handleGymFilterClick = (slug) => (e) => {
     e.preventDefault();
-    goto("/all");
+    e.stopPropagation();
+    if ($gymFilter.includes(slug)) {
+      gymFilter.set($gymFilter.filter((g) => g !== slug));
+    } else {
+      gymFilter.set([...$gymFilter, slug]);
+    }
+  };
+
+  const handleGymFilterSeeAll = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    gymFilter.set([]);
+  };
+
+  const handleGymPickerToggle = (e) => {
+    e.preventDefault();
+    hideGyms = !hideGyms;
   };
 </script>
 
 <div class="container">
-  <div class="gyms">
-    {#each $gyms as gym}
-      <div class="gym">
-        <img class="gym-image" src={gym["image_url"]} />
-        <div class="gym-details">
-          <h3>{gym.name}</h3>
-          {gym.website_url}
-        </div>
-      </div>
-    {/each}
+  <div
+    class="gyms-container"
+    class:collapsed={hideGyms}
+    on:click={handleGymPickerToggle}
+  >
+    <div class="gym-header">
+      <h3>
+        Gym Filters {#if !isEmpty($gymFilter)}({$gymFilter.length}){/if}
+      </h3>
+      <span class:collapsed={hideGyms} class="expand-icon material-icons">
+        expand_more
+      </span>
+    </div>
+    <span class="gyms" class:collapsed={hideGyms}>
+      {#each $gyms as gym}
+        <span
+          class={`badge ${gym.slug}`}
+          class:selected={$gymFilter.includes(gym.slug)}
+          class:unselected={!isEmpty($gymFilter) &&
+            !$gymFilter.includes(gym.slug)}
+          on:click={handleGymFilterClick(gym.slug)}
+        >
+          {gym.name}
+        </span>
+      {/each}
+      <span
+        class="badge"
+        class:unselected={isEmpty($gymFilter)}
+        on:click={handleGymFilterSeeAll}
+      >
+        See All
+      </span>
+    </span>
   </div>
-</div>
-<div class="bottom-bar drop-shadow">
-  <button on:click={handleAllGymsClick}>See all gyms</button>
+  <SessionsTable
+    bind:extended={hideGyms}
+    sessionsStore={sessions}
+    {gymFilter}
+  />
 </div>
 
 <style>
   .container {
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    padding: 5px;
+    height: calc(100vh - 55px);
+    padding: 10px;
+    flex: 1;
+  }
+  .gyms-container {
+    background: #f5f5f54f;
+    border: solid #f5f5f5 2px;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease-in-out;
+    max-height: 50vh;
+    cursor: pointer;
   }
   .gyms {
-    flex: 1;
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 10px;
+    transition: all 0.3s ease-in-out;
+    margin-top: 5px;
+    content-visibility: auto;
   }
-
-  .gym {
+  .gym-header {
     display: flex;
-    margin: 10px;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 15px 10px;
-    border-radius: 10px;
-    border: solid #f5f5f5 2px;
+    flex-flow: row;
     width: 100%;
+    align-items: center;
   }
-
-  .gym-image {
-    flex: 1;
-    max-width: 300px;
-    height: 200px;
-    object-fit: cover;
-    overflow: hidden;
+  .expand-icon {
+    transition: all 0.3s ease-in-out;
+    transform: rotateZ(180deg);
+    line-height: 30px;
+    font-size: 36px;
   }
-
+  .expand-icon.collapsed {
+    transform: rotateZ(0deg);
+  }
+  .gyms.collapsed {
+    opacity: 0;
+  }
+  .gyms-container.collapsed {
+    max-height: 55px;
+  }
   h3 {
     margin: 0;
-  }
-
-  .gym-details {
+    font-size: 1.1em;
     flex: 1;
-    height: 100%;
-    padding: 10px;
   }
-
-  button {
-    min-width: 500px;
-    max-width: 600px;
-  }
-
-  .bottom-bar {
-    position: sticky;
-    bottom: 0px;
-    margin: auto;
-    background: white;
+  .dates {
+    flex: 1;
+    min-height: 80px;
+    max-height: 80px;
+    overflow-x: scroll;
     width: 100%;
-    padding: 10px;
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px 0;
+    border: solid red 1px;
+  }
+  .date-box {
+    flex: 1;
+    min-width: 60px;
+    max-width: 60px;
+    min-height: 60px;
+    max-height: 60px;
+    padding: 5px;
+    border: solid 2px #f5f5f5;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    margin: 0 5px;
+    background: white;
+    border-radius: 50%;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    -webkit-user-select: none;
   }
-  @media only screen and (max-width: 900px) {
-    .gym {
-      width: 100%;
-    }
+  .date-box.selected {
+    border: solid 3px #4361ee;
   }
-  @media only screen and (max-width: 600px) {
-    button {
-      min-width: 100%;
-    }
+  .date-title {
+    font-weight: bold;
+    font-size: 9px;
   }
 </style>
