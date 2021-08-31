@@ -13,7 +13,7 @@ const config = {
     target: "#svelte",
     vite: {
       optimizeDeps: {
-        include: ["lodash", "dayjs"],
+        exclude: ["lodash", "dayjs"],
       },
     },
   },
