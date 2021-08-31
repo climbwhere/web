@@ -4,7 +4,7 @@ import isEmpty from "lodash/isEmpty.js";
 import dayjs from "dayjs";
 
 import { getGyms, getLastUpdated, getSessions } from "$lib/api";
-import { DAYS_OF_WEEK } from "./constants";
+import { DAYS_OF_WEEK, MONTHS } from "./constants";
 
 const REFRESH_INTERVAL = 60000; // 1 minute interval
 
@@ -54,7 +54,9 @@ export const getSessionsTableData = (
     // group into date
     const dateSessions = groupBy(ss, (session) => {
       const date = dayjs(session.starts_at);
-      return `${DAYS_OF_WEEK[date.day()]}, ${date.format("DD/MM/YY")}`;
+      return `${DAYS_OF_WEEK[date.day()]}, ${date.format("D")} ${
+        MONTHS[date.month()]
+      } `;
     });
     // group into time
     Object.keys(dateSessions).forEach((date) => {

@@ -39,7 +39,7 @@
       <div>
         {#each Object.keys($sessionsByDateTime[date]) as time}
           <div class="timeslot">
-            {time.split(" ")[1]}
+            <span class="time-label">{time.split(" ")[1]}</span>
             {#each $sessionsByDateTime[date][time] as session}
               <div
                 class={`session ${session.gym.slug}`}
@@ -71,12 +71,12 @@
     flex-wrap: wrap;
   }
   .column {
-    content-visibility: auto;
     flex: 1;
     margin-top: 5px;
     min-width: 33%;
     max-width: 450px;
-    padding: 10px;
+    padding: 5px;
+    border-radius: 10px;
   }
 
   @media only screen and (max-width: 800px) {
@@ -95,21 +95,26 @@
   }
 
   .timeslot {
-    padding: 5px 0;
+    padding: 5px 5px;
+    border: solid 2px #f5f5f5;
     border-radius: 10px;
+    margin: 10px 0;
   }
 
   .timeslot:hover {
-    background: aliceblue;
+    border: solid 2px #4361ee;
   }
   .column-header {
-    background: white;
+    background: black;
+    color: white;
     position: sticky;
     top: 0;
     z-index: 1;
-    padding: 10px 0;
+    padding: 10px;
     font-size: 0.9em;
     font-weight: bold;
+    margin-bottom: 10px;
+    border-radius: 10px 10px 0 0;
   }
   .session:hover,
   .session:active {
@@ -119,7 +124,7 @@
     content-visibility: auto;
     cursor: pointer;
     width: 100%;
-    margin: 5px 0;
+    margin: 3px 0;
     padding: 5px 10px;
     border-radius: 5px;
     display: flex;
@@ -150,5 +155,10 @@
     text-decoration: line-through;
     opacity: 0.6;
     background: #f4454565;
+  }
+
+  .time-label {
+    font-size: 0.8em;
+    font-weight: bold;
   }
 </style>

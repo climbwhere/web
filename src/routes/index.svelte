@@ -124,7 +124,6 @@
     flex-wrap: wrap;
     transition: all 0.3s ease-in-out;
     margin-top: 5px;
-    content-visibility: auto;
   }
   .gym-header {
     display: flex;
