@@ -29,7 +29,7 @@
 <script lang="ts">
   import SessionsTable from "$lib/components/SessionsTable.svelte";
   import { createGymsStore, createSessionsStore } from "$lib/stores";
-  import { isEmpty } from "lodash";
+  import isEmpty from "lodash/isEmpty";
   import { writable } from "svelte/store";
 
   export let initialData;
