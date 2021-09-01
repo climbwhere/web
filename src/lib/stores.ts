@@ -3,7 +3,7 @@ import groupBy from "lodash/groupBy.js";
 import isEmpty from "lodash/isEmpty.js";
 import dayjs from "dayjs";
 
-import { getGyms, getLastUpdated, getSessions } from "$lib/api";
+import { getGyms, getLastUpdated, getSessions, getSnapshot } from "$lib/api";
 import { DAYS_OF_WEEK, MONTHS } from "./constants";
 
 const REFRESH_INTERVAL = 60000; // 1 minute interval
@@ -34,6 +34,17 @@ export const createLastUpdatedStore = (initialData: Date) =>
   readable<Date>(initialData, (set) => {
     const refresherInterval = setInterval(
       async () => getLastUpdated().then(set),
+      REFRESH_INTERVAL
+    );
+    return () => {
+      clearInterval(refresherInterval);
+    };
+  });
+
+export const createScraperStatusStore = (initialData: Snapshot) =>
+  readable<Snapshot>(initialData, (set) => {
+    const refresherInterval = setInterval(
+      async () => getSnapshot().then(set),
       REFRESH_INTERVAL
     );
     return () => {

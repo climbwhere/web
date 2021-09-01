@@ -27,16 +27,10 @@ export const getLastUpdated = async () =>
       throw error;
     });
 
-export const getScraperStatus = async () =>
+export const getSnapshot = async () =>
   fetch(API_URL + "/snapshots/latest")
     .then((r) => r.json())
-    .then(
-      ({
-        data: {
-          data: { sessions },
-        },
-      }) => sessions
-    )
+    .then(({ data }) => data as Snapshot)
     .catch((error) => {
       console.error(error);
       throw error;

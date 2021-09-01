@@ -1,25 +1,14 @@
 <script context="module" lang="ts">
-  import {
-    getGyms,
-    getLastUpdated,
-    getScraperStatus,
-    getSessions,
-  } from "$lib/api";
+  import { getGyms, getSnapshot, getSessions } from "$lib/api";
 
   export async function load({ page, fetch, session, context }) {
-    const res = await Promise.all([
-      getGyms(),
-      getSessions(),
-      getLastUpdated(),
-      getScraperStatus(),
-    ]);
+    const res = await Promise.all([getGyms(), getSessions(), getSnapshot()]);
     return {
       props: {
         initialData: {
           gyms: res[0],
           sessions: res[1],
-          lastUpdated: res[2],
-          scraperStatus: res[3],
+          scraperStatus: res[2],
         },
       },
     };
@@ -28,9 +17,17 @@
 
 <script lang="ts">
   import SessionsTable from "$lib/components/SessionsTable.svelte";
-  import { createGymsStore, createSessionsStore } from "$lib/stores";
+  import {
+    createGymsStore,
+    createSessionsStore,
+    createScraperStatusStore,
+  } from "$lib/stores";
   import isEmpty from "lodash/isEmpty.js";
+  import dayjs from "dayjs";
+  import relativeTimePlugin from "dayjs/plugin/relativeTime.js";
   import { writable } from "svelte/store";
+
+  dayjs.extend(relativeTimePlugin);
 
   export let initialData;
   let gymFilter = writable([]);
@@ -38,6 +35,7 @@
 
   const sessions = createSessionsStore(initialData.sessions);
   const gyms = createGymsStore(initialData.gyms);
+  const scraperStatus = createScraperStatusStore(initialData.scraperStatus);
 
   const handleGymFilterClick = (slug) => (e) => {
     e.preventDefault();
@@ -96,6 +94,18 @@
       </span>
     </span>
   </div>
+
+  <span class="status-label" class:hidden={hideGyms}>
+    <span
+      class="status-icon material-icons"
+      aria-label="Status icon"
+      class:error={$scraperStatus.has_errors}
+      >{$scraperStatus.has_errors ? "report_problem" : "check_circle"}</span
+    >
+    {`Last updated ${dayjs($scraperStatus.created_at).fromNow()} ${
+      $scraperStatus.has_errors ? "with" : "without"
+    } errors`}
+  </span>
   <SessionsTable
     bind:extended={hideGyms}
     sessionsStore={sessions}
@@ -106,7 +116,7 @@
 <style>
   .container {
     height: calc(100vh - 55px);
-    padding: 10px;
+    padding: 5px;
     flex: 1;
   }
   .gyms-container {
@@ -189,5 +199,23 @@
   .date-title {
     font-weight: bold;
     font-size: 9px;
+  }
+  .status-label {
+    font-size: 13px;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+  }
+  .status-icon {
+    color: mediumseagreen;
+    font-size: 14px;
+    margin-right: 3px;
+  }
+  .status-icon.error {
+    color: orange;
+  }
+
+  .hidden {
+    display: none;
   }
 </style>

@@ -21,3 +21,12 @@ type Session = {
   ends_at: Date;
   gym: Gym;
 };
+
+type Snapshot = {
+  has_errors: boolean;
+  created_at: Date;
+  data: {
+    sessions: [string: { data: Session[]; error?: { message: string } }];
+  };
+  id: string;
+};
