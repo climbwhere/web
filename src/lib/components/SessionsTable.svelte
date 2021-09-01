@@ -1,12 +1,12 @@
 <script lang="ts">
   import { getSessionsTableData } from "$lib/stores";
-  import type { Writable } from "svelte/store";
+  import type { Readable } from "svelte/store";
   import scrollWheel from "$lib/actions/scrollWheel";
   import pannable from "$lib/actions/pannable";
 
   export let extended = false;
-  export let sessionsStore: SvelteStore<Session[]>;
-  export let gymFilter: Writable<[]>;
+  export let sessionsStore: Readable<Session[]>;
+  export let gymFilter: SvelteStore<string[]>;
   const sessionsByDateTime = getSessionsTableData(sessionsStore, gymFilter);
 
   function handleScrollWheel(e) {

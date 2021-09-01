@@ -30,7 +30,7 @@
   dayjs.extend(relativeTimePlugin);
 
   export let initialData;
-  let gymFilter = writable([]);
+  let gymFilter = writable<string[]>([]);
   let hideGyms;
 
   const sessions = createSessionsStore(initialData.sessions);
