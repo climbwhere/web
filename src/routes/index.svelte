@@ -104,7 +104,10 @@
     >
     {`Last updated ${dayjs($scraperStatus.created_at).fromNow()} ${
       $scraperStatus.has_errors ? "with" : "without"
-    } errors`}
+    } errors.`}
+    See something wrong?
+    <a sveltekit:prefetch href="/feedback">Submit Feedback.</a>
+    <a href="/about">About.</a>
   </span>
   <SessionsTable
     bind:extended={hideGyms}
@@ -214,8 +217,10 @@
   .status-icon.error {
     color: orange;
   }
-
   .hidden {
     display: none;
+  }
+  a {
+    margin-left: 5px;
   }
 </style>
