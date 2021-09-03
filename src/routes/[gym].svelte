@@ -19,7 +19,6 @@
 <script lang="ts">
   import SessionsTable from "$lib/components/SessionsTable.svelte";
   import { createSessionsStore } from "$lib/stores";
-  import copy from "$lib/actions/copy";
   import { writable } from "svelte/store";
 
   export let gym: Gym, sessions: Session[];
@@ -41,7 +40,7 @@
       </p>
       <p>
         <span class="material-icons">phone</span>
-        <span class="copy" use:copy>+65 62827530</span>
+        <span>+65 62827530</span>
       </p>
       <p>contact@boulderplusclimbing.com</p>
       <button>Instagram</button>
