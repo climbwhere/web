@@ -2,7 +2,7 @@ export default function scrollWheel(node) {
   function handleScrollWheel(e) {
     node.dispatchEvent(
       new CustomEvent("scrollWheel", {
-        detail: { deltaY: e.deltaY },
+        detail: { deltaY: e.deltaY, offsetY: node.scrollTop },
       })
     );
   }

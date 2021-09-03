@@ -11,12 +11,14 @@
   const sessionsByDateTime = getSessionsTableData(sessionsStore, gymFilter);
 
   function handleScrollWheel(e) {
-    const { deltaY } = e.detail;
-    extended = deltaY > 0;
+    const { deltaY, offsetY } = e.detail;
+    if (offsetY <= 100) {
+      extended = deltaY > 0;
+    }
   }
   function handlePanMove(e) {
     const { dy, offsetY } = e.detail;
-    if (dy < 0) {
+    if (dy < 0 && offsetY <= 100) {
       extended = true;
     }
     if (dy > 0 && offsetY <= 100) {
