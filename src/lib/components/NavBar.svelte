@@ -1,5 +1,5 @@
 <script>
-  import { goto } from "$app/navigation";
+  import { goto, prefetch } from "$app/navigation";
   const onLogoClick = () => {
     goto("/");
   };
@@ -7,7 +7,12 @@
 
 <nav>
   <div class="left">
-    <div on:click={onLogoClick} class="logo nav-item" aria-label="Check Slots">
+    <div
+      on:click={onLogoClick}
+      on:mouseenter={() => prefetch("/")}
+      class="logo nav-item"
+      aria-label="Check Slots"
+    >
       <img
         class="logo-image"
         alt="logo"

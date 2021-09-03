@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getSessionsTableData } from "$lib/stores";
   import type { Readable } from "svelte/store";
+  import { goto, prefetch } from "$app/navigation";
   import scrollWheel from "$lib/actions/scrollWheel";
   import pannable from "$lib/actions/pannable";
 
@@ -22,6 +23,13 @@
       extended = false;
     }
   }
+
+  const handleSessionClick = (gymSlug: string) => () => {
+    goto(gymSlug);
+  };
+  const handleSessionMouseDown = (gymSlug: string) => () => {
+    prefetch(gymSlug);
+  };
 </script>
 
 <div
@@ -45,6 +53,8 @@
                 class={`session ${session.gym.slug}`}
                 class:warn={session.spaces < 10}
                 class:invalid={session.spaces < 1}
+                on:click={handleSessionClick(session.gym.slug)}
+                on:mousedown={handleSessionMouseDown(session.gym.slug)}
               >
                 <span class="gym">
                   {session.gym.name}
