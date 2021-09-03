@@ -86,7 +86,7 @@
   .column {
     flex: 1;
     margin-top: 5px;
-    min-width: 33%;
+    min-width: 50%;
     max-width: 450px;
     padding: 5px;
     border-radius: 10px;
