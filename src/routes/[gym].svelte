@@ -35,17 +35,25 @@
       <h1>{gym.name}</h1>
       <p>
         <span class="material-icons">home</span>
-        The Aperia Mall, 12 Kallang Ave, #03-17, 339511
-        <a href={gym.map_url}>Directions</a>
+
+        <a href={gym.map_url}>The Aperia Mall, 12 Kallang Ave, #03-17, 339511</a
+        >
       </p>
       <p>
         <span class="material-icons">phone</span>
         <span>+65 62827530</span>
       </p>
       <p>contact@boulderplusclimbing.com</p>
-      <button>Instagram</button>
-      <button>Website</button>
-      <button class={gym.slug}>Booking Site -></button>
+      <button on:click={() => window.open(gym.instagram_url, "_blank")}
+        >Instagram</button
+      >
+      <button on:click={() => window.open(gym.website_url, "_blank")}
+        >Website</button
+      >
+      <button
+        on:click={() => window.open(gym.booking_url, "_blank")}
+        class={gym.slug}>Booking Site -></button
+      >
     </div>
     <div class="slots">
       <h2>Slots</h2>
@@ -74,6 +82,11 @@
   }
 
   .content-container {
+    padding: 10px;
+  }
+
+  h1 {
+    margin: 15px 0 0 0;
   }
 
   p {
