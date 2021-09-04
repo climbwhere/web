@@ -12,6 +12,7 @@
     }
     return {
       props: { gym, sessions },
+      status: gym != null ? 200 : 404,
     };
   }
 </script>
@@ -73,8 +74,6 @@
       />
     </div>
   </div>
-{:else}
-  NOT FOUND
 {/if}
 
 <style>
