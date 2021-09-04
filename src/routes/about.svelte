@@ -9,17 +9,23 @@
     bouldering gyms in Singapore.
   </p>
   <p>
-    With many new gyms opening up, and the surging demand for climbing gym slots
-    makes looking for open/less-crowded timeslots a very arduous process. We
-    made this tool to help with that.
+    With many new gyms opening up and the surging demand for climbing, looking
+    for open/less-crowded timeslots has become a very arduous process. We made
+    this site to help with that.
   </p>
-  <h3>Where our data is from</h3>
+  <h3>Where the data is from</h3>
   <p>
     We retrieve gym slot information directly from the respective gyms' websites
-    every 2 minutes or so. Data is not guaranteed to be accurate or up to date.
-    Check data health here.
+    every 2 minutes or so.
   </p>
-  <small>© {dayjs().year()} Climbwhere · All rights reserved.</small>
+  <p>
+    From time to time, changes are made to the booking systems of climbing gyms.
+    This can affect the accuracy of our scrapers. Data is not guaranteed to be
+    accurate or up to date.
+  </p>
+  <p>
+    <small>© {dayjs().year()} Climbwhere · All rights reserved.</small>
+  </p>
 </div>
 
 <style>
@@ -27,7 +33,7 @@
     overflow-y: scroll;
     max-width: 600px;
     width: 100%;
-    height: 100%;
+    heirht: 100%;
     display: flex;
     flex-flow: column;
     padding: 0 10px 50px 10px;
@@ -40,5 +46,9 @@
 
   h3 {
     margin: 15px 0 0 0;
+  }
+
+  small {
+    color: rgb(201, 201, 201);
   }
 </style>
