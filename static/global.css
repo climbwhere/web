@@ -71,7 +71,7 @@ button {
   font-weight: bold;
   border-radius: 10px;
   transition-duration: 0.3s;
-  margin-bottom: 5px;
+  margin: 5px 0;
   cursor: pointer;
 }
 
