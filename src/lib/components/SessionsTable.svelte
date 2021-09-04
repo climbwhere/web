@@ -27,10 +27,10 @@
   }
 
   const handleSessionClick = (gymSlug: string) => () => {
-    goto(gymSlug);
+    goto("/gym/" + gymSlug);
   };
   const handleSessionMouseDown = (gymSlug: string) => () => {
-    prefetch(gymSlug);
+    prefetch("/gym/" + gymSlug);
   };
 </script>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
-  import isEmpty from "lodash/isEmpty";
+  import isEmpty from "lodash/isEmpty.js";
   import { postReport } from "$lib/api";
   let message = "",
     error = "",
