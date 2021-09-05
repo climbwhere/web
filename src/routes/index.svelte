@@ -206,21 +206,15 @@
   .status-label {
     font-size: 13px;
     padding-left: 5px;
-    display: flex;
-    align-items: center;
   }
   .status-icon {
     color: mediumseagreen;
-    font-size: 14px;
-    margin-right: 3px;
+    font-size: 13px;
   }
   .status-icon.error {
     color: orange;
   }
   .hidden {
     display: none;
-  }
-  a {
-    margin-left: 5px;
   }
 </style>

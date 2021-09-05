@@ -53,7 +53,6 @@
             {#each $sessionsByDateTime[date][time] as session}
               <div
                 class={`session ${session.gym.slug}`}
-                class:warn={session.spaces < 10}
                 class:invalid={session.spaces < 1}
                 on:click={handleSessionClick(session.gym.slug)}
                 on:mousedown={handleSessionMouseDown(session.gym.slug)}
@@ -61,7 +60,11 @@
                 <span class="gym">
                   {session.gym.name}
                 </span>
-                <span class="spaces">
+                <span
+                  class="spaces"
+                  class:warn={session.spaces < 10}
+                  class:invalid={session.spaces < 1}
+                >
                   {session.spaces} Spaces
                 </span>
               </div>
@@ -89,7 +92,7 @@
     min-width: 50%;
     max-width: 450px;
     padding: 5px;
-    border-radius: 10px;
+    border-radius: 5px;
   }
 
   @media only screen and (max-width: 800px) {
@@ -110,7 +113,7 @@
   .timeslot {
     padding: 5px 5px;
     border: solid 2px #f5f5f5;
-    border-radius: 10px;
+    border-radius: 5px;
     margin: 10px 0;
   }
 
