@@ -1,10 +1,9 @@
 import { build, files, timestamp } from "$service-worker";
 
-const CACHE_NAME = "climbwhere-sg-cache-v4";
+const CACHE_NAME = `${timestamp}-climbwhere-sg`;
 
 self.addEventListener("install", function (event) {
-  console.log("Install");
-  caches.open(CACHE_NAME).then((cache) => cache.addAll(files));
+  caches.open(CACHE_NAME).then((cache) => cache.addAll([...build, ...files]));
   // purge older caches
   caches.keys().then(function (cacheNames) {
     return Promise.all(
@@ -15,8 +14,4 @@ self.addEventListener("install", function (event) {
         })
     );
   });
-});
-
-self.addEventListener("activate", function (event) {
-  console.log("Activate");
 });
