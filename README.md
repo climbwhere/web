@@ -1,20 +1,26 @@
-# create-svelte
+<img src="https://user-images.githubusercontent.com/8543107/121490522-afec1a80-ca07-11eb-88fa-7d8210c54670.png" />
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
+# Climbwhere.sg - Timely climbing gym booking information for Singapore. 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f24978be-65f1-41ef-9743-0691952d8a68/deploy-status)](https://app.netlify.com/sites/elastic-franklin-9a8023/deploys)
 
-## Creating a project
+This website shows aggregated climbing gym slot information from multiple bouldering gyms in Singapore.
 
-If you're seeing this, you've probably already done this step. Congrats!
+With many new gyms opening up and the surging demand for climbing, looking for open/less-crowded timeslots has become a very arduous process. We made this site to help with that.
 
-```bash
-# create a new project in the current directory
-npm init svelte@next
+## Supported gyms
 
-# create a new project in my-app
-npm init svelte@next my-app
-```
+* Boulder +
+* BFF Climb
+* Oyeyo
+* Z-Vertigo
+* ~~Lighthouse~~ (Removed by owners' request).
+* Boulder World
+* Fit Bloc
+* The Rock School
+* Boulder Planet
+* Boulder Movement (Downtown, Rochor, Tai Seng)
 
-> Note: the `@next` is temporary
+
 
 ## Developing
 
