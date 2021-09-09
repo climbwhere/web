@@ -2,6 +2,7 @@
   "name": "climbwhere-sg",
   "version": "1.0.0",
   "scripts": {
+    "start": "node build/index.js",
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
     "preview": "svelte-kit preview",
@@ -12,6 +13,7 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-netlify": "^1.0.0-next.27",
+    "@sveltejs/adapter-node": "^1.0.0-next.46",
     "@sveltejs/kit": "next",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
     "@typescript-eslint/parser": "^4.19.0",
