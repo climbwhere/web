@@ -100,27 +100,9 @@
   .column {
     flex: 1;
     margin-top: 5px;
-    min-width: 50%;
-    max-width: 450px;
     padding: 5px;
     border-radius: 5px;
   }
-
-  @media only screen and (max-width: 800px) {
-    .column {
-      width: 100%;
-      min-width: 50%;
-    }
-  }
-
-  @media only screen and (max-width: 600px) {
-    .column {
-      width: 100%;
-      min-width: 100%;
-      max-width: 100%;
-    }
-  }
-
   .timeslot {
     padding: 5px 5px;
     border: solid 2px #f5f5f5;
@@ -167,23 +149,19 @@
     padding: 5px;
     border-radius: 5px;
   }
-
   .gym {
     font-weight: bold;
     flex: 1;
   }
-
   .warn {
     color: #ffad49;
   }
-
   .invalid {
     color: #f44545;
     text-decoration: line-through;
     opacity: 0.6;
     background: #f4454565;
   }
-
   .time-label {
     font-size: 0.8em;
     font-weight: bold;
