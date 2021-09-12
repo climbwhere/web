@@ -8,7 +8,12 @@
   export let extended = false;
   export let snapshotStore: Readable<Snapshot>;
   export let gymFilter: SvelteStore<string[]>;
-  const sessionsByDateTime = getSessionsTableData(snapshotStore, gymFilter);
+  export let dateFilter: Readable<Date>;
+  const sessionsByDateTime = getSessionsTableData(
+    snapshotStore,
+    gymFilter,
+    dateFilter
+  );
 
   function handleScrollWheel(e) {
     const { deltaY, offsetY } = e.detail;
@@ -32,6 +37,10 @@
   const handleSessionMouseDown = (gymSlug: string) => () => {
     prefetch("/gym/" + gymSlug);
   };
+
+  function getGym(id: string) {
+    return $snapshotStore.data.gyms.filter((g) => g.id === id)[0];
+  }
 </script>
 
 <div
@@ -52,13 +61,15 @@
             <span class="time-label">{time.split(" ")[1]}</span>
             {#each $sessionsByDateTime[date][time] as session}
               <div
-                class={`session ${session.gym}`}
+                class={`session ${getGym(session.gym_id).slug}`}
                 class:invalid={session.spaces < 1}
-                on:click={handleSessionClick(session.gym)}
-                on:mousedown={handleSessionMouseDown(session.gym)}
+                on:click={handleSessionClick(getGym(session.gym_id).slug)}
+                on:mousedown={handleSessionMouseDown(
+                  getGym(session.gym_id).slug
+                )}
               >
                 <span class="gym">
-                  {session.gym_id}
+                  {getGym(session.gym_id).name}
                 </span>
                 <span
                   class="spaces"

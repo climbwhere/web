@@ -25,6 +25,7 @@
 
   export let initialData;
   let gymFilter = writable<string[]>([]);
+  let dateFilter = writable<Date>(new Date());
   let hideGyms;
 
   const snapshot = createSnapshotStore(initialData.snapshot);
@@ -105,6 +106,7 @@
     bind:extended={hideGyms}
     snapshotStore={snapshot}
     {gymFilter}
+    {dateFilter}
   />
 </div>
 

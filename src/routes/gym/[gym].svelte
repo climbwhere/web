@@ -1,17 +1,16 @@
 <script context="module" lang="ts">
-  import { getGyms, getSessions } from "$lib/api";
+  import { getSnapshot } from "$lib/api";
 
   export async function load({ page, fetch, session, context }) {
     const { gym: gymSlug } = page.params;
-    const gyms = await getGyms();
-    const sessions = await getSessions();
+    const snapshot = await getSnapshot();
     let gym = null;
-    const filteredGyms = gyms.filter((g) => g.slug === gymSlug);
+    const filteredGyms = snapshot.data.gyms.filter((g) => g.slug === gymSlug);
     if (filteredGyms.length > 0) {
       gym = filteredGyms[0];
     }
     return {
-      props: { gym, sessions },
+      props: { gym, snapshot },
       status: gym != null ? 200 : 404,
     };
   }
@@ -19,12 +18,12 @@
 
 <script lang="ts">
   import SessionsTable from "$lib/components/SessionsTable.svelte";
-  import { createSessionsStore } from "$lib/stores";
+  import { createSnapshotStore } from "$lib/stores";
   import { writable } from "svelte/store";
 
-  export let gym: Gym, sessions: Session[];
+  export let gym: Gym, snapshot: Snapshot;
 
-  const sessions_ = createSessionsStore(sessions);
+  const snapshotStore = createSnapshotStore(snapshot);
 </script>
 
 {#if gym != null}
@@ -68,7 +67,7 @@
     </div>
     <div class="slots">
       <h2>Slots</h2>
-      <SessionsTable snapshotStore={sessions_} gymFilter={writable([gym.id])} />
+      <SessionsTable {snapshotStore} gymFilter={writable([gym.id])} />
     </div>
   </div>
 {/if}
