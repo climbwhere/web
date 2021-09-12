@@ -1,31 +1,31 @@
 const { VITE_API_URL: API_URL } = import.meta.env;
 
-export const getSessions = async () =>
-  fetch(API_URL + "/sessions")
-    .then((r) => r.json())
-    .then(({ data: sessions }) => sessions as Session[])
-    .catch((error) => {
-      console.error(error);
-      throw error;
-    });
+// export const getSessions = async () =>
+//   fetch(API_URL + "/sessions")
+//     .then((r) => r.json())
+//     .then(({ data: sessions }) => sessions as Session[])
+//     .catch((error) => {
+//       console.error(error);
+//       throw error;
+//     });
 
-export const getGyms = async () =>
-  fetch(API_URL + "/gyms")
-    .then((r) => r.json())
-    .then(({ data }) => data as Gym[])
-    .catch((error) => {
-      console.error(error);
-      throw error;
-    });
+// export const getGyms = async () =>
+//   fetch(API_URL + "/gyms")
+//     .then((r) => r.json())
+//     .then(({ data }) => data as Gym[])
+//     .catch((error) => {
+//       console.error(error);
+//       throw error;
+//     });
 
-export const getLastUpdated = async () =>
-  fetch(API_URL + "/snapshots/latest")
-    .then((r) => r.json())
-    .then(({ data: { created_at } }) => created_at as Date)
-    .catch((error) => {
-      console.error(error);
-      throw error;
-    });
+// export const getLastUpdated = async () =>
+//   fetch(API_URL + "/snapshots/latest")
+//     .then((r) => r.json())
+//     .then(({ data: { created_at } }) => created_at as Date)
+//     .catch((error) => {
+//       console.error(error);
+//       throw error;
+//     });
 
 export const getSnapshot = async () =>
   fetch(API_URL + "/snapshots/latest")

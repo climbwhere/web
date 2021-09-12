@@ -1,14 +1,12 @@
 <script context="module" lang="ts">
-  import { getGyms, getSnapshot, getSessions } from "$lib/api";
+  import { getSnapshot } from "$lib/api";
 
   export async function load({ page, fetch, session, context }) {
-    const res = await Promise.all([getGyms(), getSessions(), getSnapshot()]);
+    const res = await getSnapshot();
     return {
       props: {
         initialData: {
-          gyms: res[0],
-          sessions: res[1],
-          scraperStatus: res[2],
+          snapshot: res,
         },
       },
     };
@@ -17,11 +15,7 @@
 
 <script lang="ts">
   import SessionsTable from "$lib/components/SessionsTable.svelte";
-  import {
-    createGymsStore,
-    createSessionsStore,
-    createScraperStatusStore,
-  } from "$lib/stores";
+  import { createSnapshotStore } from "$lib/stores";
   import isEmpty from "lodash/isEmpty.js";
   import dayjs from "dayjs";
   import relativeTimePlugin from "dayjs/plugin/relativeTime.js";
@@ -33,17 +27,15 @@
   let gymFilter = writable<string[]>([]);
   let hideGyms;
 
-  const sessions = createSessionsStore(initialData.sessions);
-  const gyms = createGymsStore(initialData.gyms);
-  const scraperStatus = createScraperStatusStore(initialData.scraperStatus);
+  const snapshot = createSnapshotStore(initialData.snapshot);
 
-  const handleGymFilterClick = (slug) => (e) => {
+  const handleGymFilterClick = (id) => (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if ($gymFilter.includes(slug)) {
-      gymFilter.set($gymFilter.filter((g) => g !== slug));
+    if ($gymFilter.includes(id)) {
+      gymFilter.set($gymFilter.filter((g) => g !== id));
     } else {
-      gymFilter.set([...$gymFilter, slug]);
+      gymFilter.set([...$gymFilter, id]);
     }
   };
 
@@ -74,13 +66,13 @@
       </span>
     </div>
     <span class="gyms" class:collapsed={hideGyms}>
-      {#each $gyms as gym}
+      {#each $snapshot.data.gyms as gym}
         <span
           class={`badge ${gym.slug}`}
-          class:selected={$gymFilter.includes(gym.slug)}
+          class:selected={$gymFilter.includes(gym.id)}
           class:unselected={!isEmpty($gymFilter) &&
-            !$gymFilter.includes(gym.slug)}
-          on:click={handleGymFilterClick(gym.slug)}
+            !$gymFilter.includes(gym.id)}
+          on:click={handleGymFilterClick(gym.id)}
         >
           {gym.name}
         </span>
@@ -99,11 +91,11 @@
     <span
       class="status-icon material-icons"
       aria-label="Status icon"
-      class:error={$scraperStatus.has_errors}
-      >{$scraperStatus.has_errors ? "report_problem" : "check_circle"}</span
+      class:error={$snapshot.has_errors}
+      >{$snapshot.has_errors ? "report_problem" : "check_circle"}</span
     >
-    {`Last updated ${dayjs($scraperStatus.created_at).fromNow()} ${
-      $scraperStatus.has_errors ? "with" : "without"
+    {`Last updated ${dayjs($snapshot.created_at).fromNow()} ${
+      $snapshot.has_errors ? "with" : "without"
     } errors.`}
     See something wrong?
     <a sveltekit:prefetch href="/feedback">Submit Feedback.</a>
@@ -111,7 +103,7 @@
   </span>
   <SessionsTable
     bind:extended={hideGyms}
-    sessionsStore={sessions}
+    snapshotStore={snapshot}
     {gymFilter}
   />
 </div>

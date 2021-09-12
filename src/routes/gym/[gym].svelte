@@ -68,10 +68,7 @@
     </div>
     <div class="slots">
       <h2>Slots</h2>
-      <SessionsTable
-        sessionsStore={sessions_}
-        gymFilter={writable([gym.slug])}
-      />
+      <SessionsTable snapshotStore={sessions_} gymFilter={writable([gym.id])} />
     </div>
   </div>
 {/if}

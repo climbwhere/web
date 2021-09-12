@@ -6,9 +6,9 @@
   import pannable from "$lib/actions/pannable";
 
   export let extended = false;
-  export let sessionsStore: Readable<Session[]>;
+  export let snapshotStore: Readable<Snapshot>;
   export let gymFilter: SvelteStore<string[]>;
-  const sessionsByDateTime = getSessionsTableData(sessionsStore, gymFilter);
+  const sessionsByDateTime = getSessionsTableData(snapshotStore, gymFilter);
 
   function handleScrollWheel(e) {
     const { deltaY, offsetY } = e.detail;
@@ -52,13 +52,13 @@
             <span class="time-label">{time.split(" ")[1]}</span>
             {#each $sessionsByDateTime[date][time] as session}
               <div
-                class={`session ${session.gym.slug}`}
+                class={`session ${session.gym}`}
                 class:invalid={session.spaces < 1}
-                on:click={handleSessionClick(session.gym.slug)}
-                on:mousedown={handleSessionMouseDown(session.gym.slug)}
+                on:click={handleSessionClick(session.gym)}
+                on:mousedown={handleSessionMouseDown(session.gym)}
               >
                 <span class="gym">
-                  {session.gym.name}
+                  {session.gym_id}
                 </span>
                 <span
                   class="spaces"

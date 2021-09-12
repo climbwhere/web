@@ -19,13 +19,14 @@ type Session = {
   spaces: number;
   starts_at: Date;
   ends_at: Date;
-  gym: Gym;
+  gym_id: string;
 };
 
 type Snapshot = {
   has_errors: boolean;
   created_at: Date;
   data: {
+    gyms: Gym[];
     sessions: [string: { data: Session[]; error?: { message: string } }];
   };
   id: string;
