@@ -1,6 +1,7 @@
 import { readable, derived, Readable } from "svelte/store";
 import groupBy from "lodash/groupBy.js";
 import isEmpty from "lodash/isEmpty.js";
+import uniq from "lodash/uniq";
 import dayjs from "dayjs";
 
 import { getSnapshot } from "$lib/api";
@@ -19,36 +20,57 @@ export const createSnapshotStore = (initialData: Snapshot) =>
     };
   });
 
+export const getSessions = (snapshotStore: Readable<Snapshot>) =>
+  derived([snapshotStore], ([$snapshot]) =>
+    Object.values($snapshot.data.sessions)
+      .flatMap((ss) => ss.data)
+      .filter((s) => s != null)
+  );
 
-export const getSessionsTableData = (
-  snapshotStore: Readable<Snapshot>,
+export const getDatesFromSessions = (sessionStore: Readable<Session[]>) =>
+  derived([sessionStore], ([$sessions]) => {
+    return uniq($sessions.map((s) => dayjs(s.starts_at).format("ddd/MM/YYYY")));
+  });
+
+export const getTableDataFromSessions = (
+  sessionStore: Readable<Session[]>,
   gymFilter: Readable<string[]>,
   dateFilter?: Readable<Date>
 ) =>
-  derived([snapshotStore, gymFilter, dateFilter], ([$snapshot, $gymFilter, $dateFilter]) => {
-    let dateTimeSessions = {};
-    const filterDate = dayjs($dateFilter);
-    // filter gyms
-    let ss = Object.values($snapshot.data.sessions).flatMap(s => s.data).filter(s => s != null);
-    if (!isEmpty($gymFilter)) {
-      ss = ss.filter((s) => $gymFilter.includes(s?.gym_id));
-    }
-    // group into date
-    const dateSessions = groupBy(ss, (session) => {
-      const date = dayjs(session.starts_at);
-      return `${DAYS_OF_WEEK[date.day()]}, ${date.format("D")} ${MONTHS[date.month()]
-        } `;
-    });
-    // group into time
-    Object.keys(dateSessions).forEach((date) => {
-      const ss = dateSessions[date];
-      if (dateFilter != null && `${DAYS_OF_WEEK[filterDate.day()]}, ${filterDate.format("D")} ${MONTHS[filterDate.month()]
-        } ` !== date) {
-        return;
+  derived(
+    [sessionStore, gymFilter, dateFilter],
+    ([$sessions, $gymFilters, $dateFilter]) => {
+      let dateTimeSessions: {
+        [date: string]: { [time: string]: Session[] };
+      } = {};
+      const filterDate = dayjs($dateFilter);
+      let ss = $sessions;
+      // filter gyms
+      if (!isEmpty($gymFilters)) {
+        ss = ss.filter((s) => $gymFilters.includes(s?.gym_id));
       }
-      dateTimeSessions[date] = groupBy(ss, (session) =>
-        dayjs(session.starts_at).format("DD/MM/YY hh:mmA")
-      );
-    });
-    return dateTimeSessions;
-  });
+      // group into date
+      const dateSessions = groupBy(ss, (session) => {
+        const date = dayjs(session.starts_at);
+        return `${DAYS_OF_WEEK[date.day()]}, ${date.format("D")} ${
+          MONTHS[date.month()]
+        } `;
+      });
+      // group into time
+      Object.keys(dateSessions).forEach((date) => {
+        const ss = dateSessions[date];
+        if (
+          dateFilter != null &&
+          `${DAYS_OF_WEEK[filterDate.day()]}, ${filterDate.format("D")} ${
+            MONTHS[filterDate.month()]
+          } ` !== date
+        ) {
+          return;
+        }
+        dateTimeSessions[date] = groupBy(ss, (session) =>
+          dayjs(session.starts_at).format("DD/MM/YY hh:mmA")
+        );
+      });
+      return dateTimeSessions;
+    }
+  );

@@ -15,12 +15,17 @@
 
 <script lang="ts">
   import SessionsTable from "$lib/components/SessionsTable.svelte";
-  import { createSnapshotStore } from "$lib/stores";
+  import {
+    createSnapshotStore,
+    getDatesFromSessions,
+    getSessions,
+  } from "$lib/stores";
   import isEmpty from "lodash/isEmpty.js";
   import dayjs from "dayjs";
   import relativeTimePlugin from "dayjs/plugin/relativeTime.js";
   import { writable } from "svelte/store";
 
+  import { DAYS_OF_WEEK, MONTHS } from "$lib/constants";
   dayjs.extend(relativeTimePlugin);
 
   export let initialData;
@@ -29,6 +34,8 @@
   let hideGyms;
 
   const snapshot = createSnapshotStore(initialData.snapshot);
+  const sessions = getSessions(snapshot);
+  const dates = getDatesFromSessions(sessions);
 
   const handleGymFilterClick = (id) => (e) => {
     e.preventDefault();
@@ -53,8 +60,13 @@
 </script>
 
 <div class="container">
+  <div class:hidden={hideGyms} class="filter-container">
+    {#each $dates as date}
+      {date}
+    {/each}
+  </div>
   <div
-    class="gyms-container"
+    class="filter-container"
     class:collapsed={hideGyms}
     on:click={handleGymPickerToggle}
   >
@@ -115,15 +127,16 @@
     height: calc(100vh - 55px);
     padding: 5px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
   }
-  .gyms-container {
+  .filter-container {
     background: #f5f5f54f;
     border: solid #f5f5f5 2px;
     border-radius: 20px;
     padding: 10px;
     margin-bottom: 5px;
     transition: all 0.3s ease-in-out;
-    max-height: 50vh;
     cursor: pointer;
   }
   .gyms {
@@ -150,7 +163,7 @@
   .gyms.collapsed {
     opacity: 0;
   }
-  .gyms-container.collapsed {
+  .filter-container.collapsed {
     max-height: 55px;
   }
   h3 {

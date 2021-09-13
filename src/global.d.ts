@@ -27,7 +27,9 @@ type Snapshot = {
   created_at: Date;
   data: {
     gyms: Gym[];
-    sessions: [string: { data: Session[]; error?: { message: string } }];
+    sessions: {
+      [gymSlug: string]: { data: Session[]; error?: { message: string } };
+    };
   };
   id: string;
 };

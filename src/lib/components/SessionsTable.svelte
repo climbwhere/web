@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getSessionsTableData } from "$lib/stores";
+  import { getSessions, getTableDataFromSessions } from "$lib/stores";
   import type { Readable } from "svelte/store";
   import { goto, prefetch } from "$app/navigation";
   import scrollWheel from "$lib/actions/scrollWheel";
@@ -9,8 +9,10 @@
   export let snapshotStore: Readable<Snapshot>;
   export let gymFilter: SvelteStore<string[]>;
   export let dateFilter: Readable<Date>;
-  const sessionsByDateTime = getSessionsTableData(
-    snapshotStore,
+
+  const sessions = getSessions(snapshotStore);
+  const sessionsByDateTime = getTableDataFromSessions(
+    sessions,
     gymFilter,
     dateFilter
   );
@@ -89,6 +91,7 @@
 
 <style>
   .container {
+    flex: 1;
     overflow-y: scroll;
     margin-top: 10px;
     padding-bottom: 50px;
@@ -99,6 +102,7 @@
   }
   .column {
     flex: 1;
+    width: 100%;
     margin-top: 5px;
     padding: 5px;
     border-radius: 5px;
