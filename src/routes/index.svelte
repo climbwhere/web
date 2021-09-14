@@ -64,7 +64,7 @@
 </script>
 
 <div class="container">
-  <div class="filter-container dates">
+  <div class="dates">
     {#each $dates as date}
       <div
         class="date-box"
@@ -151,6 +151,7 @@
     border-radius: 20px;
     padding: 10px;
     margin-bottom: 5px;
+    max-height: 50vh;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
   }
@@ -184,6 +185,7 @@
   }
   .filter-container.collapsed {
     max-height: 55px;
+    transition: all 0.3s ease-in-out;
   }
   h3 {
     margin: 0;
@@ -200,7 +202,6 @@
     flex-direction: row;
     align-items: center;
     padding: 5px 0;
-    border: solid red 1px;
   }
   .date-box {
     flex: 1;
