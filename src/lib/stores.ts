@@ -33,7 +33,7 @@ export const getSessions = (snapshotStore: Readable<Snapshot>) =>
 
 export const getDatesFromSessions = (sessionStore: Readable<Session[]>) =>
   derived<[Readable<Session[]>], string[]>([sessionStore], ([$sessions]) => {
-    return uniq($sessions.map((s) => dayjs(s.starts_at).format("DD/ddd")));
+    return uniq($sessions.map((s) => dayjs(s.starts_at).format("DD/MMM/YYYY")));
   });
 
 export const getTableDataFromSessions = (

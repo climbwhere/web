@@ -25,7 +25,6 @@
   import relativeTimePlugin from "dayjs/plugin/relativeTime.js";
   import { writable } from "svelte/store";
 
-  import { DAYS_OF_WEEK, MONTHS } from "$lib/constants";
   dayjs.extend(relativeTimePlugin);
 
   export let initialData;
@@ -57,12 +56,28 @@
     e.preventDefault();
     hideGyms = !hideGyms;
   };
+
+  const handleDateClick = (date: string) => (e) => {
+    e.preventDefault();
+    dateFilter.set(dayjs(date, "DD/MMM/YYYY").toDate());
+  };
 </script>
 
 <div class="container">
-  <div class:hidden={hideGyms} class="filter-container">
+  <div class="filter-container dates">
     {#each $dates as date}
-      {date}
+      <div
+        class="date-box"
+        class:selected={dayjs($dateFilter).format("DD/MMM/YYYY") === date}
+        on:click={handleDateClick(date)}
+      >
+        <strong>
+          {date.split("/")[0]}
+        </strong>
+        <span class="date-title">
+          {dayjs(date, "DD/MMM/YYYY").format("ddd")}
+        </span>
+      </div>
     {/each}
   </div>
   <div
@@ -139,6 +154,10 @@
     transition: all 0.3s ease-in-out;
     cursor: pointer;
   }
+  .dates {
+    display: flex;
+    overflow-x: scroll;
+  }
   .gyms {
     display: flex;
     flex-wrap: wrap;
@@ -208,7 +227,8 @@
   }
   .date-title {
     font-weight: bold;
-    font-size: 9px;
+    font-size: 14px;
+    color: salmon;
   }
   .status-label {
     font-size: 13px;
