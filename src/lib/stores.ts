@@ -1,4 +1,5 @@
 import { readable, derived, Readable } from "svelte/store";
+import orderBy from "lodash/orderBy.js";
 import groupBy from "lodash/groupBy.js";
 import isEmpty from "lodash/isEmpty.js";
 import uniq from "lodash/uniq";
@@ -22,14 +23,17 @@ export const createSnapshotStore = (initialData: Snapshot) =>
 
 export const getSessions = (snapshotStore: Readable<Snapshot>) =>
   derived([snapshotStore], ([$snapshot]) =>
-    Object.values($snapshot.data.sessions)
-      .flatMap((ss) => ss.data)
-      .filter((s) => s != null)
+    orderBy(
+      Object.values($snapshot.data.sessions)
+        .flatMap((ss) => ss.data)
+        .filter((s) => s != null),
+      "starts_at"
+    )
   );
 
 export const getDatesFromSessions = (sessionStore: Readable<Session[]>) =>
-  derived([sessionStore], ([$sessions]) => {
-    return uniq($sessions.map((s) => dayjs(s.starts_at).format("ddd/MM/YYYY")));
+  derived<[Readable<Session[]>], string[]>([sessionStore], ([$sessions]) => {
+    return uniq($sessions.map((s) => dayjs(s.starts_at).format("DD/ddd")));
   });
 
 export const getTableDataFromSessions = (
