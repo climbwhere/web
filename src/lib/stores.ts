@@ -2,7 +2,7 @@ import { readable, derived, Readable } from "svelte/store";
 import orderBy from "lodash/orderBy.js";
 import groupBy from "lodash/groupBy.js";
 import isEmpty from "lodash/isEmpty.js";
-import uniq from "lodash/uniq";
+import uniq from "lodash/uniq.js";
 import dayjs from "dayjs";
 
 import { getSnapshot } from "$lib/api";
