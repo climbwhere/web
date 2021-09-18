@@ -189,13 +189,13 @@
   }
   h3 {
     margin: 0;
-    font-size: 1.1em;
+    font-size: 1em;
     flex: 1;
   }
   .dates {
     flex: 1;
-    min-height: 80px;
-    max-height: 80px;
+    min-height: 60px;
+    max-height: 60px;
     overflow-x: scroll;
     width: 100%;
     display: flex;
@@ -205,10 +205,10 @@
   }
   .date-box {
     flex: 1;
-    min-width: 60px;
-    max-width: 60px;
-    min-height: 60px;
-    max-height: 60px;
+    min-width: 70px;
+    max-width: 80px;
+    min-height: 40px;
+    max-height: 50px;
     padding: 5px;
     border: solid 2px #f5f5f5;
     display: flex;
@@ -218,17 +218,17 @@
     text-align: center;
     margin: 0 5px;
     background: white;
-    border-radius: 50%;
+    border-radius: 10px;
     transition-duration: 0.2s;
     cursor: pointer;
     -webkit-user-select: none;
   }
   .date-box.selected {
-    border: solid 3px #4361ee;
+    border: solid 2px #4361ee;
   }
   .date-title {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 13px;
     color: salmon;
   }
   .status-label {

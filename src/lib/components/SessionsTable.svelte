@@ -53,8 +53,8 @@
   on:scrollWheel={handleScrollWheel}
 >
   {#each Object.keys($sessionsByDateTime) as date}
-    <div class="column">
-      <div class="column-header">
+    <div class="date">
+      <div class="date-header">
         {date}
       </div>
       <div>
@@ -97,10 +97,10 @@
     padding-bottom: 50px;
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
   }
-  .column {
+  .date {
     flex: 1;
     width: 100%;
     margin-top: 5px;
@@ -117,7 +117,7 @@
   .timeslot:hover {
     border: solid 2px #4361ee;
   }
-  .column-header {
+  .date-header {
     background: black;
     color: white;
     position: sticky;
