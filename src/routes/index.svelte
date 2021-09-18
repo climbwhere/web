@@ -23,9 +23,12 @@
   import isEmpty from "lodash/isEmpty.js";
   import dayjs from "dayjs";
   import relativeTimePlugin from "dayjs/plugin/relativeTime.js";
+  import customParseFormat from "dayjs/plugin/customParseFormat.js";
+
   import { writable } from "svelte/store";
 
   dayjs.extend(relativeTimePlugin);
+  dayjs.extend(customParseFormat);
 
   export let initialData;
   let gymFilter = writable<string[]>([]);
