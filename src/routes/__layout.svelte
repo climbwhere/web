@@ -14,8 +14,8 @@
   {/if}
 </svelte:head>
 
+<NavBar />
 <div class="container">
-  <NavBar />
   <div class="content">
     <slot />
   </div>
@@ -24,18 +24,15 @@
 <style>
   .container {
     margin: auto;
-    height: 100%;
     width: 100%;
     max-width: 800px;
     background: white;
-    display: grid;
-    grid-template-rows: 55px auto;
-    overflow-y: hidden;
+    overflow: clip;
   }
   .content {
-    height: calc(100vh - 55px);
+    height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: clip;
   }
 </style>

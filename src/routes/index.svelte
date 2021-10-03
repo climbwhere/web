@@ -142,7 +142,9 @@
 
 <style>
   .container {
-    height: calc(100vh - 55px);
+    height: calc(
+      100vh - 55px - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+    );
     padding: 5px;
     flex: 1;
     display: flex;
