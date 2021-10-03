@@ -30,6 +30,7 @@
     background: white;
     display: grid;
     grid-template-rows: 55px auto;
+    overflow-y: hidden;
   }
   .content {
     height: calc(100vh - 55px);

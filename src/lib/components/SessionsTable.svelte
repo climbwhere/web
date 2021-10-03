@@ -63,7 +63,7 @@
             <span class="time-label">{time.split(" ")[1]}</span>
             {#each $sessionsByDateTime[date][time] as session}
               <div
-                class={`session ${getGym(session.gym_id).slug}`}
+                class="session"
                 class:invalid={session.spaces < 1}
                 on:click={handleSessionClick(getGym(session.gym_id).slug)}
                 on:mousedown={handleSessionMouseDown(
@@ -71,7 +71,9 @@
                 )}
               >
                 <span class="gym">
-                  {getGym(session.gym_id).name}
+                  <span class={`badge ${getGym(session.gym_id).slug}`}>
+                    {getGym(session.gym_id).name}
+                  </span>
                 </span>
                 <span
                   class="spaces"
@@ -138,7 +140,7 @@
     cursor: pointer;
     width: 100%;
     margin: 3px 0;
-    padding: 5px 10px;
+    padding: 5px 10px 5px 0;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -148,7 +150,7 @@
     text-align: right;
     padding-right: 10px;
     font-weight: bold;
-    background: white;
+    background: #f5f5f5;
     color: black;
     padding: 5px;
     border-radius: 5px;
