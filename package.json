@@ -6,11 +6,11 @@
   },
   "devDependencies": {
     "snowpack": "^3.0.1",
-    "snowpack-resolve-alias": "^1.2.8"
+    "snowpack-resolve-alias": "^1.2.8",
+    "@snowpack/plugin-dotenv": "^2.1.0",
+    "@snowpack/plugin-svelte": "^3.5.2"
   },
   "dependencies": {
-    "@snowpack/plugin-dotenv": "^2.1.0",
-    "@snowpack/plugin-svelte": "^3.5.2",
     "isomorphic-unfetch": "^3.1.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
