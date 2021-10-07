@@ -5,10 +5,13 @@
     "test": "echo \"This template does not include a test runner by default.\" && exit 1"
   },
   "devDependencies": {
-    "snowpack": "^3.0.1",
-    "snowpack-resolve-alias": "^1.2.8",
     "@snowpack/plugin-dotenv": "^2.1.0",
-    "@snowpack/plugin-svelte": "^3.5.2"
+    "@snowpack/plugin-svelte": "^3.5.2",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2",
+    "snowpack": "^3.0.1",
+    "snowpack-resolve-alias": "^1.2.8"
   },
   "dependencies": {
     "isomorphic-unfetch": "^3.1.0",
