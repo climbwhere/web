@@ -8,13 +8,7 @@
     This website shows aggregated climbing gym slot information from multiple
     climbing and bouldering gyms in Singapore.
   </p>
-
-  <h3>Why did we make this?</h3>
-  <p>
-    Due to COVID-19, many local climbing gyms are forced to lower their max
-    capacities. The high demand for climbing gym slots nowadays makes it very
-    tedious to look for gyms and open timeslots.
-  </p>
+  <p>Looking for</p>
 
   <h3>Where is this data from?</h3>
   <p>
@@ -22,21 +16,6 @@
     every 2 minutes or so. Data is not guaranteed to be accurate or up to date. <Link
       to="status">Check data health here</Link
     >.
-  </p>
-
-  <h3>Who are we?</h3>
-  <p>
-    This website was designed and built by <a href="https://sean.place">Sean</a
-    >, and its scrapers were built by
-    <a href="https://www.instagram.com/lowkeyravern/">Ravern</a>. Technicalities
-    of the site explained
-    <a href="https://sean.place/blog/climbwhere-sg/">here</a> for fellow web people.
-  </p>
-
-  <p>
-    Like our work? <a href="https://www.buymeacoffee.com/seanlim"
-      >buy us a coffee!</a
-    >
   </p>
 
   <small>

@@ -1,18 +1,18 @@
-import App from "./App.svelte";
+import App from './App.svelte';
 
 const { SNOWPACK_PUBLIC_ENV: ENV } = import.meta.env;
 
-let app = new App({
+const app = new App({
   target: document.body,
   props: { env: ENV },
 });
 
-if ("serviceWorker" in navigator && ENV !== 'development') {
-  window.addEventListener("load", function () {
+if ('serviceWorker' in navigator && ENV !== 'development') {
+  window.addEventListener('load', () => {
     navigator.serviceWorker
-      .register("./sw.js")
+      .register('./sw.js')
       .then((reg) => {
-        console.log("Service worker registered");
+        console.log('Service worker registered');
       })
       .catch((error) => {
         console.error(error);

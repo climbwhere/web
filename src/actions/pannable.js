@@ -7,13 +7,13 @@ export default function pannable(node) {
     y = event.touches[0].clientY;
 
     node.dispatchEvent(
-      new CustomEvent("panstart", {
+      new CustomEvent('panstart', {
         detail: { x, y },
-      })
+      }),
     );
 
-    window.addEventListener("touchmove", handleMousemove);
-    window.addEventListener("touchend", handleMouseup);
+    window.addEventListener('touchmove', handleMousemove);
+    window.addEventListener('touchend', handleMouseup);
   }
 
   function handleMousemove(event) {
@@ -23,22 +23,24 @@ export default function pannable(node) {
     y = event.touches[0].clientY;
 
     node.dispatchEvent(
-      new CustomEvent("panmove", {
-        detail: { x, y, dx, dy, offsetY: node.scrollTop },
-      })
+      new CustomEvent('panmove', {
+        detail: {
+          x, y, dx, dy, offsetY: node.scrollTop,
+        },
+      }),
     );
   }
 
   function handleMouseup(event) {
-    window.removeEventListener("touchmove", handleMousemove);
-    window.removeEventListener("touchend", handleMouseup);
+    window.removeEventListener('touchmove', handleMousemove);
+    window.removeEventListener('touchend', handleMouseup);
   }
 
-  node.addEventListener("touchstart", handleMousedown);
+  node.addEventListener('touchstart', handleMousedown);
 
   return {
     destroy() {
-      node.removeEventListener("touchstart", handleMousedown);
+      node.removeEventListener('touchstart', handleMousedown);
     },
   };
 }
