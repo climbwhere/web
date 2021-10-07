@@ -7,7 +7,7 @@ let app = new App({
   props: { env: ENV },
 });
 
-if ("serviceWorker" in navigator) {
+if ("serviceWorker" in navigator && ENV !== 'development') {
   window.addEventListener("load", function () {
     navigator.serviceWorker
       .register("./sw.js")
