@@ -8,6 +8,7 @@ const urlsToCache = [
   "/api.js",
   "/constants.js",
   "/telegram.png",
+  "/logo.png",
   "/App.svelte.js",
   "/App.svelte.css.proxy.js",
   "/App.svelte.css",
