@@ -8,18 +8,24 @@
     This website shows aggregated climbing gym slot information from multiple
     climbing and bouldering gyms in Singapore.
   </p>
-  <p>Looking for</p>
+
+  <p>
+    Add it as a bookmark, save it on your homescreen, or use our <a
+      href="https://t.me/climbwhere_sg_bot">Telegram bot</a
+    >.
+  </p>
 
   <h3>Where is this data from?</h3>
   <p>
-    We retrieve gym slot information directly from the respective gyms' websites
-    every 2 minutes or so. Data is not guaranteed to be accurate or up to date. <Link
+    We retrieve gym slot information directly from the respective gyms'
+    websites. Data is not guaranteed to be accurate or up to date. <Link
       to="status">Check data health here</Link
     >.
   </p>
 
   <small>
     <p>© {moment().year()} Climbwhere · All rights reserved.</p>
+    <p>Created by <a href="https://sean.place">Sean</a></p>
   </small>
 </div>
 
