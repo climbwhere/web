@@ -58,7 +58,7 @@
   .container {
     width: 100%;
     max-height: 30vh;
-    padding: 10px 5px;
+    padding: 0 5px 10px 5px;
     overflow: scroll;
     border: 3px solid #f5f5f5;
     border-radius: 10px;
@@ -68,6 +68,7 @@
   }
 
   .header {
+    padding-top: 10px;
     display: flex;
     flex-flow: row;
     position: sticky;
