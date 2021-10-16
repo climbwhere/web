@@ -42,13 +42,12 @@
 <style>
   .container {
     flex: 1;
-    min-height: 90px;
-    max-height: 90px;
+    min-height: 70px;
+    max-height: 70px;
     overflow-x: scroll;
     width: 100%;
     display: flex;
     flex-direction: row;
-    padding: 10px 0;
   }
 
   .empty {
@@ -60,15 +59,14 @@
 
   h3 {
     margin: 0;
-    font-size: 1.2em;
+    font-size: 1em;
   }
 
   .date-box {
     flex: 1;
     min-width: 80px;
     max-width: 80px;
-    border: solid 3px #f5f5f5;
-    padding: 15px 0px;
+    border: solid 3px transparent;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -76,14 +74,15 @@
     text-align: center;
     margin: 0 5px;
     background: white;
-    border-radius: 15px;
     transition-duration: 0.2s;
     cursor: pointer;
     -webkit-user-select: none;
+    opacity: 0.5;
   }
 
   .date-box.selected {
-    border: solid 3px #4361ee;
+    border-bottom: solid 3px #4361ee;
+    opacity: 1;
   }
 
   .date-title {
