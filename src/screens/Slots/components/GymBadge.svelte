@@ -19,6 +19,11 @@
 >
 
 <style>
+  .b8a {
+    background-color: #dc722c;
+    color: white;
+  }
+
   .fitbloc {
     background-color: #7b112a;
     color: white;
