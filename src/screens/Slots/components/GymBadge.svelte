@@ -19,6 +19,10 @@
 >
 
 <style>
+  .boruda {
+    background-color: #ffffed;
+  }
+
   .b8a {
     background-color: #dc722c;
     color: white;
