@@ -1,8 +1,9 @@
 <script>
-  export let gym, spaces, timing, hide;
-
+  import moment from "moment";
   import { gymBookingLinks } from "~/constants";
   import GymBadge from "./GymBadge.svelte";
+
+  export let gym, spaces, startsAt, hide;
 
   const onRowClicked = () => {
     window.open(gymBookingLinks[gym.slug], "_blank");
@@ -17,7 +18,7 @@
   class="umami--click--table-row-click"
 >
   <td class="gym"><GymBadge {gym} /> </td>
-  <td class="timings">{timing}</td>
+  <td class="timings">{moment(startsAt).format("h:mmA")}</td>
   <td class="spaces"> <span class="badge">{spaces}</span></td>
 </tr>
 
@@ -54,7 +55,8 @@
   }
 
   .invalid {
-    color: #f44545;
     text-decoration: line-through;
+    filter: grayscale(1);
+    background: #f5f5f5;
   }
 </style>

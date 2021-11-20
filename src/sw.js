@@ -1,4 +1,4 @@
-const VERSION = '0.0.2';
+const VERSION = '1.0.0';
 const CACHE_NAME = `${VERSION}-climbwhere-sg-cache`;
 
 const urlsToCache = [
@@ -40,9 +40,6 @@ const urlsToCache = [
   '/screens/Report.svelte.css',
   '/screens/Report.svelte.css.proxy.js',
   '/screens/Report.svelte.js',
-  '/screens/Status.svelte.css',
-  '/screens/Status.svelte.css.proxy.js',
-  '/screens/Status.svelte.js',
   '/screens/Error.svelte.css',
   '/screens/Error.svelte.css.proxy.js',
   '/screens/Error.svelte.js',

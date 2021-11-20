@@ -1,11 +1,10 @@
 <script>
   import isEmpty from "lodash/isEmpty";
 
-  import { getGyms } from "~/api";
   import GymBadge from "./GymBadge.svelte";
   import Skeleton from "~/components/Skeleton/GymPickerSkeleton.svelte";
 
-  export let selectedGyms, shouldHideGyms, gymsRequest;
+  export let isLoading, gyms, selectedGyms, shouldHideGyms;
 
   const handleClearAll = (e) => {
     e.preventDefault();
@@ -13,11 +12,11 @@
     selectedGyms = [];
   };
 
-  const handleGymClick = (gymSlug) => {
-    if (!selectedGyms.includes(gymSlug)) {
-      selectedGyms = [...selectedGyms, gymSlug];
+  const handleGymClick = (gymId) => {
+    if (!selectedGyms.includes(gymId)) {
+      selectedGyms = [...selectedGyms, gymId];
     } else {
-      selectedGyms = selectedGyms.filter((g) => g !== gymSlug);
+      selectedGyms = selectedGyms.filter((g) => g !== gymId);
     }
   };
 
@@ -28,30 +27,30 @@
 </script>
 
 <div class="container" on:click={handleToggle} class:collapsed={shouldHideGyms}>
-  {#await gymsRequest}
+  {#if isLoading}
     <Skeleton />
-  {:then gyms}
+  {:else}
     <span class="header">
       <h3 class="title">
-        Gym Filters {#if !isEmpty(selectedGyms)}({selectedGyms.length}){/if}
+        Gyms {#if !isEmpty(selectedGyms)}({selectedGyms.length}){/if}
       </h3>
       <span class:collapsed={shouldHideGyms} class="expand-icon material-icons">
         expand_more
       </span>
     </span>
     <span class="gyms" class:collapsed={shouldHideGyms}>
-      {#each gyms as gym}
+      {#each $gyms as gym}
         <GymBadge
           {gym}
           onClick={handleGymClick}
-          gymSelected={selectedGyms.includes(gym.slug)}
+          gymSelected={selectedGyms.includes(gym.id)}
           gymUnselected={!isEmpty(selectedGyms) &&
-            !selectedGyms.includes(gym.slug)}
+            !selectedGyms.includes(gym.id)}
         />
       {/each}
       <span class="badge outline" on:click={handleClearAll}>Clear All</span>
     </span>
-  {/await}
+  {/if}
 </div>
 
 <style>
@@ -63,7 +62,7 @@
     border: 3px solid #f5f5f5;
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
-    margin-bottom: 10px;
+    margin: 10px 0;
     cursor: pointer;
   }
 

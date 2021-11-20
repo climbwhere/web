@@ -1,50 +1,30 @@
+import  orderBy  from "lodash/orderBy";
+import flatten from "lodash/flatten";
 import fetch from "isomorphic-unfetch";
-import moment from "moment";
 const { SNOWPACK_PUBLIC_API_URL: API_URL } = import.meta.env;
 
-export const getSessions = async () =>
-  fetch(API_URL + "/sessions")
-    .then((r) => r.json())
-    .then(({ data: sessions }) => sessions)
-    .then((sessions) =>
-      sessions.map((session) => ({
-        ...session,
-        _time: moment(session.starts_at).format("hh:mmA"),
-        _date: moment(session.starts_at).format("DD/MM/YY"),
-      }))
-    )
-    .catch((error) => {
-      console.error(error);
-      throw error;
-    });
-
-export const getGyms = async () =>
-  fetch(API_URL + "/gyms")
-    .then((r) => r.json())
-    .then(({ data }) => data)
-    .catch((error) => {
-      console.error(error);
-      throw error;
-    });
-
-export const getLastUpdated = async () =>
-  fetch(API_URL + "/snapshots/latest")
-    .then((r) => r.json())
-    .then(({ data: { created_at } }) => created_at)
-    .catch((error) => {
-      console.error(error);
-      throw error;
-    });
-
-export const getScraperStatus = async () =>
+export const getLatestSnapshot = async () =>
   fetch(API_URL + "/snapshots/latest")
     .then((r) => r.json())
     .then(
       ({
         data: {
-          data: { sessions },
+          created_at,
+          data: { sessions, gyms },
+          has_errors,
         },
-      }) => sessions
+      }) => {
+        const sessionsList = orderBy(flatten(
+          Object.values(sessions).map((d) => d.data)
+        ).filter(s => s !== undefined), "starts_at");
+
+        return {
+          lastUpdated: created_at,
+          sessions: sessionsList,
+          gyms,
+          hasErrors: has_errors,
+        };
+      }
     )
     .catch((error) => {
       console.error(error);

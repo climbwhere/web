@@ -88,7 +88,8 @@ body {
 }
 
 .badge.unselected {
-  opacity: 0.3;
+  filter: grayscale(1);
+  opacity: 0.5;
 }
 
 .hidden {

@@ -5,7 +5,7 @@
 
   import Skeleton from "~/components/Skeleton/DatePickerSkeleton.svelte";
 
-  export let sessionsRequest, selectedDate;
+  export let sessions, isLoading, selectedDate;
 
   const handleDateBoxClick = (d) => (e) => {
     e.preventDefault();
@@ -14,10 +14,10 @@
 </script>
 
 <div class="container">
-  {#await sessionsRequest}
+  {#if isLoading}
     <Skeleton />
-  {:then sessions}
-    {#each uniq(sessions.map((s) => s._date)) as date}
+  {:else}
+    {#each uniq($sessions.map( (s) => moment(s.starts_at).format("DD/MM/YY") )) as date}
       <div
         class="date-box umami--click--click-date-filter"
         class:selected={selectedDate === date}
@@ -36,14 +36,15 @@
         <b>Looks like there are currently no sessions...</b>
       </div>
     {/if}
-  {/await}
+  {/if}
 </div>
 
 <style>
   .container {
+    padding-top: 10px;
     flex: 1;
-    min-height: 70px;
-    max-height: 70px;
+    min-height: 60px;
+    max-height: 60px;
     overflow-x: scroll;
     width: 100%;
     display: flex;
@@ -78,11 +79,14 @@
     cursor: pointer;
     -webkit-user-select: none;
     opacity: 0.5;
+    filter: grayscale(1);
+    border-radius: 10px;
   }
 
   .date-box.selected {
-    border-bottom: solid 3px #4361ee;
+    border: solid 3px #4361ee;
     opacity: 1;
+    filter: grayscale(0);
   }
 
   .date-title {

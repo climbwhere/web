@@ -7,7 +7,7 @@
   const handleBadgeClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    onClick(gym.slug);
+    onClick(gym.id);
   };
 </script>
 

@@ -1,12 +1,16 @@
 <script>
   import isEmpty from "lodash/isEmpty";
+  import find from "lodash/find";
+  import moment from "moment";
 
   import TableRow from "./TableRow.svelte";
   import Skeleton from "~/components/Skeleton/SlotsTableSkeleton.svelte";
   import scrollWheel from "~/actions/scrollWheel";
   import pannable from "~/actions/pannable";
 
-  export let sessionsRequest,
+  export let sessions,
+    isLoading,
+    gyms,
     dateFilter,
     gymFilter,
     extended = false;
@@ -34,29 +38,29 @@
   use:scrollWheel
   on:scrollWheel={handleScrollWheel}
 >
-  {#await sessionsRequest}
+  {#if isLoading}
     <Skeleton />
-  {:then sessions}
+  {:else}
     <table>
       <thead>
         <th>Gym</th>
         <th>Time</th>
         <th class="spaces">Available Spaces</th>
       </thead>
-      {#each sessions as session}
+      {#each $sessions as session}
         <TableRow
-          hide={session._date !== dateFilter ||
-            (!isEmpty(gymFilter) && !gymFilter.includes(session.gym.slug))}
-          gym={session.gym}
+          hide={moment(session.starts_at).format("DD/MM/YY") !== dateFilter ||
+            (!isEmpty(gymFilter) && !gymFilter.includes(session.gym_id))}
+          gym={find($gyms, (gym) => gym.id === session.gym_id)}
           spaces={session.spaces}
-          timing={session._time}
+          startsAt={session.starts_at}
         />
       {/each}
     </table>
-    {#if isEmpty(sessions.filter((s) => !(s._date !== dateFilter || (!isEmpty(gymFilter) && !gymFilter.includes(s.gym.slug)))))}
+    {#if isEmpty($sessions.filter((s) => !(moment(s.starts_at).format("DD/MM/YY") !== dateFilter || (!isEmpty(gymFilter) && !gymFilter.includes(s.gym_id)))))}
       <div class="empty"><p>🦥 No slots found 🦥</p></div>
     {/if}
-  {/await}
+  {/if}
 </div>
 
 <style>

@@ -18,9 +18,7 @@
   <h3>Where is this data from?</h3>
   <p>
     We retrieve gym slot information directly from the respective gyms'
-    websites. Data is not guaranteed to be accurate or up to date. <Link
-      to="status">Check data health here</Link
-    >.
+    websites. Data is not guaranteed to be accurate or up to date.
   </p>
 
   <small>

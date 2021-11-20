@@ -1,53 +1,42 @@
 <script>
-  import uniq from "lodash/uniq";
   import moment from "moment";
   import { Link, navigate } from "svelte-routing";
-  import isNil from "lodash/isNil";
-  import isEmpty from "lodash/isEmpty";
 
-  import {
-    getSessions,
-    getLastUpdated,
-    getScraperStatus,
-    getGyms,
-  } from "~/api";
+  import { getLatestSnapshot } from "~/api";
   import SlotsTable from "./components/SlotsTable.svelte";
   import DatePicker from "./components/DatePicker.svelte";
   import GymPicker from "./components/GymPicker.svelte";
   import RefreshButton from "./components/RefreshButton.svelte";
+  import { writable } from "svelte/store";
 
   let dateFilter = moment().format("DD/MM/YY"); // current date as a "guess"
   let gymFilter = [];
   let shouldHideGyms;
-  let loading = false;
+  let isLoading = true;
+  let gyms = writable([]);
+  let sessions = writable([]);
+  let hasErrors = false;
+  let lastUpdated;
 
-  const handleSessionsResponse = (sessions) => {
-    dateFilter = uniq(sessions.map((s) => s._date))[0]; // sets earliest retrieved dates
-    return sessions;
+  const handleSnapshotResponse = (snapshot) => {
+    sessions.set(snapshot.sessions);
+    gyms.set(snapshot.gyms);
+    hasErrors = snapshot.hasErrors;
+    lastUpdated = snapshot.lastUpdated;
   };
-  const handleScraperStatus = (data) =>
-    !isEmpty(Object.values(data).filter((gym) => !isNil(gym.error)));
 
-  let sessionsRequest, lastUpdatedRequest, hasErrorsRequest, gymsRequest;
-
+  let latestSnapshotRequest;
   const loadData = async () => {
-    loading = true;
-    sessionsRequest = getSessions().then(handleSessionsResponse);
-    lastUpdatedRequest = getLastUpdated();
-    hasErrorsRequest = getScraperStatus().then(handleScraperStatus);
-    gymsRequest = getGyms();
+    isLoading = true;
+    latestSnapshotRequest = getLatestSnapshot().then(handleSnapshotResponse);
 
-    Promise.all([
-      sessionsRequest,
-      lastUpdatedRequest,
-      hasErrorsRequest,
-      gymsRequest,
-    ])
+    Promise.all([latestSnapshotRequest])
       .then(() => {
-        loading = false;
+        isLoading = false;
       })
       .catch(async (errors) => {
-        loading = false;
+        console.error(errors);
+        isLoading = false;
         navigate("/error");
       });
   };
@@ -56,11 +45,18 @@
 </script>
 
 <div class="container">
-  <DatePicker bind:selectedDate={dateFilter} {sessionsRequest} />
+  <DatePicker bind:selectedDate={dateFilter} {sessions} {isLoading} />
   <div class="content">
-    <GymPicker bind:selectedGyms={gymFilter} {shouldHideGyms} {gymsRequest} />
+    <GymPicker
+      bind:selectedGyms={gymFilter}
+      {isLoading}
+      {gyms}
+      {shouldHideGyms}
+    />
     <SlotsTable
-      {sessionsRequest}
+      {sessions}
+      {gyms}
+      {isLoading}
       {dateFilter}
       {gymFilter}
       bind:extended={shouldHideGyms}
@@ -68,30 +64,28 @@
   </div>
   <RefreshButton
     hidden={shouldHideGyms}
-    refreshing={loading}
+    refreshing={isLoading}
     on:click={loadData}
   />
   <footer>
-    {#await Promise.all([lastUpdatedRequest, hasErrorsRequest])}
+    {#if isLoading}
       Loading...
-    {:then [lastUpdated, hasErrors]}
-      <Link to="status">
-        <span
-          class="status-icon material-icons"
-          class:error={hasErrors}
-          aria-label="Status icon"
-          >{hasErrors ? "report_problem" : "check_circle"}</span
-        >
-        <b
-          >Last updated {moment(lastUpdated).fromNow()}{hasErrors
-            ? " with errors"
-            : ""}.</b
-        >
-      </Link>
+    {:else}
+      <span
+        class="status-icon material-icons"
+        class:error={hasErrors}
+        aria-label="Status icon"
+        >{hasErrors ? "report_problem" : "check_circle"}</span
+      >
+      <b
+        >Last updated {moment(lastUpdated).fromNow()}{hasErrors
+          ? " with errors"
+          : ""}.</b
+      >
       Something not quite right?
       <Link to="report">Report it here</Link>.
       <Link to="about">About</Link>.
-    {/await}
+    {/if}
   </footer>
 </div>
 
