@@ -20,4 +20,6 @@ export const gymBookingLinks = {
   'boulder-movement-downtown': 'https://www.boulderm.com/register',
   'boulder-movement-tai-seng': 'https://www.boulderm.com/register',
   'boulder-movement-rochor': 'https://www.boulderm.com/register',
+  b8a: 'https://www.b8a.sg/book-a-slot/',
+  boruda: 'https://www.boruda.sg/bookings',
 };

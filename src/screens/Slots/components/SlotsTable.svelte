@@ -98,6 +98,7 @@
     font-size: 0.8em;
     position: sticky;
     top: 0px;
+    z-index: 1;
     background: white;
     border-bottom: #f5f5f5 solid 2px;
   }
