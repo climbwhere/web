@@ -99,7 +99,7 @@
     position: sticky;
     top: 0px;
     z-index: 1;
-    backdrop-filter: blur(20px);
+    background-color: white;
     border-bottom: #f5f5f5 solid 2px;
   }
 
