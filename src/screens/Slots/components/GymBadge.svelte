@@ -33,7 +33,12 @@
     color: white;
   }
 
-  .boulder-plus {
+  .boulder-plus-aperia {
+    background-color: #652580;
+    color: white;
+  }
+
+  .boulder-plus-chevrons {
     background-color: #652580;
     color: white;
   }
