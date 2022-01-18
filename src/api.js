@@ -1,4 +1,4 @@
-import  orderBy  from "lodash/orderBy";
+import orderBy from "lodash/orderBy";
 import flatten from "lodash/flatten";
 import fetch from "isomorphic-unfetch";
 const { SNOWPACK_PUBLIC_API_URL: API_URL } = import.meta.env;

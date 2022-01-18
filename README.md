@@ -10,14 +10,20 @@ Due to COVID-19, many local climbing gyms are forced to lower their max capaciti
 
 ## Supported gyms
 
-* Boulder +
-* BFF Climb
-* Oyeyo
+* Boulder + Aperia
+* Boulder + Chevrons 
+* BFF Climb Bukit Timah
+* BFF Climb Bendemeer
+* OYEYO
 * Z-Vertigo
 * ~~Lighthouse~~ (Removed by owners' request).
 * Boulder World
 * Fit Bloc
 * The Rock School
 * Boulder Planet
-* Boulder Movement (Downtown, Rochor, Tai Seng)
+* Boulder Movement Downtown
+* Boulder Movement Rochor
+* Boulder Movement Tai Seng
+* b8a
+* boruda
 

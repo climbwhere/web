@@ -43,9 +43,14 @@
     color: white;
   }
 
-  .bff {
+  .bff-bendemeer {
     background-color: #ea078d;
-    color: black;
+    color: white;
+  }
+
+  .bff-bukit-timah {
+    background-color: #ea078d;
+    color: white;
   }
 
   .boulder-world {

@@ -8,7 +8,8 @@ export const defaultFilterState = {
 export const gymBookingLinks = {
   'boulder-plus':
     'https://app.rockgympro.com/b/?&bw=f33c8b7f0916487d9af58088967aa62d',
-  bff: 'https://bffclimb.com/booking/',
+  'bff-bendemeer': 'https://bffclimb.perfectgym.com/clientportal2/#/Login',
+  'bff-bukit-timah': 'https://bffclimb.perfectgym.com/clientportal2/#/Login',
   oyeyo: 'https://www.picktime.com/oyy',
   'z-vertigo': 'https://www.picktime.com/ZVbooking',
   lighthouse: 'https://www.lighthouseclimbing.com/',
