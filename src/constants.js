@@ -14,7 +14,7 @@ export const gymBookingLinks = {
   lighthouse: 'https://www.lighthouseclimbing.com/',
   'boulder-world':
     'https://www.picktime.com/566fe29b-2e46-4a73-ad85-c16bfc64b34b',
-  fitbloc: 'https://fitbloc.com/booking/',
+  fitbloc: 'https://fitbloc.com/book-a-slot/#gymentry',
   'the-rock-school': 'https://therockschool.sg/schedule/',
   'boulder-planet': 'https://www.boulderplanet.sg/bookings',
   'boulder-movement-downtown': 'https://www.boulderm.com/register',
