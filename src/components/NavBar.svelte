@@ -11,17 +11,18 @@
       <img
         class="logo-image"
         alt="logo"
-        src="/logo.png"
+        src="/logo.webp"
         aria-label="logo"
       /><span>Climbwhere.sg</span>
     </div>
   </div>
   <a href="https://t.me/climbwhere_sg_bot" aria-label="Telegram bot">
-    <img class="telegram-logo" src="/telegram.png" alt="telegram-logo" />
+    <img class="telegram-logo" src="/telegram.webp" alt="telegram-logo" />
     <span class="r">t.me/climbwhere_sg_bot</span>
   </a>
   <a href="https://github.com/climbwhere/web">
     <img
+      class="gh-badge"
       src="https://img.shields.io/github/stars/climbwhere/web?style=social"
       alt="GitHub badge"
     />
@@ -90,6 +91,10 @@
     width: 25px;
     height: 25px;
     margin-right: 5px;
+  }
+
+  .gh-badge {
+    width: 90px;
   }
 
   @media only screen and (max-width: 460px) {
