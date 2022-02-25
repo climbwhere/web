@@ -23,7 +23,10 @@
 
   <small>
     <p>© {moment().year()} Climbwhere · All rights reserved.</p>
-    <p>Created by <a href="https://sean.place">Sean</a></p>
+    <p>
+      Created by <a href="https://sean.place">Sean</a> and
+      <a href="https://ravern.zone">Ravern</a>
+    </p>
   </small>
 </div>
 

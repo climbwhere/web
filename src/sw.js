@@ -1,4 +1,4 @@
-const VERSION = '1.2.3';
+const VERSION = '1.2.4';
 const CACHE_NAME = `${VERSION}-climbwhere-sg-cache`;
 
 const urlsToCache = [
@@ -7,7 +7,6 @@ const urlsToCache = [
   '/index.css',
   '/index.js',
   '/api.js',
-  '/constants.js',
   '/telegram.webp',
   '/logo.webp',
   '/App.svelte.js',

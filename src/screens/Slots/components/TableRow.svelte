@@ -1,12 +1,11 @@
 <script>
   import moment from "moment";
-  import { gymBookingLinks } from "~/constants";
   import GymBadge from "./GymBadge.svelte";
 
   export let gym, spaces, startsAt, hide;
 
   const onRowClicked = () => {
-    window.open(gymBookingLinks[gym.slug], "_blank");
+    window.open(gym.booking_url, "_blank");
   };
 </script>
 
