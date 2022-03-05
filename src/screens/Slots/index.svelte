@@ -8,6 +8,7 @@
   import GymPicker from "./components/GymPicker.svelte";
   import RefreshButton from "./components/RefreshButton.svelte";
   import { writable } from "svelte/store";
+  import { onMount } from "svelte";
 
   let dateFilter = moment().format("DD/MM/YY"); // current date as a "guess"
   let gymFilter = [];
@@ -28,20 +29,17 @@
   let latestSnapshotRequest;
   const loadData = async () => {
     isLoading = true;
-    latestSnapshotRequest = getLatestSnapshot().then(handleSnapshotResponse);
-
-    Promise.all([latestSnapshotRequest])
-      .then(() => {
-        isLoading = false;
-      })
-      .catch(async (errors) => {
-        console.error(errors);
-        isLoading = false;
-        navigate("/error");
-      });
+    try {
+      latestSnapshotRequest = handleSnapshotResponse(await getLatestSnapshot());
+      isLoading = false;
+    } catch (errors) {
+      console.error(errors);
+      isLoading = false;
+      navigate("/error");
+    }
   };
 
-  loadData();
+  onMount(loadData);
 </script>
 
 <div class="container">
