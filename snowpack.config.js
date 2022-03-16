@@ -15,6 +15,15 @@ module.exports = {
         noWarning: true,
       },
     ],
+    [
+      'snowpack-plugin-markdown',
+      {
+        /*
+           Pass options to `marked`. See a full list of options here:
+           https://marked.js.org/using_advanced#options
+        */
+      },
+    ],
   ],
   routes: [
     /* Enable an SPA Fallback in development: */

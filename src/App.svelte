@@ -1,10 +1,11 @@
 <script>
   import { Router, Route } from "svelte-routing";
 
-  import Slots from "~/screens/Slots/index.svelte";
-  import Report from "~/screens/Report.svelte";
-  import About from "~/screens/About.svelte";
+  import SlotsScreen from "~/screens/Slots/index.svelte";
+  import ReportScreen from "~/screens/Report.svelte";
+  import AboutScreen from "~/screens/About.svelte";
   import ErrorScreen from "~/screens/Error.svelte";
+  import UpdatesScreen from "~/screens/Updates.svelte";
   import NotFound from "~/screens/NotFound.svelte";
   import NavBar from "~/components/NavBar.svelte";
 
@@ -26,10 +27,11 @@
   <NavBar />
   <div class="content">
     <Router {url}>
-      <Route path="/" component={Slots} />
-      <Route path="/report" component={Report} />
-      <Route path="/about" component={About} />
+      <Route path="/" component={SlotsScreen} />
+      <Route path="/report" component={ReportScreen} />
+      <Route path="/about" component={AboutScreen} />
       <Route path="/error" component={ErrorScreen} />
+      <Route path="/updates" component={UpdatesScreen} />
       <Route path="" component={NotFound} />
     </Router>
   </div>

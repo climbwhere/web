@@ -26,6 +26,10 @@
     lastUpdated = snapshot.lastUpdated;
   };
 
+  const handleBannerClick = () => {
+    navigate("/updates");
+  };
+
   let latestSnapshotRequest;
   const loadData = async () => {
     isLoading = true;
@@ -51,6 +55,11 @@
       {gyms}
       {shouldHideGyms}
     />
+    <div class="banner" on:click={handleBannerClick}>
+      <span class="material-icons" aria-label="Status icon">priority_high</span>
+      PSA: Gyms are making changes to their booking systems, click/tap here for more
+      info.
+    </div>
     <SlotsTable
       {sessions}
       {gyms}
@@ -123,5 +132,26 @@
   }
   .status-icon.error {
     color: red;
+  }
+
+  .banner {
+    color: white;
+    background: rgb(79, 173, 255);
+    padding: 0.5rem 0.8rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .banner:active {
+    opacity: 0.8;
+  }
+
+  .banner .material-icons {
+    margin-right: 5px;
   }
 </style>

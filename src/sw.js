@@ -1,4 +1,4 @@
-const VERSION = '1.3.6';
+const VERSION = '1.3.7';
 const CACHE_NAME = `${VERSION}-climbwhere-sg-cache`;
 
 const urlsToCache = [

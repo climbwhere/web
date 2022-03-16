@@ -1,0 +1,22 @@
+#updates > table {
+  width: 100%;
+  border: solid 1px black;
+  border-collapse: collapse;
+  text-align: left;
+  overflow-x: scroll;
+  font-size: 0.9rem;
+}
+
+#updates > table > thead > tr > th {
+  background: lightgrey;
+  border: solid 1px black;
+  padding: 0.6rem 0.2rem;
+}
+#updates > table > tbody > tr > td {
+  border: solid 1px black;
+  padding: 0.6rem 0.2rem;
+}
+
+#updates > tr > td:first-child {
+  font-weight: bold;
+}
