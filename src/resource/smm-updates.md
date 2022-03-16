@@ -11,8 +11,8 @@ Below is a compilation of all the latest changes that gyms have made:
 | ---------------- | ------------------------------------------------------------------- | ------------- | ----------------------- |
 | Boulder+         | No                                                                  | Full Day      |                         |
 | BFF              | No                                                                  | Full Day      |                         |
-| Boruda           | No, unless **6:30-10:30pm on Weekdays**                             | Full Day      |                         |
-| Boulder Planet   | No, unless **7:00-10:30pm on Weekdays**                             | Full Day      |                         |
+| Boruda           | No, unless **6:30pm-10:30pm on Weekdays**                           | Full Day      |                         |
+| Boulder Planet   | No, unless **7:00pm-10:30pm on Weekdays**                           | Full Day      |                         |
 | b8A              | No, unless **6pm-10:30pm on Weekdays, OR 10am-6pm on Weekends/PH.** | Full Day      |                         |
 | Boulder Movement | Yes                                                                 | 2h 25mins     |                         |
 | Climb Central    | Yes                                                                 | Unchanged     | Removed alt. lanes rule |
