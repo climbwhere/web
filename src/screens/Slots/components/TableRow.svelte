@@ -12,13 +12,17 @@
 <tr
   on:click={onRowClicked}
   class:hidden={hide}
-  class:warn={spaces < 10}
-  class:invalid={spaces < 1}
+  class:warn={spaces < 10 && spaces !== -1}
+  class:invalid={spaces < 1 && spaces !== -1}
   class="umami--click--table-row-click"
 >
   <td class="gym"><GymBadge {gym} /> </td>
   <td class="timings">{moment(startsAt).format("h:mmA")}</td>
-  <td class="spaces"> <span class="badge">{spaces}</span></td>
+  <td class="spaces">
+    {#if spaces !== -1}
+      <span class="badge">{spaces}</span>
+    {/if}
+  </td>
 </tr>
 
 <style>
