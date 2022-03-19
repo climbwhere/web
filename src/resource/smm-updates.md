@@ -10,6 +10,7 @@ Below is a compilation of all the latest changes that gyms have made:
 |                  | Booking Required?                                                   | Slot Duration | Remarks                 |
 | ---------------- | ------------------------------------------------------------------- | ------------- | ----------------------- |
 | Boulder+         | No                                                                  | Full Day      |                         |
+| Boulder World    | No                                                                  | Full Day      |                         |
 | BFF              | No                                                                  | Full Day      |                         |
 | Boruda           | No, unless **6:30pm-10:30pm on Weekdays**                           | Full Day      |                         |
 | Boulder Planet   | No, unless **7:00pm-10:30pm on Weekdays**                           | Full Day      |                         |
