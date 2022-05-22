@@ -1,9 +1,12 @@
 <script>
   import updatesMD from "~/resource/smm-updates.md";
+  import mayUpdatesMD from "~/resource/may-updates.md";
   import "~/table.css";
 </script>
 
 <div id="updates" class="container">
+  {@html mayUpdatesMD.body}
+  <hr />
   {@html updatesMD.body}
   <h3>Not sure? Ask around!</h3>
   <div class="banner">

@@ -55,10 +55,10 @@
       {gyms}
       {shouldHideGyms}
     />
-    <div class="banner" on:click={handleBannerClick}>
+    <div class="banner red" on:click={handleBannerClick}>
       <span class="material-icons" aria-label="Status icon">priority_high</span>
-      PSA: Gyms are making changes to their booking systems, click/tap here for more
-      info.
+      Climbwhere is shutting down: slot updates will no longer be available from
+      25th May 2022.
     </div>
     <SlotsTable
       {sessions}
@@ -136,7 +136,6 @@
 
   .banner {
     color: white;
-    background: rgb(79, 173, 255);
     padding: 0.5rem 0.8rem;
     margin-bottom: 0.5rem;
     width: 100%;
@@ -145,6 +144,10 @@
     border-radius: 10px;
     user-select: none;
     cursor: pointer;
+  }
+
+  .red {
+    background: red;
   }
 
   .banner:active {

@@ -5,8 +5,9 @@
 
 <div class="container">
   <p>
-    This website shows aggregated climbing gym slot information from multiple
-    climbing and bouldering gyms in Singapore.
+    Climbwhere was created as a side project in 2021. It was visited 13.6k
+    times, with around 500 monthly users at its peak. The source code is
+    available on Github here.
   </p>
 
   <p>
@@ -25,7 +26,7 @@
     <p>© {moment().year()} Climbwhere · All rights reserved.</p>
     <p>
       Created by <a href="https://sean.place">Sean</a> and
-      <a href="https://ravern.zone">Ravern</a>
+      <a href="https://ravern.site">Ravern</a>
     </p>
   </small>
 </div>

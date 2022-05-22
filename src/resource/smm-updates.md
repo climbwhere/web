@@ -1,11 +1,9 @@
-## Updates
+## Updates (March 2022)
 
 The SMM rules for gym facilities in Singapore have finally been loosened! Climbing gyms will be reviewing the latest guidelines and making
 changes to their booking systems, so the slot timings on this website may no longer be relevant.
 
-## Table of changes
-
-_**Last updated on 21 March 2022, 10:00AM.**_
+Below is a compilation of all the latest changes that gyms have made:
 
 | Gym Name           | Booking Required?                                                   | Slot Duration | Remarks                 |
 | ------------------ | ------------------------------------------------------------------- | ------------- | ----------------------- |
