@@ -5,10 +5,6 @@
 </script>
 
 <div id="updates" class="container">
-  {@html mayUpdatesMD.body}
-  <hr />
-  {@html updatesMD.body}
-  <h3>Not sure? Ask around!</h3>
   <div class="banner">
     <img class="telegram-logo" src="/telegram.webp" alt="telegram-logo" />
     <a href="https://t.me/climbjios" aria-label="Telegram bot">
@@ -18,6 +14,10 @@
   <p>
     Meet fellow climbers and discuss all things climbing related in ClimbJios.
   </p>
+  <hr />
+  {@html mayUpdatesMD.body}
+  <hr />
+  {@html updatesMD.body}
 </div>
 
 <style>

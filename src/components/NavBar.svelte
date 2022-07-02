@@ -16,10 +16,10 @@
       /><span>Climbwhere.sg</span>
     </div>
   </div>
-  <a href="https://t.me/climbwhere_sg_bot" aria-label="Telegram bot">
+  <!-- <a href="https://t.me/climbwhere_sg_bot" aria-label="Telegram bot">
     <img class="telegram-logo" src="/telegram.webp" alt="telegram-logo" />
     <span class="r">t.me/climbwhere_sg_bot</span>
-  </a>
+  </a> -->
   <a href="https://github.com/climbwhere/web">
     <img
       class="gh-badge"

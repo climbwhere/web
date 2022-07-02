@@ -27,11 +27,7 @@
   <NavBar />
   <div class="content">
     <Router {url}>
-      <Route path="/" component={SlotsScreen} />
-      <Route path="/report" component={ReportScreen} />
-      <Route path="/about" component={AboutScreen} />
-      <Route path="/error" component={ErrorScreen} />
-      <Route path="/updates" component={UpdatesScreen} />
+      <Route path="/" component={UpdatesScreen} />
       <Route path="" component={NotFound} />
     </Router>
   </div>
